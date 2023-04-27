@@ -1,14 +1,14 @@
 package productionprocess.data.entities;
 
 import jakarta.persistence.*;
-import productionprocess.data.entities.Account;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "employees")
 public class Employee {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "first_name")
@@ -19,9 +19,14 @@ public class Employee {
 
     @Column(name = "phone_number")
     private String phone;
-
-    @OneToOne(cascade=CascadeType.REMOVE)
-    private Account account;
+    
+    @Column(name = "email")
+    private String email;
+    @Column(name = "password")
+    private String password;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Set<Role> roles;
 
     public Employee(){}
 
