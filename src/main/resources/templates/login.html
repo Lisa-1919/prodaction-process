@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/login.css" th:href="@{/css/login.css}"/>
+</head>
+<body>
+<h1 class="greeting">Добро пожаловать в CONTOSO <img src="../static/img/feather.svg"></ing></h1>
+<div class="login_form">
+
+    <p class="authorization">Авторизация</p>
+    <form action="/login">
+        <div class="data">
+            <input name="username" placeholder="email" required>
+            <input name="password" placeholder="password" required>
+        </div>
+        <input class="btn" type="submit" value="Войти">
+    </form>
+</div>
+</body>
+</html>

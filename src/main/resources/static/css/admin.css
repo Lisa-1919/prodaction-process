@@ -1,0 +1,44 @@
+.employees{
+    position: absolute;
+    width: 1216px;
+    left: 122px;
+    top: 315px;
+}
+
+.btn_add_user{
+    box-sizing: border-box;
+    position: absolute;
+    width: 243.83px;
+    height: 100px;
+    left: 949.59px;
+    top: 164.79px;
+    filter: drop-shadow(46px 28px 22px rgba(7, 31, 63, 0.01))
+    drop-shadow(26px 16px 18px rgba(7, 31, 63, 0.05))
+    drop-shadow(11px 7px 13px rgba(7, 31, 63, 0.09))
+    drop-shadow(3px 2px 7px rgba(7, 31, 63, 0.1))
+    drop-shadow(0px 0px 0px rgba(7, 31, 63, 0.1));
+
+    background: #BDD9FF;
+    border: 1px solid #B5D4FF;
+    border-radius: 11px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.btn_add_user p{
+    margin-left: 40.41px;
+    margin-top: 18px;
+    width: 163px;
+    height: 64px;
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 32px;
+    /* or 100% */
+    text-align: center;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: #090074;
+}
+

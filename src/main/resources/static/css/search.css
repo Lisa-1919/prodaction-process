@@ -1,0 +1,54 @@
+.search {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 608px;
+    height: 53px;
+    left: 122px;
+    top: 198px;
+    border: 1px solid #BDD9FF;
+    border-radius: 31px;
+}
+
+.search__form {
+    margin-top: 6px;
+    margin-left: 32px;
+    width: 481px;
+    height: 40px;
+    outline: none;
+    border: 0;
+    background: #E2EDFC;
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+    /* identical to box height, or 100% */
+    letter-spacing: -0.04em;
+    color: #6D6DB3;
+}
+
+.search__form::placeholder {
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+    /* identical to box height, or 100% */
+    letter-spacing: -0.04em;
+    color: #A3C6F5;
+}
+
+.search_button {
+    width: 34px;
+    height: 34px;
+    margin-left: 39px;
+    border: none; /* Убираем рамку */
+    filter: none;
+    background: none;
+    background: url("../img/search.svg") no-repeat;
+}
+
+.search__form::-webkit-search-cancel-button{
+    background-image: url("../img/delete.svg");
+}

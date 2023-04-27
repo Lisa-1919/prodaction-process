@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/admin.css" th:href="@{/css/admin.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/admin_header.css" th:href="@{/css/admin_header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
+</head>
+<body>
+<!--<header th:insert="blocks/header::header_admin"></header>-->
+<header class="header">
+    <a class="home" href="/admin">
+        <img src="../static/img/contoso.svg" alt="Главная"/>
+    </a>
+    <a href="/logout" class="logout">
+        <img src="../static/img/logout.svg" alt="Выйти"/>
+    </a>
+</header>
+<div class="search">
+    <form action="/employees/search" method="get">
+        <p><input type="search" name="quest" placeholder="Что вы ищите?" class="search__form">
+            <input type="submit" value="" class="search_button">
+        </p>
+    </form>
+</div>
+<a class="btn_add_user" href="/employees/add"><p>Создать пользователя</p></a>
+<div class="employees">
+    <table>
+        <tr>
+            <th>№</th>
+            <th>email</th>
+            <th>ФИО</th>
+            <th>Должность</th>
+        </tr>
+        <div th:each="employee : ${employees}">
+            <tr>
+                <td width="" th:text="${employee.id}"></td>
+                <td th:text="${employee.account.email}"></td>
+                <td th:text="${employee.getFIO()}"></td>
+                <td th:text="${employee.account.role}"></td>
+                <td class="more">
+                    <a th:href="'/employees/' + ${employee.id}">
+                        <img src="../static/img/edit.svg" alt="Редактировать"/>
+                    </a>
+                </td>
+                <td class="delete">
+                    <a th:href="'/employees/' + ${employee.id} + '/delit'">
+                        <img src="../static/img/delete.svg" alt="Удалить"/>
+                    </a>
+                </td>
+
+            </tr>
+
+        </div>
+    </table>
+</div>
+</body>
+</html>

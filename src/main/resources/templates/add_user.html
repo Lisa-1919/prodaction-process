@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/admin_header.css" th:href="@{/css/admin_header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/add_user.css" th:href="@{/css/add_user.css}"/>
+</head>
+<body>
+<header class="header">
+    <a class="home" href="/admin">
+        <img src="../static/img/contoso.svg" alt="Главная"/>
+    </a>
+    <a href="/logout" class="logout">
+        <img src="../static/img/logout.svg" alt="Выйти"/>
+    </a>
+</header>
+<h1>Добавление нового пользователя</h1>
+<div class="add_user_form">
+    <form action="/employees/add" method="post">
+        <div class="data">
+            <input placeholder="Должность" required><br/>
+            <input placeholder="Имя" required><br/>
+            <input placeholder="Фамилия" required><br/>
+            <input placeholder="email" required><br/>
+            <input placeholder="Номер телефона" required><br/>
+        </div>
+        <input class="btn" type="submit" value="Сохранить"/>
+    </form>
+</div>
+</body>
+</html>

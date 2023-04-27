@@ -1,0 +1,72 @@
+.greeting{
+    position: absolute;
+    width: 466px;
+    left: calc(50% - 466px/2);
+    top: 53px;
+    bottom: 831px;
+
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 55px;
+    line-height: 70px;
+    /* or 127% */
+
+    text-align: center;
+    letter-spacing: -0.02em;
+
+    color: #090074;
+}
+
+.login_form{
+    box-sizing: border-box;
+    position: absolute;
+    width: 466px;
+    height: 450px;
+    left: calc(50% - 466px/2);
+    margin-top: 287px;
+
+    background: #E2EDFC;
+    border: 1px solid #7CB1F9;
+    border-radius: 26px;
+}
+
+
+
+.authorization{
+    position: absolute;
+    width: 205px;
+    height: 48px;
+    left: calc(50% - 205px/2 - 0.5px);
+    margin-top: 32.65px;
+
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: -0.02em;
+
+    color: #090074;
+}
+
+.data{
+    box-sizing: border-box;
+    display: grid;
+    position: absolute;
+    width: 397px;
+    height: 108px;
+    margin-left: 34.5px;
+    margin-top: 113px;
+
+}
+.btn{
+    box-sizing: border-box;
+    position: absolute;
+    width: 239px;
+    height: 70px;
+    margin-left: 120px;
+    margin-top: 264px;
+
+
+}

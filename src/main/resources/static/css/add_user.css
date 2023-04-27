@@ -1,0 +1,33 @@
+h1{
+    position: absolute;
+    width: 503.17px;
+    height: 92.44px;
+    margin-left: 467px;
+    top: 154px;
+
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 32px;
+    /* or 80% */
+
+    text-align: center;
+    letter-spacing: -0.02em;
+
+    color: #090074;
+}
+
+.data{
+    width: 397px;
+    height: 291px;
+    margin-top: 285px;
+    margin-left: 520px;
+}
+
+.btn{
+    width: 259px;
+    height: 76px;
+    margin-left: 591px;
+    margin-top: 45px;
+}
