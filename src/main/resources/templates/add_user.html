@@ -20,13 +20,19 @@
 </header>
 <h1>Добавление нового пользователя</h1>
 <div class="add_user_form">
-    <form action="/employees/add" method="post">
+    <form action="/employees/add" method="post" th:object="${employee}">
         <div class="data">
-            <input placeholder="Должность" required><br/>
-            <input placeholder="Имя" required><br/>
-            <input placeholder="Фамилия" required><br/>
-            <input placeholder="email" required><br/>
-            <input placeholder="Номер телефона" required><br/>
+            <select name="position">
+                <option value="2">Технолог</option>
+                <option value="3">Диспетчер</option>
+                <option value="4">Мастер сборочного цеха</option>
+                <option value="5">Мастер покрасочного цеха</option>
+                <option value="6">Мастер упаковочного цеха</option>
+            </select>
+            <input th:field="*{firstName}" placeholder="Имя" required><br/>
+            <input th:field="*{lastName}" placeholder="Фамилия" required><br/>
+            <input th:field="*{email}" placeholder="email" required><br/>
+            <input th:field="*{phoneNumber}" placeholder="Номер телефона" required><br/>
         </div>
         <input class="btn" type="submit" value="Сохранить"/>
     </form>

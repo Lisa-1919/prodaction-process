@@ -20,7 +20,7 @@ body {
     line-height: 39px;
     /* identical to box height */
     letter-spacing: -0.02em;
-    color: #A3C6F5;
+    color: #090074;
 }
 .data input::placeholder{
     font-family: 'Cormorant Garamond';
@@ -31,6 +31,11 @@ body {
     /* identical to box height */
     letter-spacing: -0.02em;
     color: #A3C6F5;
+}
+
+.data input:focus{
+    outline: none;
+    border: 2px solid #090074;
 }
 
 .btn{
