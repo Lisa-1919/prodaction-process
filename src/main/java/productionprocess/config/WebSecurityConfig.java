@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import productionprocess.services.AccountService;
+import productionprocess.services.EmployeeService;
 
 @Configuration
 @EnableWebSecurity
@@ -20,7 +20,7 @@ public class WebSecurityConfig{
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private AccountService accountService;
+    private EmployeeService employeeService;
 
     @Value("${spring.security.debug:false}")
     private boolean securityDebug;
@@ -51,7 +51,7 @@ public class WebSecurityConfig{
     }
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(accountService).passwordEncoder(bCryptPasswordEncoder);
+        auth.userDetailsService(employeeService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Bean
