@@ -20,19 +20,20 @@
 </header>
 <h1>Редактирование пользователя</h1>
 <div class="edit_user_form">
-    <form th:action="'/employees/' + ${employee.id} + '/'" method="post" th:object="${employee}">
+    <form th:action="'/employees/' + ${employee.id}" method="post" th:object="${employee}">
         <div class="data">
-            <select name="position">
+            <select name="roleId">
+                <option value="1">Admin</option>
                 <option value="2">Технолог</option>
                 <option value="3">Диспетчер</option>
                 <option value="4">Мастер сборочного цеха</option>
                 <option value="5">Мастер покрасочного цеха</option>
                 <option value="6">Мастер упаковочного цеха</option>
             </select>
-            <input th:field="*{firstName}" th:text="${employee}" placeholder="Имя" required><br/>
-            <input th:fiels="*{lastName}" placeholder="Фамилия" required><br/>
-            <input th:field="*{email}" placeholder="email" required><br/>
-            <input th:field="*{phoneNumber}" placeholder="Номер телефона" required><br/>
+            <input th:field="*{firstName}" th:value="${employee.firstName}" placeholder="Имя" required><br/>
+            <input th:field="*{lastName}" th:value="${employee.lastName}" placeholder="Фамилия" required><br/>
+            <input th:field="*{email}" th:value="${employee.email}" placeholder="email" required><br/>
+            <input th:field="*{phone}" th:value="${employee.phone}" placeholder="Номер телефона" required><br/>
         </div>
         <input class="btn" type="submit" value="Сохранить"/>
     </form>

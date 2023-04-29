@@ -1,6 +1,7 @@
 package productionprocess.data.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "employees")
+@Builder
 public class Employee implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +52,14 @@ public class Employee implements UserDetails {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public Employee(String firstName, String lastName, String phone, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
     }
 
     public Integer getId() {

@@ -19,7 +19,7 @@ public class Route {
     @Column(name = "total_time")
     private LocalTime totalTime;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "route")
     private List<OperationInRoute> operationInRoutes;
 
     public Route() {

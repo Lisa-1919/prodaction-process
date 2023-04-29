@@ -40,16 +40,16 @@
         <div th:each="employee : ${employees}">
             <tr>
                 <td width="" th:text="${employee.id}"></td>
-                <td th:text="${employee.account.email}"></td>
-                <td th:text="${employee.getFIO()}"></td>
-                <td th:text="${employee.account.role}"></td>
+                <td th:text="${employee.email}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="role"></td>
                 <td class="more">
                     <a th:href="'/employees/' + ${employee.id}">
                         <img src="../static/img/edit.svg" alt="Редактировать"/>
                     </a>
                 </td>
                 <td class="delete">
-                    <a th:href="'/employees/' + ${employee.id} + '/delit'">
+                    <a th:href="'/employees/' + ${employee.id} + '/delete'">
                         <img src="../static/img/delete.svg" alt="Удалить"/>
                     </a>
                 </td>

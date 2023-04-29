@@ -8,7 +8,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import productionprocess.services.EmployeeService;
 
@@ -29,7 +33,7 @@ public class WebSecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/registration").permitAll()
+ //                       .requestMatchers("/registration").permitAll()
 //                        .requestMatchers("/home").permitAll()
 //                        .requestMatchers("/admin/*").hasRole("ADMIN")
 //                        .requestMatchers("/manager/*").hasRole("MANAGER")
@@ -40,7 +44,7 @@ public class WebSecurityConfig{
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
-//                        .defaultSuccessUrl("/home")
+                        .defaultSuccessUrl("/home")
                         .permitAll()
                 )
                 .logout((logout) -> logout
@@ -49,6 +53,14 @@ public class WebSecurityConfig{
 
         return http.build();
     }
+
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        UserDetails user = User.builder().username("admin").password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW").roles("ADMIN").build();
+//        return new InMemoryUserDetailsManager(user);
+//    }
+//
+
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(employeeService).passwordEncoder(bCryptPasswordEncoder);
