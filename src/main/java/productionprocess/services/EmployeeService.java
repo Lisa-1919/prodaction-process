@@ -11,17 +11,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import productionprocess.data.entities.Employee;
 import productionprocess.data.entities.Role;
 import productionprocess.data.repo.EmployeeRepo;
 import productionprocess.data.repo.RoleRepo;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import static org.passay.DigestDictionaryRule.ERROR_CODE;
 

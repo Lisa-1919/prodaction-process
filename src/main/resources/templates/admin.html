@@ -42,7 +42,7 @@
                 <td width="" th:text="${employee.id}"></td>
                 <td th:text="${employee.email}"></td>
                 <td th:text="${employee.lastName}"></td>
-                <td th:text="role"></td>
+                <td th:text="${employee.getRoleName()}"></td>
                 <td class="more">
                     <a th:href="'/employees/' + ${employee.id}">
                         <img src="../static/img/edit.svg" alt="Редактировать"/>

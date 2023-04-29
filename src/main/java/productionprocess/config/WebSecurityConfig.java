@@ -54,13 +54,6 @@ public class WebSecurityConfig{
         return http.build();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService(){
-//        UserDetails user = User.builder().username("admin").password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW").roles("ADMIN").build();
-//        return new InMemoryUserDetailsManager(user);
-//    }
-//
-
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(employeeService).passwordEncoder(bCryptPasswordEncoder);
