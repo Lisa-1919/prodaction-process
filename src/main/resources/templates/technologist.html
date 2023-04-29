@@ -9,9 +9,22 @@
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/technologist_products.css" th:href="@{/css/technologist_products.css}"/>
 </head>
 <body>
-<header th:insert="blocks/header::header"></header>
-<div th:insert="blocks/search::search"></div>
+<header th:insert="blocks/header::header">
+</header>
+<div class="search">
+    <form action="/products/search" method="get">
+        <p><input type="search" name="quest" placeholder="Что вы ищите?" class="search__form">
+            <input type="submit" value="" class="search_button">
+        </p>
+    </form>
+</div>
+<nuv class="technologist_functions">
+    <a class="btn_technologist" href="/products/add"><p>Создать</p></a>
+    <a class="btn_technologist" href="/materials"><p>Материалы</p></a>
+    <a class="btn_technologist" href="/operations"><p>Операции</p></a>
+</nuv>
 </body>
 </html>
