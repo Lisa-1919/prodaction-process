@@ -147,4 +147,8 @@ public class Employee implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public String getRoleName(){
+        return roles.stream().toList().get(0).getRoleName();
+    }
 }
