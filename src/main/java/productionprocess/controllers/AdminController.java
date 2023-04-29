@@ -35,7 +35,7 @@ public class AdminController {
 
     @PostMapping("/employees/add")
     public String addManager(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String phoneNumber,
-                             @RequestParam String email, @RequestParam Integer roleId, Model model) throws IOException {
+                             @RequestParam String email, @RequestParam Integer roleId, Model model) {
         String password = employeeService.generatePassword();
 
         Employee employee = new Employee(firstName, lastName, phoneNumber, email, password);
