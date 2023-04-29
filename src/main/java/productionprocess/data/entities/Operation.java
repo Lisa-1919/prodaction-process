@@ -20,20 +20,25 @@ public class Operation {
     @Column(name = "time")
     private LocalTime time;
 
+    @Column(name = "workshop")
+    private String workshop;
+
     public Operation() {
     }
 
-    public Operation(Integer id, String name, String description, LocalTime time) {
+    public Operation(Integer id, String name, String description, LocalTime time, String workshop) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.time = time;
+        this.workshop = workshop;
     }
 
-    public Operation(String name, String description, LocalTime time) {
+    public Operation(String name, String description, LocalTime time, String workshop) {
         this.name = name;
         this.description = description;
         this.time = time;
+        this.workshop = workshop;
     }
 
     public Integer getId() {
