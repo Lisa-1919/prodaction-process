@@ -7,20 +7,12 @@
     <title>Contoso</title>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/admin.css" th:href="@{/css/admin.css}"/>
-    <link type="text/css" rel="stylesheet" href="../static/css/admin_header.css" th:href="@{/css/admin_header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
 </head>
 <body>
-<!--<header th:insert="blocks/header::header"></header>-->
-<header class="header">
-    <a class="home" href="/admin">
-        <img src="../static/img/contoso.svg" alt="Главная"/>
-    </a>
-    <a href="/logout" class="logout">
-        <img src="../static/img/logout.svg" alt="Выйти"/>
-    </a>
-</header>
+<header th:insert="blocks/header::header"></header>
 <div class="search">
     <form action="/employees/search" method="get">
         <p><input type="search" name="quest" placeholder="Что вы ищите?" class="search__form">
@@ -45,12 +37,12 @@
                 <td th:text="${employee.getRoleName()}"></td>
                 <td class="more">
                     <a th:href="'/employees/' + ${employee.id}">
-                        <img src="../static/img/edit.svg" alt="Редактировать"/>
+                        <img src="/img/edit.svg" alt="Редактировать"/>
                     </a>
                 </td>
                 <td class="delete">
                     <a th:href="'/employees/' + ${employee.id} + '/delete'">
-                        <img src="../static/img/delete.svg" alt="Удалить"/>
+                        <img src="/img/delete.svg" alt="Удалить"/>
                     </a>
                 </td>
             </tr>

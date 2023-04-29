@@ -34,11 +34,14 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<MaterialsForProduct> materialsForProducts;
 
+    @Column(name="article")
+    private String article;
+
     public Product() {
         this.materialsForProducts = new ArrayList<>();
     }
 
-    public Product(Integer id, String type, String model, String rodSize, String paintKind, double costPrice, Route route, List<MaterialsForProduct> materialsForProducts) {
+    public Product(Integer id, String type, String model, String rodSize, String paintKind, double costPrice, Route route, List<MaterialsForProduct> materialsForProducts, String article) {
         this.id = id;
         this.type = type;
         this.model = model;
@@ -47,9 +50,10 @@ public class Product {
         this.costPrice = costPrice;
         this.route = route;
         this.materialsForProducts = materialsForProducts;
+        this.article = article;
     }
 
-    public Product(String type, String model, String rodSize, String paintKind, double costPrice, Route route, List<MaterialsForProduct> materialsForProducts) {
+    public Product(String type, String model, String rodSize, String paintKind, double costPrice, Route route, List<MaterialsForProduct> materialsForProducts, String article) {
         this.type = type;
         this.model = model;
         this.rodSize = rodSize;
@@ -57,6 +61,7 @@ public class Product {
         this.costPrice = costPrice;
         this.route = route;
         this.materialsForProducts = materialsForProducts;
+        this.article = article;
     }
 
     public Integer getId() {
@@ -121,5 +126,13 @@ public class Product {
 
     public void setMaterialsForProducts(List<MaterialsForProduct> materialsForProducts) {
         this.materialsForProducts = materialsForProducts;
+    }
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
     }
 }
