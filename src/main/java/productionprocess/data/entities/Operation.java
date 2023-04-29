@@ -72,4 +72,12 @@ public class Operation {
     public void setTime(LocalTime time) {
         this.time = time;
     }
+
+    public String getWorkshop() {
+        return workshop;
+    }
+
+    public void setWorkshop(String workshop) {
+        this.workshop = workshop;
+    }
 }
