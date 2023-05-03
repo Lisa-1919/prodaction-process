@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/t_operations.css" th:href="@{/css/t_operations.css}"/>
+</head>
+<body>
+<header th:insert="blocks/header::header">
+</header>
+<div class="search">
+    <form action="/operations/search" method="get">
+        <p><input type="search" name="quest" placeholder="Что вы ищите?" class="search__form">
+            <input type="submit" value="" class="search_button">
+        </p>
+    </form>
+</div>
+<nuv class="technologist_functions">
+    <a class="btn_technologist" href="/operations/add"><p>Создать</p></a>
+    <a class="btn_technologist" href="/products"><p>Товары</p></a>
+    <a class="btn_technologist" href="/materials"><p>Материалы</p></a>
+</nuv>
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>№</th>-->
+<!--        <th>email</th>-->
+<!--        <th>ФИО</th>-->
+<!--        <th>Должность</th>-->
+<!--    </tr>-->
+<!--    <div th:each="product : ${products}">-->
+<!--        <tr>-->
+<!--            <td th:text="${product.id}"></td>-->
+<!--            <td th:text="${product.getModel()}"></td>-->
+<!--            <td th:text="${product.article}"></td>-->
+<!--            <td th:text="${product.costPrice}"></td>-->
+<!--            <td class="more">-->
+<!--                <a th:href="'/products/' + ${product.id}">-->
+<!--                    <img src="/img/edit.svg" alt="Редактировать"/>-->
+<!--                </a>-->
+<!--            </td>-->
+<!--            <td class="delete">-->
+<!--                <a th:href="'/products/' + ${product.id} + '/delete'">-->
+<!--                    <img src="/img/delete.svg" alt="Удалить"/>-->
+<!--                </a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </div>-->
+<!--</table>-->
+</body>
+</html>

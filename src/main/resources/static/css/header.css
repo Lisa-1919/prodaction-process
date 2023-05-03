@@ -11,10 +11,12 @@
 
 .home{
     margin-left: 1px;
+    text-decoration: none;
 }
 
 
 .logout{
-    margin-right: 58px;
+    margin-left: 1191px;
+    text-decoration: none;
 }
 

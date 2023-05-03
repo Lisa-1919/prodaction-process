@@ -75,6 +75,11 @@ public class AdminController {
         return "redirect:/employees";
     }
 
+//    @GetMapping("/employees/search")
+//    public String searchEmployee(@RequestParam("quest") String quest, Model model){
+//        model.addAttribute("employees", employeeService.)
+//    }
+
 
 
 }

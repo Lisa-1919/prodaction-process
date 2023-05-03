@@ -1,7 +1,10 @@
 table{
+    position: absolute;
+    width: 1216px;
+    left: 122px;
+    top: 315px;
     border-radius: 11px;
     border: 1px solid #BDD9FF;
-    width: 100%;
     text-align: center;
 
 }

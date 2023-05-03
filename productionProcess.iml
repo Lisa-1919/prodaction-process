@@ -14,7 +14,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="entityManagerFactory" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -136,5 +138,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.security:spring-security-test:6.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:6.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:6.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.passay:passay:1.6.2" level="project" />
   </component>
 </module>

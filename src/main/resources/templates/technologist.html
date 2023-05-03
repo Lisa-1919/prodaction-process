@@ -9,7 +9,8 @@
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
-    <link type="text/css" rel="stylesheet" href="../static/css/technologist_products.css" th:href="@{/css/technologist_products.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/technologist_products.css"
+          th:href="@{/css/technologist_products.css}"/>
 </head>
 <body>
 <header th:insert="blocks/header::header">
@@ -26,5 +27,33 @@
     <a class="btn_technologist" href="/materials"><p>Материалы</p></a>
     <a class="btn_technologist" href="/operations"><p>Операции</p></a>
 </nuv>
+<div class="products">
+    <table>
+        <tr>
+            <th>№</th>
+            <th>Изделие</th>
+            <th>Артикул</th>
+            <th>Себестоимость</th>
+        </tr>
+        <div th:each="product : ${products}">
+            <tr>
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.getModel()}"></td>
+                <td th:text="${product.article}"></td>
+                <td th:text="${product.costPrice}"></td>
+                <td class="more">
+                    <a th:href="'/products/' + ${product.id}">
+                        <img src="/img/edit.svg" alt="Редактировать"/>
+                    </a>
+                </td>
+                <td class="delete">
+                    <a th:href="'/products/' + ${product.id} + '/delete'">
+                        <img src="/img/delete.svg" alt="Удалить"/>
+                    </a>
+                </td>
+            </tr>
+        </div>
+    </table>
+</div>
 </body>
 </html>
