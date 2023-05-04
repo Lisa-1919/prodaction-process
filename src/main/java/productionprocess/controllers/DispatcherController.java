@@ -24,7 +24,7 @@ public class DispatcherController {
         return "dispatcher";
     }
 
-    @GetMapping("/orders-p/search")
+    @PostMapping("/orders-p")
     public String search(@RequestParam("id") Integer id, Model model){
         model.addAttribute("orderOnProduction",orderOnProductionService.searchOrderOnProductionById(id));
         return "dispatcher";

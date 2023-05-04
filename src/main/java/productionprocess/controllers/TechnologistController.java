@@ -4,17 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import productionprocess.data.entities.Employee;
 import productionprocess.data.entities.Material;
 import productionprocess.data.entities.Operation;
 import productionprocess.data.entities.Product;
 import productionprocess.services.MaterialService;
 import productionprocess.services.OperationService;
 import productionprocess.services.ProductService;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 
 @Controller
 public class TechnologistController {
@@ -32,17 +27,18 @@ public class TechnologistController {
         return "technologist";
     }
     @GetMapping("/products/add")
-    public String addProduct(Model model){
+    public String addProductPage(Model model){
         model.addAttribute("product", new Product());
         model.addAttribute("operations", operationService.findAll());
         model.addAttribute("materials", materialService.findAll());
         return "add_product";
     }
-//
-//    @PostMapping("/products/add")
-//    public String addManager( Model model) {
-//        return "redirect:/home";
-//    }
+
+    @PostMapping("/products/add")
+    public String addProduct(@ModelAttribute("product") Product product, Model model) {
+        productService.addProduct(product);
+        return "redirect:/products";
+    }
 
     @GetMapping("/products/{id}")
     public String getProduct(@PathVariable("id") Integer id, Model model){

@@ -1,23 +1,59 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
-  <title>Contoso</title>
-  <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/edit_product.css" th:href="@{/css/edit_product.css}"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/edit_product.css" th:href="@{/css/edit_product.css}"/>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
 <h1>Редактирование пользователя</h1>
 <div class="edit_product_form">
-  <form th:action="'/products/' + ${product.id}" method="post" th:object="${product}">
-    <div class="data">
-
-    <input class="btn" type="submit" value="Сохранить"/>
-  </form>
+    <form th:action="'/products/' + ${product.id}" method="post" th:object="${product}">
+        <div class="data">
+            <p>Введите название</p>
+            <input th:value="${product.model}" type="text" required>
+            <p>Введите артикул</p>
+            <input th:value="${product.article}" type="text" required>
+            <p>Маршрут</p>
+            <table class="operations">
+                <tr>
+                    <th>Цех</th>
+                    <th>Операция</th>
+                    <th>Время выполнения</th>
+                    <th></th>
+                </tr>
+                <div th:each="operation : ${operations}">
+                    <tr>
+                        <td th:text="${operation.workshop}"></td>
+                        <td th:text="${operation.name}"></td>
+                        <td th:text="${operation.time}"></td>
+                        <td><input type="checkbox" class="check"></td>
+                    </tr>
+                </div>
+            </table>
+            <p>Спецификация</p>
+            <table class="materials">
+                <tr>
+                    <th>Материал</th>
+                    <th>Кол-во</th>
+                    <th></th>
+                </tr>
+                <div th:each="material : ${materials}">
+                    <tr>
+                        <td th:text="${material.name}"></td>
+                        <td><input type="number" placeholder="кол-во"></td>
+                        <td><input type="checkbox" class="check"></td>
+                    </tr>
+                </div>
+            </table>
+        </div>
+        <input class="btn" type="submit" value="Сохранить"/>
+    </form>
 </div>
 </body>
 </html>

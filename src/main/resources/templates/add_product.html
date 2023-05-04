@@ -15,8 +15,31 @@
 <header th:insert="blocks/header :: header"></header>
 <form action="/products/add" method="post" th:object="${product}" class="form">
     <div class="data">
-        <p>Введите название</p>
-        <input type="text" required>
+        <p>Тип:
+            <select th:field="*{type}">
+                <option th:value="'Карандаш'">Карандаш</option>
+                <option th:value="'Ручка'">Ручка</option>
+                <option value="штуки">штуки</option>
+            </select>
+        </p>
+        <p>Модель:
+            <select th:field="*{model}">
+                <option th:value="'Карандаш'">Карандаш</option>
+                <option th:value="'Ручка'">Ручка</option>
+                <option value="штуки">штуки</option>
+            </select></p>
+        <p>Размер стержня:
+            <select th:field="*{rodSize}">
+                <option th:value="'Карандаш'">Карандаш</option>
+                <option th:value="'Ручка'">Ручка</option>
+                <option value="штуки">штуки</option>
+            </select></p>
+        <p>Краска:
+            <select th:field="*{paintKind}">
+                <option th:value="'Карандаш'">Карандаш</option>
+                <option th:value="'Ручка'">Ручка</option>
+                <option value="штуки">штуки</option>
+            </select></p>
         <p>Введите артикул</p>
         <input type="text" required>
         <p>Маршрут</p>

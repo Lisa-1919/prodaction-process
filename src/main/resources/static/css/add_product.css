@@ -23,3 +23,7 @@ p {
     color: #6D6DB3;
     background-color: transparent;
 }
+
+select{
+    width: 170px;
+}

@@ -16,7 +16,7 @@
 <body>
 <header th:insert="blocks/header::header"></header>
 <div class="search">
-    <form action="/assembly" method="post">
+    <form action="/paint" method="post">
         <p><input type="search" name="id" placeholder="Что вы ищите?" class="search__form">
             <input type="submit" value="" class="search_button">
         </p>
@@ -38,7 +38,7 @@
         </tr>
         <div th:each="order : ${ordersOnProduction}">
             <tr>
-                <td><a th:href="'/assembly/' + ${order.id}" th:text="${order.id}"></a></td>
+                <td><a th:href="'/paint/' + ${order.id}" th:text="${order.id}"></a></td>
                 <td th:text="${order.name}"></td>
                 <td th:text="${order.status}"></td>
                 <td th:text="${order.orderDate}"></td>

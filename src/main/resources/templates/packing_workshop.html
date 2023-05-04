@@ -6,20 +6,26 @@
   <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
   <title>Contoso</title>
   <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/admin.css" th:href="@{/css/admin.css}"/>
   <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
   <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
+  <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
+  <link type="text/css" rel="stylesheet" href="../static/css/admin.css"
+        th:href="@{/css/admin.css}"/>
+  <link type="text/css" rel="stylesheet" href="../static/css/sort.css" th:href="@{/css/sort.css}"/>
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
 <div class="search">
-  <form action="/orders-p" method="post">
+  <form action="/packing" method="post">
     <p><input type="search" name="id" placeholder="Что вы ищите?" class="search__form">
       <input type="submit" value="" class="search_button">
     </p>
   </form>
 </div>
+<select class="sort">
+  <option>Статус</option>
+
+</select>
 <div class="orders">
   <table>
     <tr>
@@ -32,7 +38,7 @@
     </tr>
     <div th:each="order : ${ordersOnProduction}">
       <tr>
-        <td><a th:href="'/orders-p/' + ${order.id}" th:text="${order.id}"></a></td>
+        <td><a th:href="'/packing/' + ${order.id}" th:text="${order.id}"></a></td>
         <td th:text="${order.name}"></td>
         <td th:text="${order.status}"></td>
         <td th:text="${order.orderDate}"></td>

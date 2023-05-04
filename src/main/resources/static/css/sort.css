@@ -1,0 +1,11 @@
+.sort{
+    position: absolute;
+    left: 763px;
+    top: 203px;
+    width: 140px;
+    height: 41px;
+    background-color: #BDD9FF;
+    border: 2px solid #BDD9FF;
+    border-radius: 11px;
+    filter: drop-shadow(46px 28px 22px rgba(7, 31, 63, 0.01)) drop-shadow(26px 16px 18px rgba(7, 31, 63, 0.05)) drop-shadow(11px 7px 13px rgba(7, 31, 63, 0.09)) drop-shadow(3px 2px 7px rgba(7, 31, 63, 0.1)) drop-shadow(0px 0px 0px rgba(7, 31, 63, 0.1));
+}

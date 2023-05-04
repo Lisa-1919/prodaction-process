@@ -10,32 +10,32 @@ import productionprocess.services.EmployeeService;
 import productionprocess.services.OrderOnProductionService;
 
 @Controller
-public class AssemblyController {
+public class PaintController {
     @Autowired
     private OrderOnProductionService orderOnProductionService;
     @Autowired
     private EmployeeService employeeService;
-    @GetMapping("/assembly")
-    public String assembly(Model model){
+    @GetMapping("/paint")
+    public String paint(Model model){
         model.addAttribute("orders", orderOnProductionService.findAll());
-        return "assembly_workshop";
+        return "paint_workshop";
     }
 
-    @PostMapping("/assembly")
+    @PostMapping("/paint")
     public String search(@RequestParam("id") Integer id, Model model){
         model.addAttribute("orders", orderOnProductionService.searchOrderOnProductionById(id));
-        return "assembly_workshop";
+        return "paint_workshop";
     }
 
-    @GetMapping("/assembly/{id}")
+    @GetMapping("/paint/{id}")
     public String order(@RequestParam("id") Integer id, Model model){
         model.addAttribute("orderOnProduction", orderOnProductionService.findById(id));
         model.addAttribute("userRole", employeeService.getAuthorized().getRoleName());
         return "order_on_production";
     }
 
-    @GetMapping("/assembly/end")
-    public String assemblyEnd(Model model){
-        return "redirect:/assembly";
+    @GetMapping("/paint/end")
+    public String paintEnd(Model model){
+        return "redirect:/paint";
     }
 }
