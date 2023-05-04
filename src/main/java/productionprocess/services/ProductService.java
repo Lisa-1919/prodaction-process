@@ -57,6 +57,7 @@ public class ProductService {
         productRepo.save(product);
     }
 
+    //поиск по артикул
     public List<Product> searchProductByModel(String value) {
         Iterable<Product> products = productRepo.findAll();
         List<Product> result = new ArrayList<>();
