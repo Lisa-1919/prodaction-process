@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/assembly_workshop.css"
+          th:href="@{/css/assembly_workshop.css}"/>
+</head>
+<body>
+<header th:insert="blocks/header::header"></header>
+<div class="search">
+    <form action="/order-p/search" method="get">
+        <p><input type="search" name="quest" placeholder="Что вы ищите?" class="search__form">
+            <input type="submit" value="" class="search_button">
+        </p>
+    </form>
+</div>
+<form action="/orders-w" method="post" class="form">
+    <table>
+        <tr>
+            <th>Наименование</th>
+            <th>В наличии</th>
+            <th>Необходимо</th>
+            <th>Дозаказать</th>
+        </tr>
+
+        <div th:each="material : ${materialsToOrder}">
+            <tr>
+                <td th:text="${material.name}"></td>
+                <td th:text="${material.stockQuantity}"></td>
+                <td th:text="${material.necessaryQuantity}"></td>
+                <td th:text="${material.orderedQuantity}"></td>
+            </tr>
+        </div>
+    </table>
+    <input class="btn" type="submit" value="Заказать">
+</form>
+</body>
+</html>

@@ -1,16 +1,19 @@
-table{
-    position: absolute;
-    width: 1216px;
-    left: 122px;
-    top: 315px;
-}
-.form{
+.form {
     position: absolute;
     display: flex;
     flex-direction: column;
     left: 122px;
 }
- p{
+
+.operations {
+    width: 1161px;
+}
+
+.materials {
+    width: 730px;
+}
+
+p {
     font-family: 'Cormorant Garamond';
     font-style: normal;
     font-weight: 500;
@@ -19,20 +22,4 @@ table{
     letter-spacing: -0.02em;
     color: #6D6DB3;
     background-color: transparent;
-}
-
-.workshops, input[type=text], input[type=number]{
-
-    width: 588px;
-    height: 47px;
-}
-
-input[type=time]{
-    width: 120px;
-    height: 47px;
-
-}
-.unit{
-    width: 100px;
-    height: 47px;
 }

@@ -1,0 +1,135 @@
+.order {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 125px;
+}
+
+.l{
+    position: absolute;
+    width: 1214px;
+    height: 70px;
+    top: 134px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+h1, h3, p, .back {
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 500;
+    /* identical to box height */
+    letter-spacing: -0.02em;
+    color: #090074;
+    text-align: center;
+}
+
+h1, .back {
+    margin-top:0;
+    height: 70px;
+    font-size: 40px;
+    line-height: 70px;
+}
+
+p, h3{
+    font-size: 30px;
+    line-height: 41px;
+}
+
+h3 {
+    margin-top: 0;
+    height: 52px;
+    border-bottom: 1px solid #6D6DB3;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.order_info {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 365px;
+    height: 331px;
+    top: 237px;
+
+    border: 1px solid #6D6DB3;
+    border-radius: 13px 0 0 0;
+}
+
+.list {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 851px;
+    left: 364px;
+    top: 237px;
+    border: 1px solid #6D6DB3;
+    border-radius: 0px 13px 0px 0px;
+}
+
+table {
+    margin-top: 0;
+    width: 851px;
+    border: 1px solid #6D6DB3;
+    text-align: center;
+
+}
+
+table.rounded-corners {
+    border-collapse: collapse;
+    border-radius: 11px;
+    border: 1px solid #6D6DB3;
+}
+
+th, td {
+    border-right: 1px solid #6D6DB3;
+    border-bottom: 1px solid #6D6DB3;
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 29px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #6D6DB3;
+}
+
+.btn_d {
+    position: absolute;
+    width: 344px;
+    height: 100px;
+    top: 468px;
+}
+
+.btn_d_1, .btn_d_2 {
+    background: #BDD9FF;
+    border: 1px solid #B5D4FF;
+    border-radius: 11px;
+    box-sizing: border-box;
+    filter: drop-shadow(46px 28px 22px rgba(7, 31, 63, 0.01)) drop-shadow(26px 16px 18px rgba(7, 31, 63, 0.05)) drop-shadow(11px 7px 13px rgba(7, 31, 63, 0.09)) drop-shadow(3px 2px 7px rgba(7, 31, 63, 0.1)) drop-shadow(0px 0px 0px rgba(7, 31, 63, 0.1));
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 33px;
+    /* or 82% */
+
+    text-align: center;
+    letter-spacing: -0.02em;
+
+    color: #090074;
+}
+
+.btn_d_1 {
+    width: 326.67px;
+    height: 91.89px;
+    align-content: center;
+    justify-content: center;
+}
+
+.btn_d_2 {
+    width: 326.67px;
+    height: 94px;
+}

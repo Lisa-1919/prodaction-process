@@ -8,17 +8,19 @@
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}">
+    <link type="text/css" rel="stylesheet" href="../static/css/add_product.css" th:href="@{/css/add_product.css}">
+
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
 <form action="/products/add" method="post" th:object="${product}" class="form">
     <div class="data">
         <p>Введите название</p>
-        <input type="text" required><br/>
+        <input type="text" required>
         <p>Введите артикул</p>
-        <input type="time" required><br/>
+        <input type="text" required>
         <p>Маршрут</p>
-        <table>
+        <table class="operations">
             <tr>
                 <th>Цех</th>
                 <th>Операция</th>
@@ -30,6 +32,21 @@
                     <td th:text="${operation.workshop}"></td>
                     <td th:text="${operation.name}"></td>
                     <td th:text="${operation.time}"></td>
+                    <td><input type="checkbox" class="check"></td>
+                </tr>
+            </div>
+        </table>
+        <p>Спецификация</p>
+        <table class="materials">
+            <tr>
+                <th>Материал</th>
+                <th>Кол-во</th>
+                <th></th>
+            </tr>
+            <div th:each="material : ${materials}">
+                <tr>
+                    <td th:text="${material.name}"></td>
+                    <td><input type="number" placeholder="кол-во"></td>
                     <td><input type="checkbox" class="check"></td>
                 </tr>
             </div>
