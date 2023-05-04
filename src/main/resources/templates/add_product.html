@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<form action="/products/add" method="post" th:object="${product}" class="form">
+    <div class="data">
+        <p>Введите название</p>
+        <input type="text" required><br/>
+        <p>Введите артикул</p>
+        <input type="time" required><br/>
+        <p>Маршрут</p>
+        <table>
+            <tr>
+                <th>Цех</th>
+                <th>Операция</th>
+                <th>Время выполнения</th>
+                <th></th>
+            </tr>
+            <div th:each="operation : ${operations}">
+                <tr>
+                    <td th:text="${operation.workshop}"></td>
+                    <td th:text="${operation.name}"></td>
+                    <td th:text="${operation.time}"></td>
+                    <td><input type="checkbox" class="check"></td>
+                </tr>
+            </div>
+        </table>
+    </div>
+    <input class="btn" type="submit" value="Сохранить"/>
+</form>
+</body>
+</html>

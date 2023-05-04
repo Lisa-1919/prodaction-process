@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/operation_material.css"
+          th:href="@{/css/operation_material.css}"/>
 </head>
 <body>
-
+<header th:insert="blocks/header :: header"></header>
+<form action="/materials/add" method="post" th:object="${material}" class="form">
+    <div class="data">
+        <p>Введите название материала:</p>
+        <input type="text" th:field="*{name}">
+        <p>Мера измерения:</p>
+        <select th:field="*{unit}" name="unit" class="unit">
+            <option value="кг">кг</option>
+            <option value="л">л</option>
+            <option value="штуки">штуки</option>
+        </select>
+        <p>Количество на складе:</p>
+        <input type="number" min="0" step="0.1" th:field="*{stockQuantity}">
+    </div>
+    <input class="btn" type="submit" value="Сохранить"/>
+</form>
 </body>
 </html>

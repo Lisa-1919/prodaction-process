@@ -12,6 +12,10 @@ import productionprocess.services.MaterialService;
 import productionprocess.services.OperationService;
 import productionprocess.services.ProductService;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+
 @Controller
 public class TechnologistController {
 
@@ -27,6 +31,18 @@ public class TechnologistController {
         model.addAttribute("products", productService.findAll());
         return "technologist";
     }
+    @GetMapping("/products/add")
+    public String addProduct(Model model){
+        model.addAttribute("product", new Product());
+        model.addAttribute("operations", operationService.findAll());
+        model.addAttribute("materials", materialService.findAll());
+        return "add_product";
+    }
+//
+//    @PostMapping("/products/add")
+//    public String addManager( Model model) {
+//        return "redirect:/home";
+//    }
 
     @GetMapping("/products/{id}")
     public String getProduct(@PathVariable("id") Integer id, Model model){
@@ -52,6 +68,18 @@ public class TechnologistController {
         return "materials";
     }
 
+    @GetMapping("/materials/add")
+    public String addMaterialPage(Model model){
+        model.addAttribute("material", new Material());
+        return "add_material";
+    }
+
+    @PostMapping("/materials/add")
+    public String addMaterial(@ModelAttribute("material") Material material, Model model) {
+        materialService.addMaterial(material);
+        return "redirect:/materials";
+    }
+
     @GetMapping("/materials/{id}")
     public String getMaterial(@PathVariable("id") Integer id, Model model){
         model.addAttribute("material", materialService.findById(id));
@@ -74,6 +102,17 @@ public class TechnologistController {
     public String operations(Model model){
         model.addAttribute("operations", materialService.findAll());
         return "operations";
+    }
+
+    @GetMapping("/operations/add")
+    public String addOperationPage(Model model){
+        model.addAttribute("operation", new Operation());
+        return "add_operation";
+    }
+
+    @PostMapping("/operations/add")
+    public String addOperations(@ModelAttribute("operation") Operation operation, Model model) {
+        return "redirect:/operations";
     }
 
     @GetMapping("/operations/{id}")

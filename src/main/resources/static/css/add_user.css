@@ -25,7 +25,12 @@ h1{
     margin-left: 520px;
 }
 
-.btn{
+.data input, select{
+    width: 397px;
+    height: 47px;
+}
+
+input[type=submit]{
     width: 259px;
     height: 76px;
     margin-left: 591px;

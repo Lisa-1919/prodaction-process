@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/operation_material.css"
+          th:href="@{/css/operation_material.css}"/>
 </head>
 <body>
-
+<header th:insert="blocks/header :: header"></header>
+<form action="/operations/add" method="post" th:object="${operation}" class="form">
+    <div class="data">
+        <p>Выберите цех</p>
+        <select th:field="*{workshop}" name="workshop" class="workshops">
+            <option value="1">Сборочный цех</option>
+            <option value="2">Покрасочный цех</option>
+            <option value="3">Упаковочный цех</option>
+        </select>
+        <p>Введите название операции</p>
+        <input type="text" th:field="*{name}" placeholder="Название операции" required><br/>
+        <p>Время выполнения поерации</p>
+        <input type="time" th:field="*{time}" required><br/>
+    </div>
+    <input class="btn" type="submit" value="Сохранить"/>
+</form>
 </body>
 </html>

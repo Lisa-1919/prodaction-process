@@ -1,0 +1,33 @@
+.form{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 190px;
+    left: 122px;
+}
+ p{
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+    letter-spacing: -0.02em;
+    color: #6D6DB3;
+    background-color: transparent;
+}
+
+.workshops, input[type=text], input[type=number]{
+
+    width: 588px;
+    height: 47px;
+}
+
+input[type=time]{
+    width: 120px;
+    height: 47px;
+
+}
+.unit{
+    width: 100px;
+    height: 47px;
+}
