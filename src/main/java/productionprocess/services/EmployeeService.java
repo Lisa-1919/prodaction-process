@@ -12,11 +12,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import productionprocess.data.entities.Employee;
+import productionprocess.data.entities.Product;
 import productionprocess.data.entities.Role;
 import productionprocess.data.repo.EmployeeRepo;
 import productionprocess.data.repo.RoleRepo;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -125,5 +126,16 @@ public class EmployeeService implements UserDetailsService {
         String password = gen.generatePassword(10, splCharRule, lowerCaseRule,
                 upperCaseRule, digitRule);
         return password;
+    }
+
+    public List<Employee> searchEmployeeByEmail(String value) {
+        Iterable<Employee> employees = employeeRepo.findAll();
+        List<Employee> result = new ArrayList<>();
+        for (Employee employee : employees) {
+            if (employee.getEmail().toLowerCase().contains(value.toLowerCase())) {
+                result.add(employee);
+            }
+        }
+        return result;
     }
 }
