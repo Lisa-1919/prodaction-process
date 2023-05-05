@@ -8,17 +8,44 @@
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}">
+    <link type="text/css" rel="stylesheet" href="../static/css/add_product.css" th:href="@{/css/add_product.css}">
+
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
 <form action="/products/add" method="post" th:object="${product}" class="form">
     <div class="data">
-        <p>Введите название</p>
-        <input type="text" required><br/>
+        <p>Тип:
+            <select th:field="*{type}">
+                <option th:value="'Карандаш'">Карандаш</option>
+                <option th:value="'Ручка'">Ручка</option>
+            </select>
+        </p>
+        <p>Модель:
+            <select th:field="*{model}">
+                <option th:value="'Big'">Big Карандаш</option>
+                <option th:value="'Small'">Small Карандаш</option>
+                <option th:value="'Standard'">Standard Ручка</option>
+                <option th:value="'High'">High Ручка</option>
+                <option th:value="'Low'">Low Ручка</option>
+            </select></p>
+        <p>Размер стержня (ручка):
+            <select th:field="*{rodSize}">
+                <option th:value="'L'">L</option>
+                <option th:value="'M'">M</option>
+            </select></p>
+        <p>Краска:
+            <select th:field="*{paintKind}">
+                <option th:value="'Белая'">Big_белый</option>
+                <option th:value="'Красная'">Big_красный</option>
+                <option th:value="'Черная'">Big_чёрный</option>
+                <option th:value="'Черная'">Small_чёрный</option>
+                <option th:value="'Красная'">Small_красный</option>
+            </select></p>
         <p>Введите артикул</p>
-        <input type="time" required><br/>
+        <input th:field="*{article}" type="text" required>
         <p>Маршрут</p>
-        <table>
+        <table class="operations" th:object="${operations}">
             <tr>
                 <th>Цех</th>
                 <th>Операция</th>
@@ -29,8 +56,24 @@
                 <tr>
                     <td th:text="${operation.workshop}"></td>
                     <td th:text="${operation.name}"></td>
-                    <td th:text="${operation.time}"></td>
-                    <td><input type="checkbox" class="check"></td>
+                    <td th:text="${operation.hours} + ':' + ${operation.minutes}"></td>
+                    <td><input type="number" min="1" step="1" name="selectedOperationsSequencing"></td>
+                    <td><input type="checkbox" class="check" name="selectedOperations" th:value="${operation.id}"></td>
+                </tr>
+            </div>
+        </table>
+        <p>Спецификация</p>
+        <table class="materials" th:object="${materials}">
+            <tr>
+                <th>Материал</th>
+                <th>Кол-во</th>
+                <th></th>
+            </tr>
+            <div th:each="material : ${materials}">
+                <tr>
+                    <td th:text="${material.type} + ' ' + ${material.name}"></td>
+                    <td><input type="number" placeholder="кол-во" name="selectedMaterialsQuantity"></td>
+                    <td><input type="checkbox" class="check" name="selectedMaterials" th:value="${material.id}"></td>
                 </tr>
             </div>
         </table>

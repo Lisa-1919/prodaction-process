@@ -17,8 +17,10 @@ public class Operation {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "time")
-    private LocalTime time;
+    @Column(name = "hours")
+    private int hours;
+    @Column(name = "minutes")
+    private int minutes;
 
     @Column(name = "workshop")
     private String workshop;
@@ -26,18 +28,20 @@ public class Operation {
     public Operation() {
     }
 
-    public Operation(Integer id, String name, String description, LocalTime time, String workshop) {
+    public Operation(Integer id, String name, String description, int hours, int minutes, String workshop) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.time = time;
+        this.hours = hours;
+        this.minutes = minutes;
         this.workshop = workshop;
     }
 
-    public Operation(String name, String description, LocalTime time, String workshop) {
+    public Operation(String name, String description, int hours, int minutes, String workshop) {
         this.name = name;
         this.description = description;
-        this.time = time;
+        this.hours = hours;
+        this.minutes = minutes;
         this.workshop = workshop;
     }
 
@@ -65,13 +69,6 @@ public class Operation {
         this.description = description;
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
 
     public String getWorkshop() {
         return workshop;
@@ -79,5 +76,21 @@ public class Operation {
 
     public void setWorkshop(String workshop) {
         this.workshop = workshop;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
     }
 }

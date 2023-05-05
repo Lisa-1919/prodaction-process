@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+
+    <link type="text/css" rel="stylesheet" href="../static/css/order-p.css" th:href="@{/css/order-p.css}"/>
+</head>
+<body>
+<header th:insert="blocks/header::header"></header>
+<div class="order" th:object="${orderOnProduction}">
+    <div class="l">
+        <h1 th:text="'Заказ № ' + ${orderOnProduction.id}"></h1>
+        <a class="back" href="/orders-p">Назад</a>
+    </div>
+
+    <div class="order_info">
+        <h3>Общая информация</h3>
+        <p th:text="'Принят: ' + ${orderOnProduction.orderDate}"></p>
+        <p th:text="'Крайняя дата: ' + ${orderOnProduction.desiredDate}"></p>
+        <p th:text="'Время выполнения: '"></p>
+        <p th:text="'Статус: ' + ${orderOnProduction.status}"></p>
+        <p th:text="'Заказчик: ' + ${orderOnProduction.name}"></p>
+    </div>
+    <div class="list">
+        <h3>Состав заказа</h3>
+        <table>
+            <tr>
+                <th>№</th>
+                <th>Артикул</th>
+                <th>Количество</th>
+            </tr>
+            <div th:each="orderDetail, index : ${orderOnProduction.getOrderOnProductionDetails()}">
+                <tr>
+                    <td th:text="${index}"></td>
+                    <td th:text="${orderDetail.product.article}"></td>
+                    <td th:text="${orderDetail.amount}"></td>
+                </tr>
+            </div>
+        </table>
+    </div>
+    <div class="btn_d">
+        <div th:if="${userRole.equals('ASSEMBLY_SHOP_MASTER')}">
+            <a class="btn_d_2" href="/assembly/end">Сборка завершена</a>
+        </div>
+        <div th:if="${userRole.equals('PAINT_SHOP_MASTER')}">
+            <a class="btn_d_2" href="/paint/end">Покраска завершена</a>
+        </div>
+        <div th:if="${userRole.equals('PACKING_SHOP_MASTER')}">
+            <a class="btn_d_2" href="/packing/end">Упаковка завершена</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

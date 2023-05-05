@@ -1,3 +1,9 @@
+table{
+    position: absolute;
+    width: 1216px;
+    left: 122px;
+    top: 315px;
+}
 .technologist_functions{
     position: absolute;
     width: 591px;

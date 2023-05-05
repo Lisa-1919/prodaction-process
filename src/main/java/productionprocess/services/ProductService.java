@@ -3,6 +3,7 @@ package productionprocess.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import productionprocess.data.entities.Product;
+import productionprocess.data.repo.MaterialsForProductRepo;
 import productionprocess.data.repo.ProductRepo;
 import productionprocess.data.repo.RouteRepo;
 
@@ -13,10 +14,11 @@ import java.util.NoSuchElementException;
 @Service
 public class ProductService {
     @Autowired
-    ProductRepo productRepo;
-
+    private ProductRepo productRepo;
     @Autowired
-    RouteRepo routeRepo;
+    private RouteRepo routeRepo;
+    @Autowired
+    private MaterialsForProductRepo materialsForProductRepo;
 
     public List<Product> findAll() {
         return productRepo.findAll();
@@ -54,7 +56,10 @@ public class ProductService {
     }
 
     public void addProduct(Product product) {
+        routeRepo.save(product.getRoute());
         productRepo.save(product);
+        product.getMaterialsForProducts().forEach(materialsForProduct -> materialsForProduct.setProduct(product));
+        materialsForProductRepo.saveAll(product.getMaterialsForProducts());
     }
 
     public List<Product> searchProductByArticle(String value) {
