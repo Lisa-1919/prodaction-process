@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import productionprocess.data.entities.OrderAtWarehouse;
+import productionprocess.data.model.MaterialToOrder;
 import productionprocess.services.OrderAtWarehouseService;
 import productionprocess.services.OrderOnProductionService;
+
+import java.util.List;
 
 @Controller
 public class DispatcherController {
@@ -43,8 +46,9 @@ public class DispatcherController {
 
     @GetMapping("/orders-p/{id}/components")
     public String orderOnProductionComponents(@PathVariable("id") Integer id, Model model){
-        model.addAttribute("materialsToOrder", orderOnProductionService.getNecessaryQuantity(id));
-        model.addAttribute("orderAtWarehouse", new OrderAtWarehouse());
+        List<MaterialToOrder> materialToOrderList = orderOnProductionService.getNecessaryQuantity(id);
+        model.addAttribute("materialsToOrder", materialToOrderList);
+        //model.addAttribute("orderAtWarehouse", new OrderAtWarehouse());
         return "order-w";
     }
 

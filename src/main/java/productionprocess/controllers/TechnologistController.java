@@ -69,7 +69,6 @@ public class TechnologistController {
             materialsForProduct.setQuantity(selectedMaterialsQuantity.get(i));
             product.getMaterialsForProducts().add(materialsForProduct);
         }
-
         productService.addProduct(product);
         return "redirect:/products";
     }

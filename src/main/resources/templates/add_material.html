@@ -15,7 +15,7 @@
 <form action="/materials/add" method="post" th:object="${material}" class="form">
     <div class="data">
         <p>Введите название материала:</p>
-        <input type="text" th:field="*{type}">
+        <input type="text" th:field="*{name}">
         <p>Мера измерения:</p>
         <select th:field="*{unit}" name="unit" class="unit">
             <option th:value="'кг'">кг</option>
