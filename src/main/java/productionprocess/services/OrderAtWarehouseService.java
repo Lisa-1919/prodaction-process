@@ -38,7 +38,7 @@ public class OrderAtWarehouseService {
         orderAtWarehouseRepo.save(orderAtWarehouseDB);
     }
 
-    public void editStatus(int id, StatusOrderAtWarehouse statusOrderAtWarehouse){
+    public void editStatus(int id, StatusOrderAtWarehouse statusOrderAtWarehouse) {
         OrderAtWarehouse orderAtWarehouseDB = orderAtWarehouseRepo.findById(id).orElseThrow();
         String status = statusOrderAtWarehouse.getStatus();
         orderAtWarehouseDB.setStatus(status);
@@ -46,11 +46,11 @@ public class OrderAtWarehouseService {
     }
 
     public boolean deleteOrderAtWarehouse(int id) {
-        try{
+        try {
             OrderAtWarehouse orderAtWarehouse = orderAtWarehouseRepo.findById(id).orElseThrow();
             orderAtWarehouseRepo.delete(orderAtWarehouse);
             return true;
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
 
@@ -61,6 +61,12 @@ public class OrderAtWarehouseService {
     }
 
     public void addOrderAtWarehouse(OrderAtWarehouse orderAtWarehouse) {
+        orderAtWarehouse.getOrderAtWarehouseDetails().forEach(detail -> {
+            if (detail.getAmount() % 100 != 0) {
+                double amount = detail.getAmount() + (100 - detail.getAmount() % 100);
+                detail.setAmount(amount);
+            }
+        });
         orderAtWarehouseRepo.save(orderAtWarehouse);
     }
 

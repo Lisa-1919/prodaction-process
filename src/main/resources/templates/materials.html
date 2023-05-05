@@ -30,15 +30,13 @@
 <table>
     <tr>
         <th>№</th>
-        <th>Тип</th>
-        <th>Свойство</th>
+        <th>Название</th>
         <th>Мера измерения</th>
         <th>Количество на складе</th>
     </tr>
     <div th:each="material : ${materials}">
         <tr>
             <td th:text="${material.id}"></td>
-            <td th:text="${material.type}"></td>
             <td th:text="${material.name}"></td>
             <td th:text="${material.unit}"></td>
             <td th:text="${material.stockQuantity}"></td>

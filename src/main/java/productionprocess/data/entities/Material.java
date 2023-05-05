@@ -9,9 +9,6 @@ public class Material {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "type")
-    private String type;
-
     @Column(name = "name")
     private String name;
 
@@ -24,16 +21,8 @@ public class Material {
     public Material() {
     }
 
-    public Material(Integer id, String type, String name, double stockQuantity, String unit) {
+    public Material(Integer id, String name, double stockQuantity, String unit) {
         this.id = id;
-        this.type = type;
-        this.name = name;
-        this.stockQuantity = stockQuantity;
-        this.unit = unit;
-    }
-
-    public Material(String type, String name, double stockQuantity, String unit) {
-        this.type = type;
         this.name = name;
         this.stockQuantity = stockQuantity;
         this.unit = unit;
@@ -45,14 +34,6 @@ public class Material {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getName() {
