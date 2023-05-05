@@ -27,32 +27,34 @@
     <a class="btn_technologist" href="/operations"><p>Операции</p></a>
 </nuv>
 <div class="list">
-<!--<table>-->
-<!--    <tr>-->
-<!--        <th>№</th>-->
-<!--        <th>email</th>-->
-<!--        <th>ФИО</th>-->
-<!--        <th>Должность</th>-->
-<!--    </tr>-->
-<!--    <div th:each="product : ${products}">-->
-<!--        <tr>-->
-<!--            <td th:text="${product.id}"></td>-->
-<!--            <td th:text="${product.getModel()}"></td>-->
-<!--            <td th:text="${product.article}"></td>-->
-<!--            <td th:text="${product.costPrice}"></td>-->
-<!--            <td class="more">-->
-<!--                <a th:href="'/products/' + ${product.id}">-->
-<!--                    <img src="/img/edit.svg" alt="Редактировать"/>-->
-<!--                </a>-->
-<!--            </td>-->
-<!--            <td class="delete">-->
-<!--                <a th:href="'/products/' + ${product.id} + '/delete'">-->
-<!--                    <img src="/img/delete.svg" alt="Удалить"/>-->
-<!--                </a>-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--    </div>-->
-<!--</table>-->
+<table>
+    <tr>
+        <th>№</th>
+        <th>Тип</th>
+        <th>Свойство</th>
+        <th>Мера измерения</th>
+        <th>Количество на складе</th>
+    </tr>
+    <div th:each="material : ${materials}">
+        <tr>
+            <td th:text="${material.id}"></td>
+            <td th:text="${material.type}"></td>
+            <td th:text="${material.name}"></td>
+            <td th:text="${material.unit}"></td>
+            <td th:text="${material.stockQuantity}"></td>
+            <td class="more">
+                <a th:href="'/materials/' + ${material.id}">
+                    <img src="/img/edit.svg" alt="Редактировать"/>
+                </a>
+            </td>
+            <td class="delete">
+                <a th:href="'/materials/' + ${material.id} + '/delete'">
+                    <img src="/img/delete.svg" alt="Удалить"/>
+                </a>
+            </td>
+        </tr>
+    </div>
+</table>
 </div>
 </body>
 </html>

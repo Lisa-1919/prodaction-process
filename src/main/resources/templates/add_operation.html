@@ -16,14 +16,15 @@
     <div class="data">
         <p>Выберите цех</p>
         <select th:field="*{workshop}" name="workshop" class="workshops">
-            <option value="1">Сборочный цех</option>
-            <option value="2">Покрасочный цех</option>
-            <option value="3">Упаковочный цех</option>
+            <option value="Сборочный цех">Сборочный цех</option>
+            <option value="Покрасочный цех">Покрасочный цех</option>
+            <option value="Упаковочный цех">Упаковочный цех</option>
         </select>
         <p>Введите название операции</p>
         <input type="text" th:field="*{name}" placeholder="Название операции" required><br/>
         <p>Время выполнения поерации</p>
-        <input type="time" th:field="*{time}" required><br/>
+        <input type="number" min="0" th:field="*{hours}" value="0" required><br/>
+        <input type="number" min="0" th:field="*{minutes}" value="0" required><br/>
     </div>
     <input class="btn" type="submit" value="Сохранить"/>
 </form>

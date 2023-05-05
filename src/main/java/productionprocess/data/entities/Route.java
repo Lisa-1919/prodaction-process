@@ -15,9 +15,10 @@ public class Route {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "total_time")
-    private LocalTime totalTime;
+    @Column(name = "total_hours")
+    private int totalHours;
+    @Column(name="total_minutes")
+    private int totalMinutes;
 
     @OneToMany(mappedBy = "route")
     private List<OperationInRoute> operationInRoutes;
@@ -26,17 +27,18 @@ public class Route {
         operationInRoutes = new ArrayList<>();
     }
 
-    public Route(Integer id, String name, LocalTime totalTime, List<OperationInRoute> operationInRoutes) {
+    public Route(Integer id, String name, int totalHours, int totalMinutes, List<OperationInRoute> operationInRoutes) {
         this.id = id;
         this.name = name;
-        this.totalTime = totalTime;
+        this.totalHours = totalHours;
+        this.totalMinutes = totalMinutes;
         this.operationInRoutes = operationInRoutes;
     }
 
-    public Route(String name, LocalTime totalTime, List<OperationInRoute> operationInRoutes) {
+    public Route(String name, int totalHours, int totalMinutes) {
         this.name = name;
-        this.totalTime = totalTime;
-        this.operationInRoutes = operationInRoutes;
+        this.totalHours = totalHours;
+        this.totalMinutes = totalMinutes;
     }
 
     public Integer getId() {
@@ -55,11 +57,27 @@ public class Route {
         this.name = name;
     }
 
-    public LocalTime getTotalTime() {
-        return totalTime;
+    public List<OperationInRoute> getOperationInRoutes() {
+        return operationInRoutes;
     }
 
-    public void setTotalTime(LocalTime totalTime) {
-        this.totalTime = totalTime;
+    public void setOperationInRoutes(List<OperationInRoute> operationInRoutes) {
+        this.operationInRoutes = operationInRoutes;
+    }
+
+    public int getTotalHours() {
+        return totalHours;
+    }
+
+    public void setTotalHours(int totalHours) {
+        this.totalHours = totalHours;
+    }
+
+    public int getTotalMinutes() {
+        return totalMinutes;
+    }
+
+    public void setTotalMinutes(int totalMinutes) {
+        this.totalMinutes = totalMinutes;
     }
 }

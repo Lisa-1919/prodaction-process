@@ -27,32 +27,34 @@
     <a class="btn_technologist" href="/materials"><p>Материалы</p></a>
 </nuv>
 <div class="list">
-    <!--<table>-->
-    <!--    <tr>-->
-    <!--        <th>№</th>-->
-    <!--        <th>email</th>-->
-    <!--        <th>ФИО</th>-->
-    <!--        <th>Должность</th>-->
-    <!--    </tr>-->
-    <!--    <div th:each="product : ${products}">-->
-    <!--        <tr>-->
-    <!--            <td th:text="${product.id}"></td>-->
-    <!--            <td th:text="${product.getModel()}"></td>-->
-    <!--            <td th:text="${product.article}"></td>-->
-    <!--            <td th:text="${product.costPrice}"></td>-->
-    <!--            <td class="more">-->
-    <!--                <a th:href="'/products/' + ${product.id}">-->
-    <!--                    <img src="/img/edit.svg" alt="Редактировать"/>-->
-    <!--                </a>-->
-    <!--            </td>-->
-    <!--            <td class="delete">-->
-    <!--                <a th:href="'/products/' + ${product.id} + '/delete'">-->
-    <!--                    <img src="/img/delete.svg" alt="Удалить"/>-->
-    <!--                </a>-->
-    <!--            </td>-->
-    <!--        </tr>-->
-    <!--    </div>-->
-    <!--</table>-->
+    <table>
+        <tr>
+            <th>№</th>
+            <th>Цех</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Время выполнения</th>
+        </tr>
+        <div th:each="operation : ${operations}">
+            <tr>
+                <td th:text="${operation.id}"></td>
+                <td th:text="${operation.workshop}"></td>
+                <td th:text="${operation.name}"></td>
+                <td th:text="${operation.description}"></td>
+                <td th:text="${operation.hours} + ':' + ${operation.minutes}"></td>
+                <td class="more">
+                    <a th:href="'/operations/' + ${operation.id}">
+                        <img src="/img/edit.svg" alt="Редактировать"/>
+                    </a>
+                </td>
+                <td class="delete">
+                    <a th:href="'/operations/' + ${operation.id} + '/delete'">
+                        <img src="/img/delete.svg" alt="Удалить"/>
+                    </a>
+                </td>
+            </tr>
+        </div>
+    </table>
 </div>
 </body>
 </html>

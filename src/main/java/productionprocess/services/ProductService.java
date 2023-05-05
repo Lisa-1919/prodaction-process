@@ -54,6 +54,7 @@ public class ProductService {
     }
 
     public void addProduct(Product product) {
+        routeRepo.save(product.getRoute());
         productRepo.save(product);
     }
 
