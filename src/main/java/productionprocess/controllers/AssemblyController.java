@@ -17,20 +17,21 @@ public class AssemblyController {
     private EmployeeService employeeService;
     @GetMapping("/assembly")
     public String assembly(Model model){
-        model.addAttribute("orders", orderOnProductionService.findAll());
+        model.addAttribute("ordersOnProduction", orderOnProductionService.getOrderByWorkShop("Сборочный цех"));
         return "assembly_workshop";
     }
 
     @PostMapping("/assembly")
     public String search(@RequestParam("id") Integer id, Model model){
-        model.addAttribute("orders", orderOnProductionService.searchOrderOnProductionById(id));
+        model.addAttribute("ordersOnProduction", orderOnProductionService.searchOrderOnProductionById(id));
         return "assembly_workshop";
     }
 
     @GetMapping("/assembly/{id}")
     public String order(@RequestParam("id") Integer id, Model model){
         model.addAttribute("orderOnProduction", orderOnProductionService.findById(id));
-        model.addAttribute("userRole", employeeService.getAuthorized().getRoleName());
+        model.addAttribute("userRole", "ASSEMBLY_SHOP_MASTER");
+        //model.addAttribute("userRole", employeeService.getAuthorized().getRoleName());
         return "order_on_production";
     }
 

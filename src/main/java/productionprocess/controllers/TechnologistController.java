@@ -52,6 +52,7 @@ public class TechnologistController {
             OperationInRoute operationInRoute = new OperationInRoute();
             operationInRoute.setOperation(operationService.findById(selectedOperations.get(i)));
             operationInRoute.setSequencing(selectedOperationsSequencing.get(i));
+            operationInRoute.setRoute(route);
             route.getOperationInRoutes().add(operationInRoute);
         }
         int hours = 0;

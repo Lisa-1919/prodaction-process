@@ -28,7 +28,6 @@ public class MaterialService {
 
     public void editMaterial(Material material) {
         Material materialDB = materialRepo.findById(material.getId()).orElseThrow();
-        materialDB.setType(material.getType());
         materialDB.setName(material.getName());
         materialDB.setStockQuantity(material.getStockQuantity());
         materialDB.setUnit(material.getUnit());

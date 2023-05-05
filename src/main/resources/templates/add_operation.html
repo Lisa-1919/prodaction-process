@@ -22,9 +22,11 @@
         </select>
         <p>Введите название операции</p>
         <input type="text" th:field="*{name}" placeholder="Название операции" required><br/>
-        <p>Время выполнения поерации</p>
-        <input type="number" min="0" th:field="*{hours}" value="0" required><br/>
-        <input type="number" min="0" th:field="*{minutes}" value="0" required><br/>
+        <p>Время выполнения операции</p>
+        <div class="time_container">
+            <p class="time"><input type="number" min="0" th:field="*{hours}" value="0" required>ч. </p>
+            <p class="time"><input type="number" min="0" th:field="*{minutes}" value="0" required>мин. </p><br/>
+        </div>
     </div>
     <input class="btn" type="submit" value="Сохранить"/>
 </form>

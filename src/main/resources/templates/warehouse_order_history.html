@@ -14,31 +14,31 @@
 <body>
 <header th:insert="blocks/header::header"></header>
 <div class="search">
-  <form action="/orders-p" method="post">
+  <form action="/orders-w" method="post">
     <p><input type="search" name="id" placeholder="Что вы ищите?" class="search__form">
       <input type="submit" value="" class="search_button">
     </p>
   </form>
 </div>
-<a href="/orders-w">Заказы на склад</a>
+<a href="/orders-p">Назад</a>
 <div class="orders">
   <table>
     <tr>
       <th>№</th>
-      <th>Заказчик</th>
       <th>Статус</th>
       <th>Дата заказа</th>
-      <th>Крайняя дата</th>
-      <th>Время выполнения</th>
+      <th>Дата получения</th>
+      <th></th>
     </tr>
-    <div th:each="order : ${ordersOnProduction}">
+    <div th:each="order : ${ordersAtWarehouse}">
       <tr>
-        <td><a th:href="'/orders-p/' + ${order.id}" th:text="${order.id}"></a></td>
-        <td th:text="${order.name}"></td>
+        <td th:text="${order.id}"></td>
         <td th:text="${order.status}"></td>
         <td th:text="${order.orderDate}"></td>
-        <td th:text="${order.desiredDate}"></td>
-        <td th:text="${order.totalHours} + ':' + ${order.totalMinutes}"></td>
+        <td th:text="${order.receiptDate}"></td>
+        <td>
+          <a th:href="'/orders-w/' + ${order.id}" th:disabled="${order.status == 'Получен'}">Подтверлить получение</a>
+        </td>
       </tr>
     </div>
   </table>

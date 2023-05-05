@@ -60,7 +60,7 @@
             </tr>
             <div th:each="material : ${materials}">
                 <tr>
-                    <td th:text="${material.type} + ' ' + ${material.name}"></td>
+                    <td th:text="${material.name}"></td>
                     <td><input type="number" placeholder="кол-во" name="selectedMaterialsQuantity"></td>
                     <td><input type="checkbox" class="check" name="selectedMaterials" th:value="${material.id}"></td>
                 </tr>

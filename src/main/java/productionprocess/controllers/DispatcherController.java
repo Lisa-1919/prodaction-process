@@ -8,6 +8,8 @@ import productionprocess.data.entities.OrderAtWarehouse;
 import productionprocess.data.entities.OrderAtWarehouseDetails;
 import productionprocess.data.entities.OrderOnProduction;
 import productionprocess.data.model.MaterialToOrder;
+import productionprocess.data.model.StatusOrderAtWarehouse;
+import productionprocess.data.model.StatusOrderOnProduction;
 import productionprocess.services.MaterialService;
 import productionprocess.services.OrderAtWarehouseService;
 import productionprocess.services.OrderOnProductionService;
@@ -23,6 +25,18 @@ public class DispatcherController {
     private OrderAtWarehouseService orderAtWarehouseService;
     @Autowired
     private MaterialService materialService;
+
+    @GetMapping("/orders-w")
+    public String OrdersAtWarehouse(Model model){
+        model.addAttribute("ordersAtWarehouse", orderAtWarehouseService.findAll());
+        return "warehouse_order_history";
+    }
+
+    @GetMapping("/orders-w/{id}")
+    public String confirmReceiptOfOrder(@PathVariable("id") Integer orderId, Model model){
+        orderAtWarehouseService.confirmReceipt(orderId, StatusOrderAtWarehouse.STATUS_2);
+        return "redirect:/orders-w";
+    }
 
     @GetMapping("/orders-p")
     public String ordersOnProduction(Model model){
@@ -42,8 +56,9 @@ public class DispatcherController {
         return "order-p";
     }
 
-    @GetMapping("/order/{id}/start")
+    @GetMapping("/orders-p/{id}/start")
     public String start(@PathVariable("id") Integer id, Model model){
+        orderOnProductionService.editStatus(id, StatusOrderOnProduction.STATUS_3);
         return "redirect:/orders-p";
     }
 
@@ -60,12 +75,8 @@ public class DispatcherController {
         List<MaterialToOrder> materialToOrder = orderOnProductionService.getNecessaryQuantity(id);
         OrderAtWarehouse orderAtWarehouse = new OrderAtWarehouse();
         orderAtWarehouse.setOrderDate(LocalDateTime.now());
-        orderAtWarehouse.setStatus("Ожидание доставки");
-
-        OrderOnProduction orderOnProduction = orderOnProductionService.findById(id);
-        orderOnProduction.setStatus("Ожидание комплектующих");
-        orderOnProductionService.editOrderOnProduction(orderOnProduction);
-
+        orderAtWarehouse.setStatus(StatusOrderAtWarehouse.STATUS_1.getStatus());
+        orderOnProductionService.editStatus(id, StatusOrderOnProduction.STATUS_2);
         for(MaterialToOrder material: materialToOrder){
             if(material.getOrderedQuantity() > 0) {
                 OrderAtWarehouseDetails orderAtWarehouseDetail = new OrderAtWarehouseDetails();

@@ -6,6 +6,7 @@ import productionprocess.data.entities.MaterialsForProduct;
 import productionprocess.data.entities.Product;
 import productionprocess.data.entities.Route;
 import productionprocess.data.repo.MaterialsForProductRepo;
+import productionprocess.data.repo.OperationInRouteRepo;
 import productionprocess.data.repo.ProductRepo;
 import productionprocess.data.repo.RouteRepo;
 
@@ -21,6 +22,8 @@ public class ProductService {
     private RouteRepo routeRepo;
     @Autowired
     private MaterialsForProductRepo materialsForProductRepo;
+    @Autowired
+    private OperationInRouteRepo operationInRouteRepo;
 
     public List<Product> findAll() {
         return productRepo.findAll();
@@ -58,6 +61,7 @@ public class ProductService {
     public boolean deleteProduct(int id) {
         try {
             Product product = productRepo.findById(id).orElseThrow();
+            routeRepo.delete(product.getRoute());
             productRepo.delete(product);
             return true;
         } catch (NoSuchElementException e) {
@@ -74,6 +78,7 @@ public class ProductService {
         List<Product> products = productRepo.findByArticle(product.getArticle());
         if (products.isEmpty() || products == null) {
             routeRepo.save(product.getRoute());
+            operationInRouteRepo.saveAll(product.getRoute().getOperationInRoutes());
             productRepo.save(product);
             product.getMaterialsForProducts().forEach(materialsForProduct -> materialsForProduct.setProduct(product));
             materialsForProductRepo.saveAll(product.getMaterialsForProducts());

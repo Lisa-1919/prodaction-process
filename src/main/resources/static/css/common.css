@@ -37,7 +37,7 @@ body {
     border: 2px solid #090074;
 }
 
-.btn_add_user, .btn{
+.btn_add_user, .btn, .login_btn{
     background: #BDD9FF;
     border: 1px solid #BDD9FF;
     border-radius: 11px;
