@@ -30,7 +30,8 @@ public class OperationService {
         Operation operationDB = operationRepo.findById(operation.getId()).orElseThrow();
         operationDB.setName(operation.getName());
         operationDB.setDescription(operation.getDescription());
-        operationDB.setTime(operation.getTime());
+        operationDB.setHours(operation.getHours());
+        operationDB.setMinutes(operation.getMinutes());
         operationRepo.save(operationDB);
     }
 
