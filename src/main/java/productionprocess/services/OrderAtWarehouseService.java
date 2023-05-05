@@ -3,6 +3,9 @@ package productionprocess.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import productionprocess.data.entities.OrderAtWarehouse;
+import productionprocess.data.entities.OrderOnProduction;
+import productionprocess.data.model.StatusOrderAtWarehouse;
+import productionprocess.data.model.StatusOrderOnProduction;
 import productionprocess.data.repo.OrderAtWarehouseDetailsRepo;
 import productionprocess.data.repo.OrderAtWarehouseRepo;
 
@@ -32,6 +35,13 @@ public class OrderAtWarehouseService {
         orderAtWarehouseDB.setReceiptDate(orderAtWarehouse.getReceiptDate());
         orderAtWarehouseDB.setStatus(orderAtWarehouseDB.getStatus());
         orderAtWarehouseDB.setOrderAtWarehouseDetails(orderAtWarehouse.getOrderAtWarehouseDetails());
+        orderAtWarehouseRepo.save(orderAtWarehouseDB);
+    }
+
+    public void editStatus(int id, StatusOrderAtWarehouse statusOrderAtWarehouse){
+        OrderAtWarehouse orderAtWarehouseDB = orderAtWarehouseRepo.findById(id).orElseThrow();
+        String status = statusOrderAtWarehouse.getStatus();
+        orderAtWarehouseDB.setStatus(status);
         orderAtWarehouseRepo.save(orderAtWarehouseDB);
     }
 
