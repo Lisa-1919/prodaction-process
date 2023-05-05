@@ -3,6 +3,8 @@ package productionprocess.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import productionprocess.data.entities.Operation;
+import productionprocess.data.entities.OperationInRoute;
+import productionprocess.data.entities.Route;
 import productionprocess.data.repo.OperationInRouteRepo;
 import productionprocess.data.repo.OperationRepo;
 
@@ -28,6 +30,18 @@ public class OperationService {
 
     public void editOperation(Operation operation) {
         Operation operationDB = operationRepo.findById(operation.getId()).orElseThrow();
+        List<OperationInRoute> operationInRoutes = operationInRouteRepo.findByOperation(operationDB);
+        for(OperationInRoute operationInRoute : operationInRoutes){
+            Route route = operationInRoute.getRoute();
+            int totalHours = route.getTotalHours();
+            totalHours = totalHours - operationDB.getHours() + operation.getHours();
+            route.setTotalHours(totalHours);
+            int totalMinutes = route.getTotalMinutes();
+            totalMinutes = totalMinutes - operationDB.getMinutes() + operation.getMinutes();
+            route.setTotalMinutes(totalMinutes);
+            operationInRoute.setRoute(route);
+            operationInRouteRepo.save(operationInRoute);
+        }
         operationDB.setName(operation.getName());
         operationDB.setDescription(operation.getDescription());
         operationDB.setHours(operation.getHours());

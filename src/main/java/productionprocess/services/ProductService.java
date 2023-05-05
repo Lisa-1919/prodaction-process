@@ -2,7 +2,9 @@ package productionprocess.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import productionprocess.data.entities.MaterialsForProduct;
 import productionprocess.data.entities.Product;
+import productionprocess.data.entities.Route;
 import productionprocess.data.repo.MaterialsForProductRepo;
 import productionprocess.data.repo.ProductRepo;
 import productionprocess.data.repo.RouteRepo;
@@ -30,6 +32,20 @@ public class ProductService {
 
     public void editProduct(Product product) {
         Product productDB = productRepo.findById(product.getId()).orElseThrow();
+
+        Route route = product.getRoute();
+        Route routeDB = routeRepo.findById(productDB.getRoute().getId()).orElseThrow();
+        routeDB.setName(route.getName());
+        routeDB.setTotalHours(route.getTotalHours());
+        routeDB.setTotalMinutes(route.getTotalMinutes());
+        routeDB.setOperationInRoutes(route.getOperationInRoutes());
+        routeRepo.save(routeDB);
+
+        List<MaterialsForProduct> materialsForProductList = materialsForProductRepo.findByProduct(productDB);
+        materialsForProductRepo.deleteAll(materialsForProductList);
+        product.getMaterialsForProducts().forEach(materialsForProduct -> materialsForProduct.setProduct(product));
+        materialsForProductRepo.saveAll(product.getMaterialsForProducts());
+
         productDB.setType(product.getType());
         productDB.setModel(product.getModel());
         productDB.setRodSize(product.getRodSize());
