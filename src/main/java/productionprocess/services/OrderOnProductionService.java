@@ -9,6 +9,7 @@ import productionprocess.data.repo.MaterialRepo;
 import productionprocess.data.repo.OrderOnProductionDetailsRepo;
 import productionprocess.data.repo.OrderOnProductionRepo;
 
+import java.awt.print.Book;
 import java.util.*;
 
 @Service
@@ -76,6 +77,11 @@ public class OrderOnProductionService {
             }
         }
         return result;
+    }
+
+    public List<OrderOnProduction> sortByStatus(List<OrderOnProduction> list) {
+        Collections.sort(list, (s1, s2) -> s1.getStatus().compareToIgnoreCase(s2.getStatus()) > 1 ? 1 : s1.getStatus().compareToIgnoreCase(s2.getStatus()) < 1 ? -1 : 0);
+        return list;
     }
 
     public List<MaterialToOrder> getNecessaryQuantity(int orderId) {

@@ -57,11 +57,11 @@ public class ProductService {
     }
 
     public boolean deleteProduct(int id) {
-        try{
+        try {
             Product product = productRepo.findById(id).orElseThrow();
             productRepo.delete(product);
             return true;
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
 
@@ -71,11 +71,15 @@ public class ProductService {
         return productRepo.existsById(id);
     }
 
-    public void addProduct(Product product) {
-        routeRepo.save(product.getRoute());
-        productRepo.save(product);
-        product.getMaterialsForProducts().forEach(materialsForProduct -> materialsForProduct.setProduct(product));
-        materialsForProductRepo.saveAll(product.getMaterialsForProducts());
+    public boolean addProduct(Product product) {
+        List<Product> products = productRepo.findByArticle(product.getArticle());
+        if (products.isEmpty() || products == null) {
+            routeRepo.save(product.getRoute());
+            productRepo.save(product);
+            product.getMaterialsForProducts().forEach(materialsForProduct -> materialsForProduct.setProduct(product));
+            materialsForProductRepo.saveAll(product.getMaterialsForProducts());
+            return true;
+        } else return false;
     }
 
     public List<Product> searchProductByArticle(String value) {
