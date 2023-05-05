@@ -64,4 +64,8 @@ public class MaterialService {
         }
         return result;
     }
+
+    public Material findByName(String name){
+        return materialRepo.findByName(name);
+    }
 }

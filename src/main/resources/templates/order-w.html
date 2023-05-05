@@ -13,7 +13,7 @@
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
-<form action="/orders-w" method="post" class="form">
+<form th:action="'/orders-p/' + ${id} + '/components'" th:object="${materialsToOrder}"  method="post" class="form">
     <table>
         <tr>
             <th>Наименование</th>
@@ -22,7 +22,7 @@
             <th>Дозаказать</th>
         </tr>
 
-        <div th:each="material : ${materialsToOrder}">
+        <div th:each="material : ${materialsToOrder}" >
             <tr>
                 <td th:text="${material.name}"></td>
                 <td th:text="${material.stockQuantity}"></td>

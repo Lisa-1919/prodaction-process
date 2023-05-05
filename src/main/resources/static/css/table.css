@@ -12,7 +12,7 @@ table.rounded-corners{
 tr:last-child{
     border-bottom: 0;
 }
-th:last-child, td:last-child{
+td:last-child{
     border-right: 0;
 }
 

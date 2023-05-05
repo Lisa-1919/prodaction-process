@@ -3,15 +3,16 @@ package productionprocess.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import productionprocess.data.entities.OrderAtWarehouse;
+import productionprocess.data.entities.OrderAtWarehouseDetails;
+import productionprocess.data.entities.OrderOnProduction;
 import productionprocess.data.model.MaterialToOrder;
+import productionprocess.services.MaterialService;
 import productionprocess.services.OrderAtWarehouseService;
 import productionprocess.services.OrderOnProductionService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -20,6 +21,8 @@ public class DispatcherController {
     private OrderOnProductionService orderOnProductionService;
     @Autowired
     private OrderAtWarehouseService orderAtWarehouseService;
+    @Autowired
+    private MaterialService materialService;
 
     @GetMapping("/orders-p")
     public String ordersOnProduction(Model model){
@@ -52,8 +55,27 @@ public class DispatcherController {
         return "order-w";
     }
 
-    @PostMapping("/orders-w")
-    public String createOrderAtWarehouse(Model model){
+    @PostMapping("/orders-p/{id}/components")
+    public String createOrderAtWarehouse(@PathVariable("id") Integer id, Model model){
+        List<MaterialToOrder> materialToOrder = orderOnProductionService.getNecessaryQuantity(id);
+        OrderAtWarehouse orderAtWarehouse = new OrderAtWarehouse();
+        orderAtWarehouse.setOrderDate(LocalDateTime.now());
+        orderAtWarehouse.setStatus("Ожидание доставки");
+
+        OrderOnProduction orderOnProduction = orderOnProductionService.findById(id);
+        orderOnProduction.setStatus("Ожидание комплектующих");
+        orderOnProductionService.editOrderOnProduction(orderOnProduction);
+
+        for(MaterialToOrder material: materialToOrder){
+            if(material.getOrderedQuantity() > 0) {
+                OrderAtWarehouseDetails orderAtWarehouseDetail = new OrderAtWarehouseDetails();
+                orderAtWarehouseDetail.setMaterial(materialService.findByName(material.getName()));
+                orderAtWarehouseDetail.setAmount(material.getOrderedQuantity());
+                orderAtWarehouse.getOrderAtWarehouseDetails().add(orderAtWarehouseDetail);
+            }
+        }
+
+        orderAtWarehouseService.addOrderAtWarehouse(orderAtWarehouse);
         return "redirect:/orders-p";
     }
 
