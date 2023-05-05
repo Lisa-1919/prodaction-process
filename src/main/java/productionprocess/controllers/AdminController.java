@@ -19,37 +19,49 @@ public class AdminController {
     @Autowired
     private EmployeeService employeeService;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-//    @ModelAttribute(name="employee")
-//    public Employee getEmployeeById(Integer id){
-//        return employeeService.findById(id);
-//    }
-
-
     @GetMapping("/employees/add")
     public String addEmployee(Model model){
+        model.addAttribute("employee", new Employee());
         return "add_user";
     }
 
     @PostMapping("/employees/add")
-    public String addManager(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String phoneNumber,
-                             @RequestParam String email, @RequestParam Integer roleId, Model model) {
+    public String addManager(@ModelAttribute("employee") Employee employee, @RequestParam Integer roleId, Model model) {
         String password = employeeService.generatePassword();
-
-        Employee employee = new Employee(firstName, lastName, phoneNumber, email, password);
-        employeeService.saveEmployee(employee, roleId);
-        try {
-            Writer writer = new FileWriter("D:\\productionProcess\\src\\main\\resources\\employees.txt", true);
-            writer.write(email + " " + password + "\n");
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        employee.setPassword(password);
+        if(employeeService.saveEmployee(employee, roleId)) {
+            try {
+                Writer writer = new FileWriter("D:\\productionProcess\\src\\main\\resources\\employees.txt", true);
+                writer.write(employee.getUsername() + " " + password + "\n");
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return "redirect:/employees";
+        }else {
+            model.addAttribute("error", "Пользователь с таким email уже существует");
+            return "add_user";
         }
-        return "redirect:/home";
     }
+
+//    @PostMapping("/employees/add")
+//    public String addManager(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String phoneNumber,
+//                             @RequestParam String email, @RequestParam Integer roleId, Model model) {
+//        String password = employeeService.generatePassword();
+//
+//        Employee employee = new Employee(firstName, lastName, phoneNumber, email, password);
+//        employeeService.saveEmployee(employee, roleId);
+//        try {
+//            Writer writer = new FileWriter("D:\\productionProcess\\src\\main\\resources\\employees.txt", true);
+//            writer.write(email + " " + password + "\n");
+//            writer.flush();
+//            writer.close();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return "redirect:/home";
+//    }
 
     @GetMapping("/employees")
     public String getAllEmployees(Model model){
@@ -75,10 +87,11 @@ public class AdminController {
         return "redirect:/employees";
     }
 
-//    @GetMapping("/employees/search")
-//    public String searchEmployee(@RequestParam("quest") String quest, Model model){
-//        model.addAttribute("employees", employeeService.)
-//    }
+    @GetMapping("/employees/search")
+    public String searchEmployee(@RequestParam("email") String email, Model model){
+        model.addAttribute("employees", employeeService.searchEmployeeByEmail(email));
+        return "admin";
+    }
 
 
 

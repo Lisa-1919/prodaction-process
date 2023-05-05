@@ -18,12 +18,6 @@ public class Product {
     @Column(name = "model")
     private String model;
 
-    @Column(name = "rod_size")
-    private String rodSize;
-
-    @Column(name = "paint_kind")
-    private String paintKind;
-
     @Column(name = "cost_price")
     private double costPrice;
 
@@ -37,31 +31,22 @@ public class Product {
     @Column(name="article")
     private String article;
 
+    @Column(name="property")
+    private String property;
+
     public Product() {
         this.materialsForProducts = new ArrayList<>();
     }
 
-    public Product(Integer id, String type, String model, String rodSize, String paintKind, double costPrice, Route route, List<MaterialsForProduct> materialsForProducts, String article) {
+    public Product(Integer id, String type, String model, double costPrice, Route route, List<MaterialsForProduct> materialsForProducts, String article, String property) {
         this.id = id;
         this.type = type;
         this.model = model;
-        this.rodSize = rodSize;
-        this.paintKind = paintKind;
         this.costPrice = costPrice;
         this.route = route;
         this.materialsForProducts = materialsForProducts;
         this.article = article;
-    }
-
-    public Product(String type, String model, String rodSize, String paintKind, double costPrice, Route route, List<MaterialsForProduct> materialsForProducts, String article) {
-        this.type = type;
-        this.model = model;
-        this.rodSize = rodSize;
-        this.paintKind = paintKind;
-        this.costPrice = costPrice;
-        this.route = route;
-        this.materialsForProducts = materialsForProducts;
-        this.article = article;
+        this.property = property;
     }
 
     public Integer getId() {
@@ -86,22 +71,6 @@ public class Product {
 
     public void setModel(String model) {
         this.model = model;
-    }
-
-    public String getRodSize() {
-        return rodSize;
-    }
-
-    public void setRodSize(String rodSize) {
-        this.rodSize = rodSize;
-    }
-
-    public String getPaintKind() {
-        return paintKind;
-    }
-
-    public void setPaintKind(String paintKind) {
-        this.paintKind = paintKind;
     }
 
     public double getCostPrice() {
@@ -134,5 +103,13 @@ public class Product {
 
     public void setArticle(String article) {
         this.article = article;
+    }
+
+    public String getProperty() {
+        return property;
+    }
+
+    public void setProperty(String property) {
+        this.property = property;
     }
 }

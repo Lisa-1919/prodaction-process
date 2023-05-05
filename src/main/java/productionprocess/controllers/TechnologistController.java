@@ -27,6 +27,12 @@ public class TechnologistController {
         return "technologist";
     }
 
+    @GetMapping("/products/search")
+    public String productSearch(@RequestParam("article") String article, Model model){
+        model.addAttribute("products", productService.searchProductByArticle(article));
+        return "technologist";
+    }
+
     @GetMapping("/products/add")
     public String addProductPage(Model model) {
         model.addAttribute("product", new Product());
@@ -97,6 +103,13 @@ public class TechnologistController {
         return "materials";
     }
 
+    @GetMapping("/materials/search")
+    public String materialSearch(@RequestParam("name") String name, Model model){
+        model.addAttribute("materials", materialService.searchMaterialByName("name"));
+        return "technologist";
+    }
+
+
     @GetMapping("/materials/add")
     public String addMaterialPage(Model model) {
         model.addAttribute("material", new Material());
@@ -131,6 +144,12 @@ public class TechnologistController {
     public String operations(Model model) {
         model.addAttribute("operations", operationService.findAll());
         return "operations";
+    }
+
+    @GetMapping("/operations/search")
+    public String operationSearch(@RequestParam("name") String name, Model model){
+        model.addAttribute("operations", operationService.searchOperationByName(name));
+        return "technologist";
     }
 
     @GetMapping("/operations/add")

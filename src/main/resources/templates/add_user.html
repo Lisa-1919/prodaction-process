@@ -3,24 +3,18 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
     <title>Contoso</title>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/add_user.css" th:href="@{/css/add_user.css}"/>
 </head>
 <body>
-<header class="header">
-    <a class="home" href="/admin">
-        <img src="../static/img/contoso.svg" alt="Главная"/>
-    </a>
-    <a href="/logout" class="logout">
-        <img src="../static/img/logout.svg" alt="Выйти"/>
-    </a>
-</header>
+<header th:insert="blocks/header::header"></header>
+<p th:text="${error}"></p>
 <h1>Добавление нового пользователя</h1>
 <div class="add_user_form">
-    <form action="/employees/add" method="post" >
+    <form action="/employees/add" method="post" th:object="${employee}">
         <div class="data">
             <select name="roleId">
                 <option value="1">Admin</option>
@@ -30,10 +24,10 @@
                 <option value="5">Мастер покрасочного цеха</option>
                 <option value="6">Мастер упаковочного цеха</option>
             </select>
-            <input name="firstName" placeholder="Имя" required><br/>
-            <input name="lastName" placeholder="Фамилия" required><br/>
-            <input name="email" placeholder="email" required><br/>
-            <input name="phoneNumber" placeholder="Номер телефона" required><br/>
+            <input th:field="*{firstName}" placeholder="Имя" required><br/>
+            <input th:field="*{lastName}" placeholder="Фамилия" required><br/>
+            <input th:field="*{email}" placeholder="email" required><br/>
+            <input th:field="*{phone}" placeholder="Номер телефона" required><br/>
         </div>
         <input type="submit" value="Сохранить" class="btn_add_user"/>
     </form>

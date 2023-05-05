@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
     <title>Contoso</title>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
@@ -16,7 +16,7 @@
 </header>
 <div class="search">
     <form action="/operations/search" method="get">
-        <p><input type="search" name="quest" placeholder="Что вы ищите?" class="search__form">
+        <p><input type="search" name="name" placeholder="Введите название операции" class="search__form">
             <input type="submit" value="" class="search_button">
         </p>
     </form>

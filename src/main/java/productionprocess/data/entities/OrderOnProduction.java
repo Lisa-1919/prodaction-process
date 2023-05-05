@@ -40,6 +40,18 @@ public class OrderOnProduction {
         orderOnProductionDetails = new ArrayList<>();
     }
 
+    public OrderOnProduction(Integer id, LocalDateTime orderDate, LocalDateTime receiptDate, String status, String name, LocalDateTime desiredDate, int totalHours, int totalMinutes, List<OrderOnProductionDetails> orderOnProductionDetails) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.receiptDate = receiptDate;
+        this.status = status;
+        this.name = name;
+        this.desiredDate = desiredDate;
+        this.totalHours = totalHours;
+        this.totalMinutes = totalMinutes;
+        this.orderOnProductionDetails = orderOnProductionDetails;
+    }
+
     public OrderOnProduction(LocalDateTime orderDate, LocalDateTime receiptDate, String status, String name, LocalDateTime desiredDate, int totalHours, int totalMinutes, List<OrderOnProductionDetails> orderOnProductionDetails) {
         this.orderDate = orderDate;
         this.receiptDate = receiptDate;

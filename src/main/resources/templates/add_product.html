@@ -3,45 +3,34 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
     <title>Contoso</title>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}">
     <link type="text/css" rel="stylesheet" href="../static/css/add_product.css" th:href="@{/css/add_product.css}">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../static/js/add_product.js" th:src="@{/js/add_product.js}"></script>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
 <form action="/products/add" method="post" th:object="${product}" class="form">
     <div class="data">
         <p>Тип:
-            <select th:field="*{type}">
+            <select th:field="*{type}" id="type">
+                <option value="">Выберите тип изделия</option>
                 <option th:value="'Карандаш'">Карандаш</option>
                 <option th:value="'Ручка'">Ручка</option>
             </select>
         </p>
         <p>Модель:
-            <select th:field="*{model}">
-                <option th:value="'Big'">Big Карандаш</option>
-                <option th:value="'Small'">Small Карандаш</option>
-                <option th:value="'Standard'">Standard Ручка</option>
-                <option th:value="'High'">High Ручка</option>
-                <option th:value="'Low'">Low Ручка</option>
-            </select></p>
-        <p>Размер стержня (ручка):
-            <select th:field="*{rodSize}">
-                <option th:value="'L'">L</option>
-                <option th:value="'M'">M</option>
-            </select></p>
-        <p>Краска:
-            <select th:field="*{paintKind}">
-                <option th:value="'Белая'">Big_белый</option>
-                <option th:value="'Красная'">Big_красный</option>
-                <option th:value="'Черная'">Big_чёрный</option>
-                <option th:value="'Черная'">Small_чёрный</option>
-                <option th:value="'Красная'">Small_красный</option>
-            </select></p>
+            <select th:field="*{model}" id="model">
+                <option value="">Выберите тип изделия</option>
+            </select>
+        </p>
+        <select th:field="*{property}" id="property">
+            <option value="">Выберите тип изделия</option>
+        </select>
         <p>Введите артикул</p>
         <input th:field="*{article}" type="text" required>
         <p>Маршрут</p>

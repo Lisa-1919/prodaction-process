@@ -48,8 +48,7 @@ public class ProductService {
 
         productDB.setType(product.getType());
         productDB.setModel(product.getModel());
-        productDB.setRodSize(product.getRodSize());
-        productDB.setPaintKind(product.getPaintKind());
+        productDB.setProperty(product.getProperty());
         productDB.setCostPrice(product.getCostPrice());
         productDB.setRoute(product.getRoute());
         productDB.setMaterialsForProducts(product.getMaterialsForProducts());

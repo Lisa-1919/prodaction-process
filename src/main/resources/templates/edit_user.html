@@ -3,21 +3,14 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
     <title>Contoso</title>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/edit_user.css" th:href="@{/css/edit_user.css}"/>
 </head>
 <body>
-<header class="header">
-    <a class="home" href="/admin">
-        <img src="../static/img/contoso.svg" alt="Главная"/>
-    </a>
-    <a href="/logout" class="logout">
-        <img src="../static/img/logout.svg" alt="Выйти"/>
-    </a>
-</header>
+<header th:insert="blocks/header::header"></header>
 <h1>Редактирование пользователя</h1>
 <div class="edit_user_form">
     <form th:action="'/employees/' + ${employee.id}" method="post" th:object="${employee}">

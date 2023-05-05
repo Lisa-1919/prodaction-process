@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="../static/img/feather.svg" type="image/png">
+    <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
     <title>Contoso</title>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
@@ -17,7 +17,7 @@
 </header>
 <div class="search">
     <form action="/products/search" method="get">
-        <p><input type="search" name="quest" placeholder="Что вы ищите?" class="search__form">
+        <p><input type="search" name="article" placeholder="Введите артикул" class="search__form">
             <input type="submit" value="" class="search_button">
         </p>
     </form>
@@ -38,7 +38,7 @@
         <div th:each="product : ${products}">
             <tr>
                 <td th:text="${product.id}"></td>
-                <td th:text="${product.getModel()}"></td>
+                <td th:text="${product.type} +' ' + ${product.model} + ' (' + ${product.property} + ')'"></td>
                 <td th:text="${product.article}"></td>
                 <td th:text="${product.costPrice}"></td>
                 <td class="more">

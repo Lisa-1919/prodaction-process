@@ -90,7 +90,7 @@ public class EmployeeService implements UserDetailsService {
     public void editEmployee(Employee employee, Integer roleId){
         Employee employeeDB = findById(employee.getId());
         Role role = roleRepo.findById(roleId).orElseThrow();
-        employee.setRoles(Collections.singleton(role));
+        employeeDB.setRoles(Collections.singleton(role));
         employeeDB.setFirstName(employee.getFirstName());
         employeeDB.setLastName(employee.getLastName());
         employeeDB.setPhone(employee.getPhone());
