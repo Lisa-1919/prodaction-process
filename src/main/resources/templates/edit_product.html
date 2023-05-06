@@ -7,53 +7,69 @@
     <title>Contoso</title>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
-    <link type="text/css" rel="stylesheet" href="../static/css/edit_product.css" th:href="@{/css/edit_product.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}">
+    <link type="text/css" rel="stylesheet" href="../static/css/add_product.css" th:href="@{/css/add_product.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../static/js/add_product.js" th:src="@{/js/add_product.js}"></script>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<h1>Редактирование пользователя</h1>
-<div class="edit_product_form">
-    <form th:action="'/products/' + ${product.id}" method="post" th:object="${product}">
-        <div class="data">
-            <p>Введите название</p>
-            <input th:value="${product.model}" type="text" required>
-            <p>Введите артикул</p>
-            <input th:value="${product.article}" type="text" required>
-            <p>Маршрут</p>
-            <table class="operations">
+<div th:object="${product}">
+<form th:action="'/products/' + ${product.id}" method="post" class="form">
+    <div class="data">
+        <p>Тип:
+            <select th:field="*{type}" id="type" th:value="${product.type}">
+                <option value="">Выберите тип изделия</option>
+                <option th:value="'Карандаш'">Карандаш</option>
+                <option th:value="'Ручка'">Ручка</option>
+            </select>
+        </p>
+        <p>Модель:
+            <select th:field="*{model}" th:value="${product.model}" id="model">
+                <option value="">Выберите тип изделия</option>
+            </select>
+        </p>
+        <select th:field="*{property}" th:value="${product.property}" id="property">
+            <option value="">Выберите тип изделия</option>
+        </select>
+        <p>Введите артикул</p>
+        <input th:field="*{article}" th:value="${product.article}" type="text" required>
+        <p>Маршрут</p>
+        <table class="operations" th:object="${operations}">
+            <tr>
+                <th>Цех</th>
+                <th>Операция</th>
+                <th>Время выполнения</th>
+                <th></th>
+            </tr>
+            <div th:each="operation : ${operations}">
                 <tr>
-                    <th>Цех</th>
-                    <th>Операция</th>
-                    <th>Время выполнения</th>
-                    <th></th>
+                    <td th:text="${operation.workshop}"></td>
+                    <td th:text="${operation.name}"></td>
+                    <td th:text="${operation.hours} + ':' + ${operation.minutes}"></td>
+                    <td><input type="number" min="1" step="1" name="selectedOperationsSequencing"></td>
+                    <td><input type="checkbox" class="check" name="selectedOperations" th:value="${operation.id}"></td>
                 </tr>
-                <div th:each="operation : ${operations}">
-                    <tr>
-                        <td th:text="${operation.workshop}"></td>
-                        <td th:text="${operation.name}"></td>
-                        <td th:text="${operation.time}"></td>
-                        <td><input type="checkbox" class="check"></td>
-                    </tr>
-                </div>
-            </table>
-            <p>Спецификация</p>
-            <table class="materials">
+            </div>
+        </table>
+        <p>Спецификация</p>
+        <table class="materials" th:object="${materials}">
+            <tr>
+                <th>Материал</th>
+                <th>Кол-во</th>
+                <th></th>
+            </tr>
+            <div th:each="material : ${materials}">
                 <tr>
-                    <th>Материал</th>
-                    <th>Кол-во</th>
-                    <th></th>
+                    <td th:text="${material.name}"></td>
+                    <td><input type="number" placeholder="кол-во" name="selectedMaterialsQuantity"></td>
+                    <td><input type="checkbox" class="check" name="selectedMaterials" th:value="${material.id}"></td>
                 </tr>
-                <div th:each="material : ${materials}">
-                    <tr>
-                        <td th:text="${material.name}"></td>
-                        <td><input type="number" placeholder="кол-во"></td>
-                        <td><input type="checkbox" class="check"></td>
-                    </tr>
-                </div>
-            </table>
-        </div>
-        <input class="btn" type="submit" value="Сохранить"/>
-    </form>
+            </div>
+        </table>
+    </div>
+    <input class="btn" type="submit" value="Сохранить"/>
+</form>
 </div>
 </body>
 </html>

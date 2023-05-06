@@ -9,7 +9,7 @@
     position: absolute;
     width: 1214px;
     height: 70px;
-    top: 134px;
+    top: 17px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -32,12 +32,14 @@ h1, .back {
     line-height: 70px;
 }
 
-p, h3{
-    font-size: 30px;
-    line-height: 41px;
+p{
+    font-size: 20px;
+    line-height: 30px;
 }
 
 h3 {
+    font-size: 30px;
+    line-height: 41px;
     margin-top: 0;
     height: 52px;
     border-bottom: 1px solid #6D6DB3;
@@ -51,7 +53,7 @@ h3 {
     position: absolute;
     width: 365px;
     height: 331px;
-    top: 237px;
+    top: 125px;
 
     border: 1px solid #6D6DB3;
     border-radius: 13px 0 0 0;
@@ -63,7 +65,7 @@ h3 {
     position: absolute;
     width: 851px;
     left: 364px;
-    top: 237px;
+    top: 125px;
     border: 1px solid #6D6DB3;
     border-radius: 0px 13px 0px 0px;
 }
@@ -100,7 +102,7 @@ th, td {
     position: absolute;
     width: 344px;
     height: 100px;
-    top: 468px;
+    top: 490px;
 }
 
 .btn_d_1, .btn_d_2 {
@@ -118,7 +120,7 @@ th, td {
 
     text-align: center;
     letter-spacing: -0.02em;
-
+    text-decoration: none;
     color: #090074;
 }
 

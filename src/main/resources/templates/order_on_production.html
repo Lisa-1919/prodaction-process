@@ -36,7 +36,7 @@
             </tr>
             <div th:each="orderDetail, index : ${orderOnProduction.getOrderOnProductionDetails()}">
                 <tr>
-                    <td th:text="${index}"></td>
+                    <td th:text="${index.index + 1}"></td>
                     <td th:text="${orderDetail.product.article}"></td>
                     <td th:text="${orderDetail.amount}"></td>
                 </tr>
@@ -44,14 +44,11 @@
         </table>
     </div>
     <div class="btn_d">
-        <div th:if="${userRole.equals('ASSEMBLY_SHOP_MASTER')}">
-            <a class="btn_d_2" href="/assembly/end">Сборка завершена</a>
+        <div th:if="${userRole.equals('ASSEMBLY_SHOP_MASTER')}" th:insert="blocks/update_status_order_on_production::assembly">
         </div>
-        <div th:if="${userRole.equals('PAINT_SHOP_MASTER')}">
-            <a class="btn_d_2" href="/paint/end">Покраска завершена</a>
+        <div th:if="${userRole.equals('PAINT_SHOP_MASTER')}" th:insert="blocks/update_status_order_on_production::paint">
         </div>
-        <div th:if="${userRole.equals('PACKING_SHOP_MASTER')}">
-            <a class="btn_d_2" href="/packing/end">Упаковка завершена</a>
+        <div th:if="${userRole.equals('PACKING_SHOP_MASTER')}" th:insert="blocks/update_status_order_on_production::packing">
         </div>
     </div>
 </div>

@@ -1,0 +1,35 @@
+<div th:fragment="assembly">
+    <div th:if="${orderOnProduction.status == 'Отправлен на сборку'}">
+        <a th:href="'/assembly/' + ${orderOnProduction.id} + '/start'">Начать сборку</a>
+    </div>
+    <div th:if="${orderOnProduction.status == 'Сборка'}">
+        <a th:href="'/assembly/' + ${orderOnProduction.id} + '/end'">Завершить сборку</a>
+    </div>
+    <div th:if="${orderOnProduction.status == 'Сборка завершена'}">
+        <a th:href="'/assembly/' + ${orderOnProduction.id} + '/send'">Передать в следующий цех</a>
+    </div>
+</div>
+
+<div th:fragment="paint">
+    <div th:if="${orderOnProduction.status == 'Отправлен на покраску'}">
+        <a th:href="'/paint/' + ${orderOnProduction.id} + '/start'">Начать покраску</a>
+    </div>
+    <div th:if="${orderOnProduction.status == 'Покраска'}">
+        <a th:href="'/paint/' + ${orderOnProduction.id} + '/end'">Завершить покраску</a>
+    </div>
+    <div th:if="${orderOnProduction.status == 'Покраска завершена'}">
+        <a th:href="'/paint/' + ${orderOnProduction.id} + '/send'">Передать в следующий цех</a>
+    </div>
+</div>
+
+<div th:fragment="packing">
+    <div th:if="${orderOnProduction.status == 'Отправлен на упаковку'}">
+        <a th:href="'/packing/' + ${orderOnProduction.id} + '/start'">Начать упаковку</a>
+    </div>
+    <div th:if="${orderOnProduction.status == 'Упаковка'}">
+        <a th:href="'/packing/' + ${orderOnProduction.id} + '/end'">Завершить упаковку</a>
+    </div>
+    <div th:if="${orderOnProduction.status == 'Упаковка завершена'}">
+        <a th:href="'/packing/' + ${orderOnProduction.id} + '/send'">Отправить на склад</a>
+    </div>
+</div>

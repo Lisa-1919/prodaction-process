@@ -13,17 +13,19 @@
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
-<form th:action="'/orders-p/' + ${id} + '/components'" th:object="${materialsToOrder}"  method="post" class="form">
+<form th:action="'/orders-p/' + ${id} + '/components'" th:object="${materialsToOrder}" method="post" class="form">
     <table>
         <tr>
+            <th>№</th>
             <th>Наименование</th>
             <th>В наличии</th>
             <th>Необходимо</th>
             <th>Дозаказать</th>
         </tr>
 
-        <div th:each="material : ${materialsToOrder}" >
+        <div th:each="material, index : ${materialsToOrder}">
             <tr>
+                <td th:text="${index.index + 1}"></td>
                 <td th:text="${material.name}"></td>
                 <td th:text="${material.stockQuantity}"></td>
                 <td th:text="${material.necessaryQuantity}"></td>

@@ -124,8 +124,9 @@ public class OrderOnProductionService {
         switch (workshop) {
             case "Сборочный цех": {
                 for (OrderOnProduction orderOnProduction : orderOnProductions) {
-                    if (orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_1.getStatus()) ||
-                            orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_2.getStatus()) ||
+                    if (
+//                            orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_1.getStatus()) ||
+//                            orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_2.getStatus()) ||
                             orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_3.getStatus()) ||
                             orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_4.getStatus()) ||
                             orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_5.getStatus()) ||
@@ -159,5 +160,17 @@ public class OrderOnProductionService {
             }
         }
         return result;
+    }
+
+    public boolean needPaint(Integer orderId){
+        boolean flag = false;
+        OrderOnProduction order = findById(orderId);
+        for(OrderOnProductionDetails detail: order.getOrderOnProductionDetails()){
+            if(detail.getProduct().getType().equals("Карандаш")){
+                flag = true;
+                break;
+            }
+        }
+        return flag;
     }
 }

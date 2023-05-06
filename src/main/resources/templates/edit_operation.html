@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/operation_material.css"
+          th:href="@{/css/operation_material.css}"/>
 </head>
 <body>
-
+<header th:insert="blocks/header :: header"></header>
+<div th:object="${operation}">
+<form th:action="'/operations/' + ${operation.id}" method="post" class="form">
+    <div class="data">
+        <p>Выберите цех</p>
+        <select th:field="*{workshop}" th:value="${operation.workshop}" name="workshop" class="workshops">
+            <option value="Сборочный цех">Сборочный цех</option>
+            <option value="Покрасочный цех">Покрасочный цех</option>
+            <option value="Упаковочный цех">Упаковочный цех</option>
+        </select>
+        <p>Введите название операции</p>
+        <input type="text" th:field="*{name}" th:value="${operation.name}" required><br/>
+        <p>Время выполнения операции</p>
+        <div class="time_container">
+            <p class="time"><input type="number" min="0" th:field="*{hours}" th:value="${operation.hours}" required>ч. </p>
+            <p class="time"><input type="number" min="0" th:field="*{minutes}" th:value="${operation.minutes}" required>мин. </p><br/>
+        </div>
+    </div>
+    <input class="btn" type="submit" value="Сохранить"/>
+</form>
 </body>
 </html>

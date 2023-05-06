@@ -83,12 +83,47 @@ public class TechnologistController {
     @GetMapping("/products/{id}")
     public String getProduct(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("product", productService.findById(id));
+        model.addAttribute("operations", operationService.findAll());
+        model.addAttribute("materials", materialService.findAll());
         return "edit_product";
     }
 
     @PostMapping("/products/{id}")
-    public String editProduct(@ModelAttribute("product") Product product, Model model) {
-        productService.editProduct(product);
+    public String editProduct(@ModelAttribute("product") Product product, @RequestParam("selectedOperations") List<Integer> selectedOperations,
+                              @RequestParam("selectedOperationsSequencing") List<Integer> selectedOperationsSequencing,
+                              @RequestParam("selectedMaterials") List<Integer> selectedMaterials,
+                              @RequestParam("selectedMaterialsQuantity") List<Double> selectedMaterialsQuantity, Model model) {
+
+        Route route = new Route();
+        for (int i = 0; i < selectedOperations.size(); i++) {
+            OperationInRoute operationInRoute = new OperationInRoute();
+            operationInRoute.setOperation(operationService.findById(selectedOperations.get(i)));
+            operationInRoute.setSequencing(selectedOperationsSequencing.get(i));
+            operationInRoute.setRoute(route);
+            route.getOperationInRoutes().add(operationInRoute);
+        }
+        int hours = 0;
+        int minutes = 0;
+        for (OperationInRoute operation : route.getOperationInRoutes()) {
+            hours += operation.getOperation().getHours();
+            minutes += operation.getOperation().getMinutes();
+            if (minutes >= 60) {
+                hours += minutes / 60;
+                minutes = minutes % 60;
+            }
+        }
+        route.setTotalHours(hours);
+        route.setTotalMinutes(minutes);
+        route.setName(product.getArticle());
+        product.setRoute(route);
+
+        for (int i = 0; i < selectedMaterials.size(); i++) {
+            MaterialsForProduct materialsForProduct = new MaterialsForProduct();
+            materialsForProduct.setMaterial(materialService.findById(selectedMaterials.get(i)));
+            materialsForProduct.setQuantity(selectedMaterialsQuantity.get(i));
+            product.getMaterialsForProducts().add(materialsForProduct);
+        }
+        productService.addProduct(product);
         return "redirect:/products";
     }
 
