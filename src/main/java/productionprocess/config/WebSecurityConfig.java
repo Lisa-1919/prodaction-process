@@ -18,7 +18,7 @@ import productionprocess.services.EmployeeService;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig{
+public class WebSecurityConfig {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -33,14 +33,13 @@ public class WebSecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
- //                       .requestMatchers("/registration").permitAll()
-//                        .requestMatchers("/home").permitAll()
-//                        .requestMatchers("/admin/*").hasRole("ADMIN")
-//                        .requestMatchers("/manager/*").hasRole("MANAGER")
-//                        .requestMatchers("/user/*").hasRole("USER")
-//                        .requestMatchers("/account").fullyAuthenticated()
-//                        .anyRequest().authenticated()
-                                .anyRequest().permitAll()
+                        .requestMatchers("/employees/*", "/home").hasAuthority("ADMIN")
+                        .requestMatchers("/products/*", "/materials/*", "/operations/*", "/home").hasAuthority("TECHNOLOGIST")
+                        .requestMatchers("/orders-p/*", "/orders-w/*", "/home").hasAuthority("OPERATOR")
+                        .requestMatchers("/assembly/*", "/home").hasAuthority("ASSEMBLY_SHOP_MASTER")
+                        .requestMatchers("/paint/*", "/home").hasAuthority("PAINT_SHOP_MASTER")
+                        .requestMatchers("/packing/*", "/home").hasAuthority("PACKING_SHOP_MASTER")
+                        .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
