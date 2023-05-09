@@ -55,7 +55,7 @@ public class EmployeeService implements UserDetailsService {
         return (List<Employee>) employeeRepo.findAll();
     }
 
-    public boolean saveEmployee(Employee employee, int roleId) {
+    public boolean saveEmployee(Employee employee, Integer roleId) {
         Employee employeeFromDB = employeeRepo.findByEmail(employee.getEmail());
         if (employeeFromDB != null) {
             return false;
@@ -87,17 +87,14 @@ public class EmployeeService implements UserDetailsService {
         return (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public void editEmployee(Employee employee, String roleName){
+    public void editEmployee(Employee employee, Integer roleId) {
         Employee employeeDB = findById(employee.getId());
         employeeDB.setFirstName(employee.getFirstName());
         employeeDB.setLastName(employee.getLastName());
         employeeDB.setPhone(employee.getPhone());
         employeeDB.setEmail(employee.getEmail());
         employeeRepo.save(employeeDB);
-//        Role role = roleRepo.findById(roleId).orElseThrow();
-//        employeeDB.setRoles(Collections.singleton(role));
-//        roleRepo.save(role);
-        Role role = roleRepo.findFirstByRoleName(roleName);
+        Role role = roleRepo.findById(roleId).orElseThrow();
         employeeDB.setRoles(Collections.singleton(role));
         roleRepo.save(role);
     }
@@ -141,5 +138,9 @@ public class EmployeeService implements UserDetailsService {
             }
         }
         return result;
+    }
+
+    public List<Role> getAllRoles() {
+        return new ArrayList<>(roleRepo.findAll());
     }
 }

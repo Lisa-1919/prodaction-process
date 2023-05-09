@@ -1,5 +1,6 @@
 h1{
     position: absolute;
+    top:100px;
     width: 503.17px;
     height: 92.44px;
     margin-left: 467px;
@@ -19,7 +20,7 @@ h1{
 .data{
     width: 397px;
     height: 291px;
-    margin-top: 146px;
+    margin-top: 210px;
     margin-left: 520px;
 }
 
@@ -33,4 +34,11 @@ input[type=submit]{
     height: 76px;
     margin-left: 591px;
     margin-top: 45px;
+}
+
+span{
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 500;
+    color: #090074;
 }

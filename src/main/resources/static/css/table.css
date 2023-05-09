@@ -9,7 +9,7 @@ table.rounded-corners{
     border-radius: 11px;
     border: 1px solid #6D6DB3;
 }
-tr:last-child{
+tr:last-child td{
     border-bottom: 0;
 }
 td:last-child{
@@ -22,7 +22,7 @@ th, td{
     font-family: 'Cormorant Garamond';
     font-style: normal;
     font-weight: 500;
-    font-size: 32px;
+    font-size: 24px;
     line-height: 40px;
     /* identical to box height, or 125% */
     letter-spacing: -0.02em;

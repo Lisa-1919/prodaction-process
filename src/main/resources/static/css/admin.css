@@ -2,7 +2,7 @@ table{
     position: absolute;
     width: 1216px;
     left: 122px;
-    top: 315px;
+    top: 255px;
 }
 .btn_add_user{
     box-sizing: border-box;
@@ -10,7 +10,7 @@ table{
     width: 243.83px;
     height: 100px;
     left: 949.59px;
-    top: 164.79px;
+    top: 114.79px;
     filter: drop-shadow(46px 28px 22px rgba(7, 31, 63, 0.01))
     drop-shadow(26px 16px 18px rgba(7, 31, 63, 0.05))
     drop-shadow(11px 7px 13px rgba(7, 31, 63, 0.09))

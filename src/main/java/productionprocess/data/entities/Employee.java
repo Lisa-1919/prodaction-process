@@ -149,6 +149,6 @@ public class Employee implements UserDetails {
     }
 
     public String getRoleName(){
-        return roles.stream().toList().get(0).getRoleName();
+        return this.roles.stream().toList().get(0).getRoleName();
     }
 }

@@ -22,11 +22,12 @@ public class AdminController {
     @GetMapping("/employees/add")
     public String addEmployee(Model model){
         model.addAttribute("employee", new Employee());
+        model.addAttribute("roles", employeeService.getAllRoles());
         return "add_user";
     }
 
     @PostMapping("/employees/add")
-    public String addManager(@ModelAttribute("employee") Employee employee, @RequestParam Integer roleId, Model model) {
+    public String addManager(@ModelAttribute("employee") Employee employee, @RequestParam("roleId") Integer roleId, Model model) {
         String password = employeeService.generatePassword();
         employee.setPassword(password);
         if(employeeService.saveEmployee(employee, roleId)) {
@@ -72,12 +73,13 @@ public class AdminController {
     @GetMapping("/employees/{id}")
     public String getEmployee(@PathVariable("id") Integer id, Model model){
         model.addAttribute("employee", employeeService.findById(id));
+        model.addAttribute("roles", employeeService.getAllRoles());
         return "edit_user";
     }
 
     @PostMapping("/employees/{id}")
-    public String editEmployee(@ModelAttribute("employee") Employee employee, @RequestParam("role") String role, Model model){
-        employeeService.editEmployee(employee, role);
+    public String editEmployee(@ModelAttribute("employee") Employee employee, @RequestParam("roleId") Integer roleId, Model model){
+        employeeService.editEmployee(employee, roleId);
         return "redirect:/employees";
     }
 

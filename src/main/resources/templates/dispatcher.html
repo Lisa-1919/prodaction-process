@@ -14,11 +14,14 @@
 <body>
 <header th:insert="blocks/header::header"></header>
 <div class="search">
-  <form action="/orders-p" method="post">
+  <form action="/orders-p" method="get">
     <p><input type="search" name="id" placeholder="Что вы ищите?" class="search__form">
       <input type="submit" value="" class="search_button">
     </p>
   </form>
+  <a href="/orders-p">
+    <img src="/img/delete.svg" alt="Отмена"/>
+  </a>
 </div>
 <a href="/orders-w">Заказы на склад</a>
 <div class="orders">

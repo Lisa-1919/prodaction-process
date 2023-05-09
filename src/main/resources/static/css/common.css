@@ -60,7 +60,8 @@ select {
     text-align: start;
     justify-content: center;
     appearance: none;
-    background: url("../img/select.svg") no-repeat right 16px;
+    background: url("../img/select.svg") no-repeat 16px;
+    background-position-x: calc(100% - 6px);
 }
 
 .btn {
