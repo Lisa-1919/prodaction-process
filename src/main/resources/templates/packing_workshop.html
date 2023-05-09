@@ -11,7 +11,6 @@
   <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
   <link type="text/css" rel="stylesheet" href="../static/css/admin.css"
         th:href="@{/css/admin.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/sort.css" th:href="@{/css/sort.css}"/>
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
@@ -25,10 +24,6 @@
     <img src="/img/delete.svg" alt="Отмена"/>
   </a>
 </div>
-<select class="sort">
-  <option>Статус</option>
-
-</select>
 <div class="orders">
   <table>
     <tr>
@@ -46,6 +41,7 @@
         <td th:text="${order.status}"></td>
         <td th:text="${order.orderDate}"></td>
         <td th:text="${order.desiredDate}"></td>
+        <td th:text="${order.totalHours} + ' ч. ' + ${order.totalMinutes} + ' мин.'"></td>
       </tr>
     </div>
   </table>

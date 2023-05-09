@@ -32,8 +32,7 @@ public class AssemblyController {
     @GetMapping("/assembly/{id}")
     public String orderPage(@PathVariable("id") Integer id, Model model){
         model.addAttribute("orderOnProduction", orderOnProductionService.findById(id));
-        model.addAttribute("userRole", "ASSEMBLY_SHOP_MASTER");
-        //model.addAttribute("userRole", employeeService.getAuthorized().getRoleName());
+        model.addAttribute("userRole", employeeService.getAuthorized().getRoleName());
         return "order_on_production";
     }
 

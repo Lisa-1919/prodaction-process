@@ -21,8 +21,7 @@ public class PaintController {
     @GetMapping("/paint")
     public String paint(Model model) {
         model.addAttribute("ordersOnProduction", orderOnProductionService.getOrderByWorkShop("Покрасочный цех"));
-        model.addAttribute("userRole", "PAINT_SHOP_MASTER");
-        //  model.addAttribute("userRole", employeeService.getAuthorized().getRoleName());
+        model.addAttribute("userRole", employeeService.getAuthorized().getRoleName());
         return "paint_workshop";
     }
 

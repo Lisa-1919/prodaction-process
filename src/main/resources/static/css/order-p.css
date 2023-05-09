@@ -9,7 +9,7 @@
     position: absolute;
     width: 1214px;
     height: 70px;
-    top: 17px;
+    top: 113px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -53,7 +53,7 @@ h3 {
     position: absolute;
     width: 365px;
     height: 331px;
-    top: 125px;
+    top: 190px;
 
     border: 1px solid #6D6DB3;
     border-radius: 13px 0 0 0;
@@ -65,7 +65,7 @@ h3 {
     position: absolute;
     width: 851px;
     left: 364px;
-    top: 125px;
+    top: 190px;
     border: 1px solid #6D6DB3;
     border-radius: 0px 13px 0px 0px;
 }
@@ -73,7 +73,6 @@ h3 {
 table {
     margin-top: 0;
     width: 851px;
-    border: 1px solid #6D6DB3;
     text-align: center;
 
 }
@@ -82,6 +81,14 @@ table.rounded-corners {
     border-collapse: collapse;
     border-radius: 11px;
     border: 1px solid #6D6DB3;
+}
+
+tr th:last-child, td:last-child{
+    border-right: none;
+}
+
+tr:last-child td{
+    border-bottom: none;
 }
 
 th, td {
@@ -98,14 +105,15 @@ th, td {
     color: #6D6DB3;
 }
 
+
 .btn_d {
     position: absolute;
     width: 344px;
     height: 100px;
-    top: 490px;
+    top: 565px;
 }
 
-.btn_d_1, .btn_d_2 {
+.btn_d_1, .btn_d_2, .btn_m {
     background: #BDD9FF;
     border: 1px solid #B5D4FF;
     border-radius: 11px;
@@ -114,8 +122,6 @@ th, td {
     font-family: 'Cormorant Garamond';
     font-style: normal;
     font-weight: 500;
-    font-size: 40px;
-    line-height: 33px;
     /* or 82% */
 
     text-align: center;
@@ -125,13 +131,21 @@ th, td {
 }
 
 .btn_d_1 {
-    width: 326.67px;
-    height: 91.89px;
+    width: 226.67px;
+    height: 81.89px;
     align-content: center;
     justify-content: center;
 }
 
 .btn_d_2 {
-    width: 326.67px;
-    height: 94px;
+    margin-top: 30px;
+    width: 200px;
+    height: 60px;
 }
+
+.btn_m{
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
+}
+

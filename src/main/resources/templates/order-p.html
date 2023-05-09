@@ -15,7 +15,9 @@
 <div class="order" th:object="${orderOnProduction}">
     <div class="l">
         <h1 th:text="'Заказ № ' + ${orderOnProduction.id}"></h1>
-        <a class="back" href="/orders-p">Назад</a>
+        <a class="back" href="/orders-p">
+            <img src="/img/To_back.png" alt="Назад">
+        </a>
     </div>
 
     <div class="order_info">
@@ -44,8 +46,9 @@
         </table>
     </div>
     <div class="btn_d">
-        <p class="btn_d_1"><a  th:href="'/orders-p/' + ${orderOnProduction.id} + '/components'">Добавить комплектующие</a></p>
-        <a class="btn_d_2" th:href="'/orders-p/' + ${orderOnProduction.id} + '/start'">Начать сборку</a>
+        <button type="submit" class="btn_d_1" th:action="'/orders-p/' + ${orderOnProduction.id} + '/components'" th:disabled="${!orderOnProduction.status.equals('Ожидание выполнения') || !orderOnProduction.status.equals('Ожидание комплектующих')}">Добавить комплектующие</button>
+        <button type="submit" class="btn_d_2" th:action="'/orders-p/' + ${orderOnProduction.id} + '/start'" th:disabled="${!orderOnProduction.status.equals('Ожидание выполнения') || !orderOnProduction.status.equals('Ожидание комплектующих')}">
+            Начать сборку</button>
     </div>
 </div>
 </body>

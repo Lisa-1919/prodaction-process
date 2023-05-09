@@ -1,6 +1,7 @@
 package productionprocess.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,12 @@ public class DispatcherController {
     }
 
     @GetMapping("/orders-w/{id}")
+    public String orderAtWarehouse(@PathVariable("id") Integer orderId, Model model){
+        model.addAttribute("orderAtWarehouse", orderAtWarehouseService.findById(orderId));
+        return "order_at_warehouse_details";
+    }
+
+    @GetMapping("/orders-w/{id}/confirm")
     public String confirmReceiptOfOrder(@PathVariable("id") Integer orderId, Model model){
         orderAtWarehouseService.confirmReceipt(orderId, StatusOrderAtWarehouse.STATUS_2);
         return "redirect:/orders-w";
@@ -66,7 +73,8 @@ public class DispatcherController {
     public String orderOnProductionComponents(@PathVariable("id") Integer id, Model model){
         List<MaterialToOrder> materialToOrderList = orderOnProductionService.getNecessaryQuantity(id);
         model.addAttribute("materialsToOrder", materialToOrderList);
-        //model.addAttribute("orderAtWarehouse", new OrderAtWarehouse());
+        double totalQuantity = materialToOrderList.stream().mapToDouble(MaterialToOrder::getOrderedQuantity).sum();
+        model.addAttribute("totalQuantity", totalQuantity);
         return "order-w";
     }
 

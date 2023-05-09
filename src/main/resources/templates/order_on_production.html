@@ -15,7 +15,22 @@
 <div class="order" th:object="${orderOnProduction}">
     <div class="l">
         <h1 th:text="'Заказ № ' + ${orderOnProduction.id}"></h1>
-        <a class="back" href="/orders-p">Назад</a>
+        <div th:if="${userRole.equals('Мастер сборочного цеха')}">
+            <a class="back" href="/assembly">
+                <img src="/img/To_back.png" alt="Назад">
+            </a>
+        </div>
+        <div th:if="${userRole.equals('Мастер покрасочного цеха')}">
+            <a class="back" href="/paint">
+                <img src="/img/To_back.png" alt="Назад">
+            </a>
+        </div>
+        <div th:if="${userRole.equals('Мастер упаковочного цеха')}">
+            <a class="back" href="/packing">
+                <img src="/img/To_back.png" alt="Назад">
+            </a>
+        </div>
+
     </div>
 
     <div class="order_info">
@@ -44,11 +59,14 @@
         </table>
     </div>
     <div class="btn_d">
-        <div th:if="${userRole.equals('ASSEMBLY_SHOP_MASTER')}" th:insert="blocks/update_status_order_on_production::assembly">
+        <div th:if="${userRole.equals('Мастер сборочного цеха')}"
+             th:insert="blocks/update_status_order_on_production::assembly">
         </div>
-        <div th:if="${userRole.equals('PAINT_SHOP_MASTER')}" th:insert="blocks/update_status_order_on_production::paint">
+        <div th:if="${userRole.equals('Мастер покрасочного цеха')}"
+             th:insert="blocks/update_status_order_on_production::paint">
         </div>
-        <div th:if="${userRole.equals('PACKING_SHOP_MASTER')}" th:insert="blocks/update_status_order_on_production::packing">
+        <div th:if="${userRole.equals('Мастер упаковочного цеха')}"
+             th:insert="blocks/update_status_order_on_production::packing">
         </div>
     </div>
 </div>

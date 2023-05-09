@@ -13,6 +13,9 @@
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
+<a class="back" th:href="'/orders-p/' + ${id}">
+    <img src="/img/To_back.png" alt="Назад">
+</a>
 <form th:action="'/orders-p/' + ${id} + '/components'" th:object="${materialsToOrder}" method="post" class="form">
     <table>
         <tr>
@@ -33,7 +36,7 @@
             </tr>
         </div>
     </table>
-    <input class="btn" type="submit" value="Заказать">
+    <button class="btn" type="submit" th:disabled="${totalQuantity==0}">Заказать</button>
 </form>
 </body>
 </html>

@@ -1,50 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
-  <title>Contoso</title>
-  <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/admin.css" th:href="@{/css/admin.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/admin.css" th:href="@{/css/admin.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/warehouse_orders.css" th:href="@{/css/warehouse_orders.css}"/>
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
 <div class="search">
-  <form action="/orders-w/search" method="get">
-    <p><input type="search" name="id" placeholder="Что вы ищите?" class="search__form">
-      <input type="submit" value="" class="search_button">
-    </p>
-  </form>
-  <a href="/orders-w">
-    <img src="/img/delete.svg" alt="Отмена"/>
-  </a>
+    <form action="/orders-w/search" method="get">
+        <p><input type="search" name="id" placeholder="Что вы ищите?" class="search__form">
+            <input type="submit" value="" class="search_button">
+        </p>
+    </form>
+    <a href="/orders-w">
+        <img src="/img/delete.svg" alt="Отмена"/>
+    </a>
 </div>
-<a href="/orders-p">Назад</a>
+<a class="back" href="/orders-p">
+    <img src="/img/To_back.png" alt="Назад">
+</a>
 <div class="orders">
-  <table>
-    <tr>
-      <th>№</th>
-      <th>Статус</th>
-      <th>Дата заказа</th>
-      <th>Дата получения</th>
-      <th></th>
-    </tr>
-    <div th:each="order : ${ordersAtWarehouse}">
-      <tr>
-        <td th:text="${order.id}"></td>
-        <td th:text="${order.status}"></td>
-        <td th:text="${order.orderDate}"></td>
-        <td th:text="${order.receiptDate}"></td>
-        <td>
-          <a th:href="'/orders-w/' + ${order.id}" th:disabled="${order.status == 'Получен'}">Подтверлить получение</a>
-        </td>
-      </tr>
-    </div>
-  </table>
+    <table>
+        <tr>
+            <th>№</th>
+            <th>Статус</th>
+            <th>Дата заказа</th>
+            <th>Дата получения</th>
+            <th></th>
+        </tr>
+        <div th:each="order : ${ordersAtWarehouse}">
+            <tr>
+                <td><a th:href="'/orders-w/' + ${order.id}" th:text="${order.id}"></a></td>
+                <td th:text="${order.status}"></td>
+                <td th:text="${order.orderDate}"></td>
+                <td th:text="${order.receiptDate}"></td>
+                <td>
+                    <button type="submit" th:action="'/orders-w/' + ${order.id} + '/confirm'"
+                            th:disabled="${order.status.equals('Получен')}">
+                        Подтвердить получение
+                    </button>
+                </td>
+            </tr>
+        </div>
+    </table>
 </div>
 </body>
 </html>

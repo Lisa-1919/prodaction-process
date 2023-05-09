@@ -15,7 +15,9 @@ tr:last-child td{
 td:last-child{
     border-right: 0;
 }
-
+th:last-child{
+    border-right: none;
+}
 th, td{
     border-right: 1px solid #6D6DB3;
     border-bottom: 1px solid #6D6DB3;

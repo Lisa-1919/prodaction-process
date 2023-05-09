@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
+  <title>Contoso</title>
+  <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+  <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+  <link type="text/css" rel="stylesheet" href="../static/css/warehouse_orders.css" th:href="@{/css/warehouse_orders.css}"/>
+  <link type="text/css" rel="stylesheet" href="../static/css/order-p.css" th:href="@{/css/order-p.css}"/>
+</head>
+<body>
+<header th:insert="blocks/header::header"></header>
+<div class="order" th:object="${orderAtWarehouse}">
+  <div class="l">
+    <h1 th:text="'Заказ № ' + ${orderAtWarehouse.id}"></h1>
+    <a class="back" href="/orders-w">Назад</a>
+  </div>
+
+  <div class="order_info">
+    <h3>Общая информация</h3>
+    <p th:text="'Статус: ' + ${orderAtWarehouse.status}"></p>
+    <p th:text="'Дата заказа: ' + ${orderAtWarehouse.orderDate}"></p>
+    <p th:text="'Дата получения: ' + ${orderAtWarehouse.receiptDate}"></p>
+  </div>
+  <div class="list">
+    <h3>Состав заказа</h3>
+    <table>
+      <tr>
+        <th>№</th>
+        <th>Название</th>
+        <th>Количество</th>
+      </tr>
+      <div th:each="orderDetail, index : ${orderAtWarehouse.getOrderAtWarehouseDetails()}">
+        <tr>
+          <td th:text="${index.index + 1}"></td>
+          <td th:text="${orderDetail.material.name}"></td>
+          <td th:text="${orderDetail.amount}"></td>
+        </tr>
+      </div>
+    </table>
+  </div>
+  <div class="btn_d">
+    <button class="btn_d_2" type="submit" th:action="'/orders-w/' + ${order.id} + '/confirm'"
+            th:disabled="${order.status.equals('Получен')}">
+      Подтвердить получение
+    </button>
+  </div>
+</div>
+</body>
+</html>
