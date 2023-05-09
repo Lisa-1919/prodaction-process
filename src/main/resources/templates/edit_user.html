@@ -15,13 +15,14 @@
 <div class="edit_user_form">
     <form th:action="'/employees/' + ${employee.id}" method="post" th:object="${employee}">
         <div class="data">
-            <select name="roleId" th:value="${employee.getRoles().stream().toList().get(0).getId()}">
-                <option th:value="1">Администратор</option>
-                <option th:value="2">Технолог</option>
-                <option th:value="3">Диспетчер</option>
-                <option th:value="4">Мастер сборочного цеха</option>
-                <option th:value="5">Мастер покрасочного цеха</option>
-                <option th:value="6">Мастер упаковочного цеха</option>
+            <select name="role">
+                <option th:value="${employee.getRoleName()}" th:text="${employee.getRoleName()}" selected></option>
+                <option th:value="'Администратор'">Администратор</option>
+                <option th:value="'Технолог'">Технолог</option>
+                <option th:value="'Диспетчер'">Диспетчер</option>
+                <option th:value="'Мастер сборочного цеха'">Мастер сборочного цеха</option>
+                <option th:value="'Мастер покрасочного цеха'">Мастер покрасочного цеха</option>
+                <option th:value="'Мастер упаковочного цеха'">Мастер упаковочного цеха</option>
             </select>
             <input th:field="*{firstName}" th:value="${employee.firstName}" placeholder="Имя" required><br/>
             <input th:field="*{lastName}" th:value="${employee.lastName}" placeholder="Фамилия" required><br/>

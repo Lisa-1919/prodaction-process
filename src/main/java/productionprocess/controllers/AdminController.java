@@ -76,8 +76,8 @@ public class AdminController {
     }
 
     @PostMapping("/employees/{id}")
-    public String editEmployee(@ModelAttribute("employee") Employee employee, @RequestParam("roleId") int roleId, Model model){
-        employeeService.editEmployee(employee, roleId);
+    public String editEmployee(@ModelAttribute("employee") Employee employee, @RequestParam("role") String role, Model model){
+        employeeService.editEmployee(employee, role);
         return "redirect:/employees";
     }
 

@@ -72,7 +72,7 @@ public class EmployeeService implements UserDetailsService {
         if (employeeRepo.findById(id).isPresent()) {
             Employee employee = findById(id);
             for (Role role : employee.getRoles()) {
-                if (role.getRoleName().equals("ADMIN")) {
+                if (role.getRoleName().equals("Администратор")) {
                     return false;
                 } else {
                     employeeRepo.deleteById(id);
@@ -87,14 +87,17 @@ public class EmployeeService implements UserDetailsService {
         return (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public void editEmployee(Employee employee, int roleId){
+    public void editEmployee(Employee employee, String roleName){
         Employee employeeDB = findById(employee.getId());
         employeeDB.setFirstName(employee.getFirstName());
         employeeDB.setLastName(employee.getLastName());
         employeeDB.setPhone(employee.getPhone());
         employeeDB.setEmail(employee.getEmail());
         employeeRepo.save(employeeDB);
-        Role role = roleRepo.findById(roleId).orElseThrow();
+//        Role role = roleRepo.findById(roleId).orElseThrow();
+//        employeeDB.setRoles(Collections.singleton(role));
+//        roleRepo.save(role);
+        Role role = roleRepo.findFirstByRoleName(roleName);
         employeeDB.setRoles(Collections.singleton(role));
         roleRepo.save(role);
     }
