@@ -17,7 +17,6 @@
     <h1 th:text="'Заказ № ' + ${orderAtWarehouse.id}"></h1>
     <a class="back" href="/orders-w">Назад</a>
   </div>
-
   <div class="order_info">
     <h3>Общая информация</h3>
     <p th:text="'Статус: ' + ${orderAtWarehouse.status}"></p>
@@ -41,12 +40,12 @@
       </div>
     </table>
   </div>
-  <div class="btn_d">
-    <button class="btn_d_2" type="submit" th:action="'/orders-w/' + ${order.id} + '/confirm'"
+  <form method="get" th:action="'/orders-w/' + ${order.id} + '/confirm'" class="btn_d">
+    <button class="btn_d_2" type="submit"
             th:disabled="${order.status.equals('Получен')}">
       Подтвердить получение
     </button>
-  </div>
+  </form>
 </div>
 </body>
 </html>

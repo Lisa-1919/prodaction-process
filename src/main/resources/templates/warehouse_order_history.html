@@ -10,7 +10,8 @@
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
-    <link type="text/css" rel="stylesheet" href="../static/css/warehouse_orders.css" th:href="@{/css/warehouse_orders.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/warehouse_orders.css"
+          th:href="@{/css/warehouse_orders.css}"/>
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
@@ -38,15 +39,17 @@
         </tr>
         <div th:each="order : ${ordersAtWarehouse}">
             <tr>
-                <td><a th:href="'/orders-w/' + ${order.id}" th:text="${order.id}"></a></td>
+                <td><a name="orderId" th:href="'/orders-w/' + ${order.id}" th:text="${order.id}"></a></td>
                 <td th:text="${order.status}"></td>
                 <td th:text="${order.orderDate}"></td>
                 <td th:text="${order.receiptDate}"></td>
                 <td>
-                    <button type="submit" th:action="'/orders-w/' + ${order.id} + '/confirm'"
-                            th:disabled="${order.status.equals('Получен')}">
-                        Подтвердить получение
-                    </button>
+                    <form method="get" th:action="'/orders-w/' + ${order.id} + '/confirm'">
+                        <button type="submit"
+                                th:disabled="${order.status.equals('Получен')}">
+                            Подтвердить получение
+                        </button>
+                    </form>
                 </td>
             </tr>
         </div>

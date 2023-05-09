@@ -1,35 +1,35 @@
 <div th:fragment="assembly">
-    <div th:if="${orderOnProduction.status == 'Отправлен на сборку'}">
-        <button type="submit" class="btn_m" th:action="'/assembly/' + ${orderOnProduction.id} + '/start'">Начать сборку</button>
-    </div>
-    <div th:if="${orderOnProduction.status == 'Сборка'}">
-        <button type="submit" class="btn_m" th:action="'/assembly/' + ${orderOnProduction.id} + '/end'">Завершить сборку</button>
-    </div>
-    <div th:if="${orderOnProduction.status == 'Сборка завершена'}">
-        <button type="submit" class="btn_m" th:action="'/assembly/' + ${orderOnProduction.id} + '/send'">Передать в следующий цех</button>
-    </div>
+    <form th:if="${orderOnProduction.status == 'Отправлен на сборку'}" method="get" th:action="'/assembly/' + ${orderOnProduction.id} + '/start'">
+        <button type="submit" class="btn_m">Начать сборку</button>
+    </form>
+    <form th:if="${orderOnProduction.status == 'Сборка'}" method="get" th:action="'/assembly/' + ${orderOnProduction.id} + '/end'">
+        <button type="submit" class="btn_m">Завершить сборку</button>
+    </form>
+    <form th:if="${orderOnProduction.status == 'Сборка завершена'}" method="get" th:action="'/assembly/' + ${orderOnProduction.id} + '/send'">
+        <button type="submit" class="btn_m" >Передать в следующий цех</button>
+    </form>
 </div>
 
 <div th:fragment="paint">
-    <div th:if="${orderOnProduction.status == 'Отправлен на покраску'}">
-        <button type="submit" class="btn_m" th:action="'/paint/' + ${orderOnProduction.id} + '/start'">Начать покраску</button>
-    </div>
-    <div th:if="${orderOnProduction.status == 'Покраска'}">
-        <button type="submit" class="btn_m" th:action="'/paint/' + ${orderOnProduction.id} + '/end'">Завершить покраску</button>
-    </div>
-    <div th:if="${orderOnProduction.status == 'Покраска завершена'}">
-        <button type="submit" class="btn_m" th:action="'/paint/' + ${orderOnProduction.id} + '/send'">Передать в следующий цех</button>
-    </div>
+    <form th:if="${orderOnProduction.status == 'Отправлен на покраску'}" method="get" th:action="'/paint/' + ${orderOnProduction.id} + '/start'">
+        <button type="submit" class="btn_m">Начать покраску</button>
+    </form>
+    <form th:if="${orderOnProduction.status == 'Покраска'}" method="get" th:action="'/paint/' + ${orderOnProduction.id} + '/end'">
+        <button type="submit" class="btn_m">Завершить покраску</button>
+    </form>
+    <form th:if="${orderOnProduction.status == 'Покраска завершена'}" method="get" th:action="'/paint/' + ${orderOnProduction.id} + '/send'">
+        <button type="submit" class="btn_m">Передать в следующий цех</button>
+    </form>
 </div>
 
 <div th:fragment="packing">
-    <div th:if="${orderOnProduction.status == 'Отправлен на упаковку'}">
-        <button type="submit" class="btn_m" th:action="'/packing/' + ${orderOnProduction.id} + '/start'">Начать упаковку</button>
-    </div>
-    <div th:if="${orderOnProduction.status == 'Упаковка'}">
-        <button type="submit" class="btn_m" th:action="'/packing/' + ${orderOnProduction.id} + '/end'">Завершить упаковку</button>
-    </div>
-    <div th:if="${orderOnProduction.status == 'Упаковка завершена'}">
-        <button type="submit" class="btn_m" th:action="'/packing/' + ${orderOnProduction.id} + '/send'">Отправить на склад</button>
-    </div>
+    <form th:if="${orderOnProduction.status == 'Отправлен на упаковку'}" method="get" th:action="'/packing/' + ${orderOnProduction.id} + '/start'">
+        <button type="submit" class="btn_m">Начать упаковку</button>
+    </form>
+    <form th:if="${orderOnProduction.status == 'Упаковка'}" method="get" th:action="'/packing/' + ${orderOnProduction.id} + '/end'">
+        <button type="submit" class="btn_m">Завершить упаковку</button>
+    </form>
+    <form th:if="${orderOnProduction.status == 'Упаковка завершена'}" method="get" th:action="'/packing/' + ${orderOnProduction.id} + '/send'">
+        <button type="submit" class="btn_m" >Отправить на склад</button>
+    </form>
 </div>

@@ -1,52 +1,51 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
-  <title>Contoso</title>
-  <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/admin.css" th:href="@{/css/admin.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/dispatcher.css" th:href="@{/css/dispatcher.css}"/>
-
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="/img/feather.svg" type="image/png">
+    <title>Contoso</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/admin.css" th:href="@{/css/admin.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/search.css" th:href="@{/css/search.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/dispatcher.css" th:href="@{/css/dispatcher.css}"/>
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
 <div class="search">
-  <form action="/orders-p" method="get">
-    <p><input type="search" name="id" placeholder="Что вы ищите?" class="search__form">
-      <input type="submit" value="" class="search_button">
-    </p>
-  </form>
-  <a href="/orders-p">
-    <img src="/img/delete.svg" alt="Отмена"/>
-  </a>
+    <form action="/orders-p" method="get">
+        <p><input type="search" name="id" placeholder="Что вы ищите?" class="search__form">
+            <input type="submit" value="" class="search_button">
+        </p>
+    </form>
+    <a href="/orders-p">
+        <img src="/img/delete.svg" alt="Отмена"/>
+    </a>
 </div>
-<button type="submit" action="/orders-w" class="btn_1">Заказы на склад</button>
+<button type="submit" onclick="location.href='/orders-w'" class="btn_1">Заказы на склад</button>
 <div class="orders">
-  <table>
-    <tr>
-      <th>№</th>
-      <th>Заказчик</th>
-      <th>Статус</th>
-      <th>Дата заказа</th>
-      <th>Крайняя дата</th>
-      <th>Время выполнения</th>
-    </tr>
-    <div th:each="order : ${ordersOnProduction}">
-      <tr>
-        <td><a th:href="'/orders-p/' + ${order.id}" th:text="${order.id}"></a></td>
-        <td th:text="${order.name}"></td>
-        <td th:text="${order.status}"></td>
-        <td th:text="${order.orderDate}"></td>
-        <td th:text="${order.desiredDate}"></td>
-        <td th:text="${order.totalHours} + ' ч. ' + ${order.totalMinutes} + ' мин.'"></td>
-      </tr>
-    </div>
-  </table>
+    <table>
+        <tr>
+            <th>№</th>
+            <th>Заказчик</th>
+            <th>Статус</th>
+            <th>Дата заказа</th>
+            <th>Крайняя дата</th>
+            <th>Время выполнения</th>
+        </tr>
+        <div th:each="order : ${ordersOnProduction}">
+            <tr>
+                <td><a th:href="'/orders-p/' + ${order.id}" th:text="${order.id}"></a></td>
+                <td th:text="${order.name}"></td>
+                <td th:text="${order.status}"></td>
+                <td th:text="${order.orderDate}"></td>
+                <td th:text="${order.desiredDate}"></td>
+                <td th:text="${order.totalHours} + ' ч. ' + ${order.totalMinutes} + ' мин.'"></td>
+            </tr>
+        </div>
+    </table>
 </div>
 </body>
 </html>

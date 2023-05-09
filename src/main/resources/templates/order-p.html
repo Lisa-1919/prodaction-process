@@ -19,7 +19,6 @@
             <img src="/img/To_back.png" alt="Назад">
         </a>
     </div>
-
     <div class="order_info">
         <h3>Общая информация</h3>
         <p th:text="'Принят: ' + ${orderOnProduction.orderDate}"></p>
@@ -46,9 +45,18 @@
         </table>
     </div>
     <div class="btn_d">
-        <button type="submit" class="btn_d_1" th:action="'/orders-p/' + ${orderOnProduction.id} + '/components'" th:disabled="${!orderOnProduction.status.equals('Ожидание выполнения') || !orderOnProduction.status.equals('Ожидание комплектующих')}">Добавить комплектующие</button>
-        <button type="submit" class="btn_d_2" th:action="'/orders-p/' + ${orderOnProduction.id} + '/start'" th:disabled="${!orderOnProduction.status.equals('Ожидание выполнения') || !orderOnProduction.status.equals('Ожидание комплектующих')}">
-            Начать сборку</button>
+        <form method="get" th:action="'/orders-p/' + ${orderOnProduction.id} + '/components'">
+            <button type="submit" class="btn_d_1"
+                    th:disabled="${!orderOnProduction.status.equals('Ожидание выполнения') || !orderOnProduction.status.equals('Ожидание комплектующих')}">
+                Добавить комплектующие
+            </button>
+        </form>
+        <form method="get" th:action="'/orders-p/' + ${orderOnProduction.id} + '/start'">
+            <button type="submit" class="btn_d_2"
+                    th:disabled="${!orderOnProduction.status.equals('Ожидание выполнения') || !orderOnProduction.status.equals('Ожидание комплектующих')}">
+                Начать сборку
+            </button>
+        </form>
     </div>
 </div>
 </body>
