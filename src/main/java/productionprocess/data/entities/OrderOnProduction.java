@@ -2,6 +2,7 @@ package productionprocess.data.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class OrderOnProduction {
     private String name;
 
     @Column(name = "desired_date")
-    private LocalDateTime desiredDate;
+    private LocalDate desiredDate;
 
     @Column(name = "total_hours")
     private int totalHours;
@@ -40,7 +41,7 @@ public class OrderOnProduction {
         orderOnProductionDetails = new ArrayList<>();
     }
 
-    public OrderOnProduction(Integer id, LocalDateTime orderDate, LocalDateTime receiptDate, String status, String name, LocalDateTime desiredDate, int totalHours, int totalMinutes, List<OrderOnProductionDetails> orderOnProductionDetails) {
+    public OrderOnProduction(Integer id, LocalDateTime orderDate, LocalDateTime receiptDate, String status, String name, LocalDate desiredDate, int totalHours, int totalMinutes, List<OrderOnProductionDetails> orderOnProductionDetails) {
         this.id = id;
         this.orderDate = orderDate;
         this.receiptDate = receiptDate;
@@ -52,7 +53,7 @@ public class OrderOnProduction {
         this.orderOnProductionDetails = orderOnProductionDetails;
     }
 
-    public OrderOnProduction(LocalDateTime orderDate, LocalDateTime receiptDate, String status, String name, LocalDateTime desiredDate, int totalHours, int totalMinutes, List<OrderOnProductionDetails> orderOnProductionDetails) {
+    public OrderOnProduction(LocalDateTime orderDate, LocalDateTime receiptDate, String status, String name, LocalDate desiredDate, int totalHours, int totalMinutes, List<OrderOnProductionDetails> orderOnProductionDetails) {
         this.orderDate = orderDate;
         this.receiptDate = receiptDate;
         this.status = status;
@@ -63,7 +64,7 @@ public class OrderOnProduction {
         this.orderOnProductionDetails = orderOnProductionDetails;
     }
 
-    public OrderOnProduction(Integer id, LocalDateTime orderDate, LocalDateTime receiptDate, String status, String name, LocalDateTime desiredDate, List<OrderOnProductionDetails> orderOnProductionDetails) {
+    public OrderOnProduction(Integer id, LocalDateTime orderDate, LocalDateTime receiptDate, String status, String name, LocalDate desiredDate, List<OrderOnProductionDetails> orderOnProductionDetails) {
         this.id = id;
         this.orderDate = orderDate;
         this.receiptDate = receiptDate;
@@ -73,7 +74,7 @@ public class OrderOnProduction {
         this.orderOnProductionDetails = orderOnProductionDetails;
     }
 
-    public OrderOnProduction(LocalDateTime orderDate, LocalDateTime receiptDate, String status, String name, LocalDateTime desiredDate, List<OrderOnProductionDetails> orderOnProductionDetails) {
+    public OrderOnProduction(LocalDateTime orderDate, LocalDateTime receiptDate, String status, String name, LocalDate desiredDate, List<OrderOnProductionDetails> orderOnProductionDetails) {
         this.orderDate = orderDate;
         this.receiptDate = receiptDate;
         this.status = status;
@@ -122,11 +123,11 @@ public class OrderOnProduction {
         this.name = name;
     }
 
-    public LocalDateTime getDesiredDate() {
+    public LocalDate getDesiredDate() {
         return desiredDate;
     }
 
-    public void setDesiredDate(LocalDateTime desiredDate) {
+    public void setDesiredDate(LocalDate desiredDate) {
         this.desiredDate = desiredDate;
     }
 
