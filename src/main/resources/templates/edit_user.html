@@ -7,7 +7,7 @@
     <title>Contoso</title>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
-    <link type="text/css" rel="stylesheet" href="../static/css/edit_user.css" th:href="@{/css/edit_user.css}"/>
+    <link type="text/css" rel="stylesheet" href="../static/css/add_user.css" th:href="@{/css/add_user.css}"/>
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
@@ -15,20 +15,20 @@
 <div class="edit_user_form">
     <form th:action="'/employees/' + ${employee.id}" method="post" th:object="${employee}">
         <div class="data">
-            <select name="roleId">
-                <option value="1">Admin</option>
-                <option value="2">Технолог</option>
-                <option value="3">Диспетчер</option>
-                <option value="4">Мастер сборочного цеха</option>
-                <option value="5">Мастер покрасочного цеха</option>
-                <option value="6">Мастер упаковочного цеха</option>
+            <select name="roleId" th:value="${employee.getRoles().stream().toList().get(0).getId()}">
+                <option th:value="1">Администратор</option>
+                <option th:value="2">Технолог</option>
+                <option th:value="3">Диспетчер</option>
+                <option th:value="4">Мастер сборочного цеха</option>
+                <option th:value="5">Мастер покрасочного цеха</option>
+                <option th:value="6">Мастер упаковочного цеха</option>
             </select>
             <input th:field="*{firstName}" th:value="${employee.firstName}" placeholder="Имя" required><br/>
             <input th:field="*{lastName}" th:value="${employee.lastName}" placeholder="Фамилия" required><br/>
             <input th:field="*{email}" th:value="${employee.email}" placeholder="email" required><br/>
             <input th:field="*{phone}" th:value="${employee.phone}" placeholder="Номер телефона" required><br/>
         </div>
-        <input class="btn" type="submit" value="Сохранить"/>
+        <input class="btn_add_user" type="submit" value="Сохранить"/>
     </form>
 </div>
 </body>

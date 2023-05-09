@@ -87,15 +87,16 @@ public class EmployeeService implements UserDetailsService {
         return (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public void editEmployee(Employee employee, Integer roleId){
+    public void editEmployee(Employee employee, int roleId){
         Employee employeeDB = findById(employee.getId());
-        Role role = roleRepo.findById(roleId).orElseThrow();
-        employeeDB.setRoles(Collections.singleton(role));
         employeeDB.setFirstName(employee.getFirstName());
         employeeDB.setLastName(employee.getLastName());
         employeeDB.setPhone(employee.getPhone());
         employeeDB.setEmail(employee.getEmail());
         employeeRepo.save(employeeDB);
+        Role role = roleRepo.findById(roleId).orElseThrow();
+        employeeDB.setRoles(Collections.singleton(role));
+        roleRepo.save(role);
     }
 
     public String generatePassword() {

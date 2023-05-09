@@ -15,22 +15,22 @@ public class CommonController {
     @GetMapping("/home")
     public String homePage(Model model) {
         switch (employeeService.getAuthorized().getRoleName()) {
-            case "ADMIN" -> {
+            case "Администратор" -> {
                 return "redirect:/employees";
             }
-            case "OPERATOR" -> {
+            case "Диспетчер" -> {
                 return "redirect:/orders-p";
             }
-            case "TECHNOLOGIST" -> {
+            case "Технолог" -> {
                 return "redirect:/products";
             }
-            case "ASSEMBLY_SHOP_MASTER" -> {
+            case "Мастер сборочного цеха" -> {
                 return "redirect:/assembly";
             }
-            case "PAINT_SHOP_MASTER" ->{
+            case "Мастер покрасочного цеха" -> {
                 return "redirect:/paint";
             }
-            case "PACKING_SHOP_MASTER" ->{
+            case "Мастер упаковочного цеха" -> {
                 return "redirect:/packing";
             }
             default -> {

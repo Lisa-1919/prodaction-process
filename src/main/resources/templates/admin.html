@@ -26,14 +26,14 @@
         <tr>
             <th>№</th>
             <th>email</th>
-            <th>ФИО</th>
+            <th>Сотрудник</th>
             <th>Должность</th>
         </tr>
         <div th:each="employee : ${employees}">
             <tr>
                 <td width="" th:text="${employee.id}"></td>
                 <td th:text="${employee.email}"></td>
-                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.firstName} + ' ' + ${employee.lastName}"></td>
                 <td th:text="${employee.getRoleName()}"></td>
                 <td class="more">
                     <a th:href="'/employees/' + ${employee.id}">

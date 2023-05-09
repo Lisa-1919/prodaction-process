@@ -9,13 +9,14 @@
     <link type="text/css" rel="stylesheet" href="../static/css/login.css" th:href="@{/css/login.css}"/>
 </head>
 <body>
+<div th:if="${param.error}">Неверный логин или пароль.</div>
 <h1 class="greeting">Добро пожаловать в CONTOSO <img src="/img/feather.svg"></ing></h1>
 <div class="login_form">
     <p class="authorization">Авторизация</p>
     <form action="/login" method="post">
         <div class="data">
-            <input name="username" placeholder="email" required>
-            <input type="password" name="password" placeholder="password" required>
+            <input name="username" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Пароль" required>
         </div>
         <input class="login_btn" type="submit" value="Войти">
     </form>

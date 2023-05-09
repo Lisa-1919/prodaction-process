@@ -33,12 +33,12 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/employees/*", "/home").hasAuthority("ADMIN")
-                        .requestMatchers("/products/*", "/materials/*", "/operations/*", "/home").hasAuthority("TECHNOLOGIST")
-                        .requestMatchers("/orders-p/*", "/orders-w/*", "/home").hasAuthority("OPERATOR")
-                        .requestMatchers("/assembly/*", "/home").hasAuthority("ASSEMBLY_SHOP_MASTER")
-                        .requestMatchers("/paint/*", "/home").hasAuthority("PAINT_SHOP_MASTER")
-                        .requestMatchers("/packing/*", "/home").hasAuthority("PACKING_SHOP_MASTER")
+                        .requestMatchers("/employees/**", "/home").hasAuthority("Администратор")
+                        .requestMatchers("/products/**", "/materials/**", "/operations/**", "/home").hasAuthority("Технолог")
+                        .requestMatchers("/orders-p/**", "/orders-w/**", "/home").hasAuthority("Диспетчер")
+                        .requestMatchers("/assembly/**", "/home").hasAuthority("Мастер сборочного цеха")
+                        .requestMatchers("/paint/**", "/home").hasAuthority("Мастер покрасочного цеха")
+                        .requestMatchers("/packing/**", "/home").hasAuthority("Мастер упаковочного цеха")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
