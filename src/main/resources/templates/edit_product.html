@@ -76,31 +76,34 @@
                     </tr>
                 </div>
             </table>
+
+            <p>Спецификация</p>
+            <table class="materials" th:object="${materials}">
+                <tr>
+                    <th>Материал</th>
+                    <th>Кол-во</th>
+                    <th></th>
+                </tr>
+                <div th:each="material : ${product.getMaterialsForProducts()}">
+                    <tr>
+                        <td th:text="${material.material.name}"></td>
+                        <td><input type="number" placeholder="кол-во" name="selectedMaterialsQuantity"
+                                   th:value="${material.quantity}"></td>
+                        <td><input type="checkbox" class="check" name="selectedMaterials"
+                                   th:value="${material.material.id}" checked>
+                        </td>
+                    </tr>
+                </div>
+                <div th:each="material : ${materials}">
+                    <tr>
+                        <td th:text="${material.name}"></td>
+                        <td><input type="number" placeholder="кол-во" name="selectedMaterialsQuantity"></td>
+                        <td><input type="checkbox" class="check" name="selectedMaterials" th:value="${material.id}">
+                        </td>
+                    </tr>
+                </div>
+            </table>
         </div>
-        <p>Спецификация</p>
-        <table class="materials" th:object="${materials}">
-            <tr>
-                <th>Материал</th>
-                <th>Кол-во</th>
-                <th></th>
-            </tr>
-            <div th:each="material : ${product.getMaterialsForProducts()}">
-                <tr>
-                    <td th:text="${material.material.name}"></td>
-                    <td><input type="number" placeholder="кол-во" name="selectedMaterialsQuantity" th:value="${material.quantity}"></td>
-                    <td><input type="checkbox" class="check" name="selectedMaterials" th:value="${material.material.id}" checked>
-                    </td>
-                </tr>
-            </div>
-            <div th:each="material : ${materials}">
-                <tr>
-                    <td th:text="${material.name}"></td>
-                    <td><input type="number" placeholder="кол-во" name="selectedMaterialsQuantity"></td>
-                    <td><input type="checkbox" class="check" name="selectedMaterials" th:value="${material.id}">
-                    </td>
-                </tr>
-            </div>
-        </table>
         <input class="btn" type="submit" value="Сохранить"/>
     </form>
 </div>

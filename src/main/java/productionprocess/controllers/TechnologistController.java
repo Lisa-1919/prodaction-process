@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import productionprocess.data.entities.*;
-import productionprocess.data.model.OperationComparator;
-import productionprocess.data.repo.OperationRepo;
 import productionprocess.services.MaterialService;
 import productionprocess.services.OperationService;
 import productionprocess.services.ProductService;
@@ -26,7 +24,6 @@ public class TechnologistController {
     private OperationService operationService;
 
 
-
     @GetMapping("/products")
     public String products(Model model) {
         model.addAttribute("products", productService.findAll());
@@ -42,7 +39,7 @@ public class TechnologistController {
     @GetMapping("/products/add")
     public String addProductPage(Model model) {
         model.addAttribute("product", new Product());
-        model.addAttribute("operations", operationService.findAll().stream().sorted(new OperationComparator()));
+        model.addAttribute("operations", operationService.findAll());
         model.addAttribute("materials", materialService.findAll());
         return "add_product";
     }
@@ -52,12 +49,18 @@ public class TechnologistController {
                              @RequestParam("selectedOperationsSequencing") List<Integer> selectedOperationsSequencing,
                              @RequestParam("selectedMaterials") List<Integer> selectedMaterials,
                              @RequestParam("selectedMaterialsQuantity") List<Double> selectedMaterialsQuantity, Model model) {
-
+        List<Integer> operationSequencingList = new ArrayList<>();
+        selectedOperationsSequencing.forEach(s -> {
+            if (s != null) {
+                operationSequencingList.add(s);
+            }
+        });
         Route route = new Route();
         for (int i = 0; i < selectedOperations.size(); i++) {
             OperationInRoute operationInRoute = new OperationInRoute();
             operationInRoute.setOperation(operationService.findById(selectedOperations.get(i)));
-            operationInRoute.setSequencing(selectedOperationsSequencing.get(i));
+            //operationInRoute.setSequencing(selectedOperationsSequencing.get(i));
+            operationInRoute.setSequencing(operationSequencingList.get(i));
             operationInRoute.setRoute(route);
             route.getOperationInRoutes().add(operationInRoute);
         }
@@ -75,11 +78,16 @@ public class TechnologistController {
         route.setTotalMinutes(minutes);
         route.setName(product.getArticle());
         product.setRoute(route);
-
+        List<Double> materialQuantityList = new ArrayList<>();
+        selectedMaterialsQuantity.forEach(m -> {
+            if (m != null) {
+                materialQuantityList.add(m);
+            }
+        });
         for (int i = 0; i < selectedMaterials.size(); i++) {
             MaterialsForProduct materialsForProduct = new MaterialsForProduct();
             materialsForProduct.setMaterial(materialService.findById(selectedMaterials.get(i)));
-            materialsForProduct.setQuantity(selectedMaterialsQuantity.get(i));
+            materialsForProduct.setQuantity(materialQuantityList.get(i));
             product.getMaterialsForProducts().add(materialsForProduct);
         }
         productService.addProduct(product);
@@ -96,17 +104,17 @@ public class TechnologistController {
         List<Operation> operationsInRoute = new ArrayList<>();
         productService.findById(id).getRoute().getOperationInRoutes().forEach(operationInRoute -> operationsInRoute.add(operationInRoute.getOperation()));
         for (Operation operation : operations) {
-            if(!operationsInRoute.contains(operation)){
+            if (!operationsInRoute.contains(operation)) {
                 result.add(operation);
             }
         }
-        model.addAttribute("operations", result.stream().sorted(new OperationComparator()));
+        model.addAttribute("operations", result);
         List<Material> materials = materialService.findAll();
         List<Material> materialResult = new ArrayList<>();
         List<Material> materialsInProduct = new ArrayList<>();
         productService.findById(id).getMaterialsForProducts().forEach(materialForProduct -> materialsInProduct.add(materialForProduct.getMaterial()));
         for (Material material : materials) {
-            if(!materialsInProduct.contains(material)){
+            if (!materialsInProduct.contains(material)) {
                 materialResult.add(material);
             }
         }
