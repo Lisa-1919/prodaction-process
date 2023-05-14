@@ -59,7 +59,6 @@ public class TechnologistController {
         for (int i = 0; i < selectedOperations.size(); i++) {
             OperationInRoute operationInRoute = new OperationInRoute();
             operationInRoute.setOperation(operationService.findById(selectedOperations.get(i)));
-            //operationInRoute.setSequencing(selectedOperationsSequencing.get(i));
             operationInRoute.setSequencing(operationSequencingList.get(i));
             operationInRoute.setRoute(route);
             route.getOperationInRoutes().add(operationInRoute);
@@ -97,8 +96,6 @@ public class TechnologistController {
     @GetMapping("/products/{id}")
     public String getProduct(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("product", productService.findById(id));
-        //model.addAttribute("operations", operationService.findAll());
-        //model.addAttribute("materials", materialService.findAll());
         List<Operation> operations = operationService.findAll();
         List<Operation> result = new ArrayList<>();
         List<Operation> operationsInRoute = new ArrayList<>();
@@ -127,11 +124,17 @@ public class TechnologistController {
                               @RequestParam("selectedOperationsSequencing") List<Integer> selectedOperationsSequencing,
                               @RequestParam("selectedMaterials") List<Integer> selectedMaterials,
                               @RequestParam("selectedMaterialsQuantity") List<Double> selectedMaterialsQuantity, Model model) {
+        List<Integer> operationSequencingList = new ArrayList<>();
+        selectedOperationsSequencing.forEach(s -> {
+            if (s != null) {
+                operationSequencingList.add(s);
+            }
+        });
         Route route = new Route();
         for (int i = 0; i < selectedOperations.size(); i++) {
             OperationInRoute operationInRoute = new OperationInRoute();
             operationInRoute.setOperation(operationService.findById(selectedOperations.get(i)));
-            operationInRoute.setSequencing(selectedOperationsSequencing.get(i));
+            operationInRoute.setSequencing(operationSequencingList.get(i));
             operationInRoute.setRoute(route);
             route.getOperationInRoutes().add(operationInRoute);
         }
@@ -149,10 +152,16 @@ public class TechnologistController {
         route.setTotalMinutes(minutes);
         route.setName(product.getArticle());
         product.setRoute(route);
+        List<Double> materialQuantityList = new ArrayList<>();
+        selectedMaterialsQuantity.forEach(m -> {
+            if (m != null) {
+                materialQuantityList.add(m);
+            }
+        });
         for (int i = 0; i < selectedMaterials.size(); i++) {
             MaterialsForProduct materialsForProduct = new MaterialsForProduct();
             materialsForProduct.setMaterial(materialService.findById(selectedMaterials.get(i)));
-            materialsForProduct.setQuantity(selectedMaterialsQuantity.get(i));
+            materialsForProduct.setQuantity(materialQuantityList.get(i));
             product.getMaterialsForProducts().add(materialsForProduct);
         }
         productService.editProduct(product);
