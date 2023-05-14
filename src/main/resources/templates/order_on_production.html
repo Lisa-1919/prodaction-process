@@ -7,7 +7,6 @@
     <title>Contoso</title>
     <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
     <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
-
     <link type="text/css" rel="stylesheet" href="../static/css/order-p.css" th:href="@{/css/order-p.css}"/>
 </head>
 <body>
@@ -35,7 +34,7 @@
 
     <div class="order_info">
         <h3>Общая информация</h3>
-        <p th:text="'Принят: ' + ${orderOnProduction.orderDate}"></p>
+        <p th:text="'Принят: ' + ${#temporals.format(orderOnProduction.orderDate, 'dd-MM-yyyy HH:mm:ss')}" ></p>
         <p th:text="'Крайняя дата: ' + ${orderOnProduction.desiredDate}"></p>
         <p th:text="'Время выполнения: '"></p>
         <p th:text="'Статус: ' + ${orderOnProduction.status}"></p>

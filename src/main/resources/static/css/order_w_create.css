@@ -8,3 +8,9 @@
 table{
     width: 1196px;
 }
+
+.back{
+    position: fixed;
+    left: 50px;
+    top: 120px;
+}

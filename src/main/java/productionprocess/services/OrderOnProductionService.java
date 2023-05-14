@@ -79,11 +79,6 @@ public class OrderOnProductionService {
         return result;
     }
 
-    public List<OrderOnProduction> sortByStatus(List<OrderOnProduction> list) {
-        Collections.sort(list, (s1, s2) -> s1.getStatus().compareToIgnoreCase(s2.getStatus()) > 1 ? 1 : s1.getStatus().compareToIgnoreCase(s2.getStatus()) < 1 ? -1 : 0);
-        return list;
-    }
-
     public List<MaterialToOrder> getNecessaryQuantity(int orderId) {
         OrderOnProduction orderOnProduction = findById(orderId);
         List<OrderOnProductionDetails> orderOnProductionDetails = orderOnProduction.getOrderOnProductionDetails();
@@ -128,9 +123,9 @@ public class OrderOnProductionService {
 //                            orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_1.getStatus()) ||
 //                            orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_2.getStatus()) ||
                             orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_3.getStatus()) ||
-                            orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_4.getStatus()) ||
-                            orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_5.getStatus()) ||
-                            orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_6.getStatus())) {
+                                    orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_4.getStatus()) ||
+                                    orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_5.getStatus()) ||
+                                    orderOnProduction.getStatus().equals(StatusOrderOnProduction.STATUS_6.getStatus())) {
                         result.add(orderOnProduction);
                     }
                 }
@@ -162,15 +157,34 @@ public class OrderOnProductionService {
         return result;
     }
 
-    public boolean needPaint(Integer orderId){
+    public boolean needPaint(Integer orderId) {
         boolean flag = false;
         OrderOnProduction order = findById(orderId);
-        for(OrderOnProductionDetails detail: order.getOrderOnProductionDetails()){
-            if(detail.getProduct().getType().equals("Карандаш")){
+        for (OrderOnProductionDetails detail : order.getOrderOnProductionDetails()) {
+            if (detail.getProduct().getType().equals("Карандаш")) {
                 flag = true;
                 break;
             }
         }
         return flag;
+    }
+
+    public void runtime() {
+        List<OrderOnProduction> orders = orderOnProductionRepo.findAll();
+        for (OrderOnProduction order : orders) {
+            if (order.getTotalHours() == 0 && order.getTotalMinutes() == 0) {
+                int totalHours = 0;
+                int totalMinutes = 0;
+                for (OrderOnProductionDetails orderDetail : order.getOrderOnProductionDetails()) {
+                    totalHours += orderDetail.getProduct().getRoute().getTotalHours() * orderDetail.getAmount();
+                    totalMinutes += orderDetail.getProduct().getRoute().getTotalMinutes() * orderDetail.getAmount();
+                }
+                if (totalMinutes >= 60) {
+                    order.setTotalHours(totalHours + totalMinutes / 60);
+                    order.setTotalMinutes(totalMinutes % 60);
+                }
+            }
+        }
+        orderOnProductionRepo.saveAll(orders);
     }
 }

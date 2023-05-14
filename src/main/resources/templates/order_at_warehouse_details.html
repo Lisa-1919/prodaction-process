@@ -7,7 +7,6 @@
   <title>Contoso</title>
   <link type="text/css" rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}"/>
   <link type="text/css" rel="stylesheet" href="../static/css/header.css" th:href="@{/css/header.css}"/>
-  <link type="text/css" rel="stylesheet" href="../static/css/warehouse_orders.css" th:href="@{/css/warehouse_orders.css}"/>
   <link type="text/css" rel="stylesheet" href="../static/css/order-p.css" th:href="@{/css/order-p.css}"/>
 </head>
 <body>
@@ -15,13 +14,15 @@
 <div class="order" th:object="${orderAtWarehouse}">
   <div class="l">
     <h1 th:text="'Заказ № ' + ${orderAtWarehouse.id}"></h1>
-    <a class="back" href="/orders-w">Назад</a>
+    <a class="back" href="/orders-p">
+      <img src="/img/To_back.png" alt="Назад">
+    </a>
   </div>
   <div class="order_info">
     <h3>Общая информация</h3>
     <p th:text="'Статус: ' + ${orderAtWarehouse.status}"></p>
-    <p th:text="'Дата заказа: ' + ${orderAtWarehouse.orderDate}"></p>
-    <p th:text="'Дата получения: ' + ${orderAtWarehouse.receiptDate}"></p>
+    <p th:text="'Дата заказа: ' + ${#temporals.format(orderAtWarehouse.orderDate, 'dd-MM-yyyy HH:mm:ss')}"></p>
+    <p th:text="'Дата получения: ' + ${#temporals.format(orderAtWarehouse.receiptDate, 'dd-MM-yyyy HH:mm:ss')}"></p>
   </div>
   <div class="list">
     <h3>Состав заказа</h3>
@@ -40,9 +41,9 @@
       </div>
     </table>
   </div>
-  <form method="get" th:action="'/orders-w/' + ${order.id} + '/confirm'" class="btn_d">
+  <form method="get" th:action="'/orders-w/' + ${orderAtWarehouse.id} + '/confirm'" class="btn_d">
     <button class="btn_d_2" type="submit"
-            th:disabled="${order.status.equals('Получен')}">
+            th:disabled="${orderAtWarehouse.status.equals('Получен')}">
       Подтвердить получение
     </button>
   </form>

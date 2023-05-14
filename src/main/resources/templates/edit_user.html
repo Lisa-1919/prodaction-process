@@ -21,7 +21,10 @@
             <input th:field="*{firstName}" th:value="${employee.firstName}" placeholder="Имя" required><br/>
             <input th:field="*{lastName}" th:value="${employee.lastName}" placeholder="Фамилия" required><br/>
             <input th:field="*{email}" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" th:value="${employee.email}" placeholder="email" required><br/>
-            <input th:field="*{phone}" pattern="^\+375 \(\d{2}\) [0-9]{3} [0-9]{2} [0-9]{2}$" th:value="${employee.phone}" required><br/>
+            <input th:field="*{phone}" pattern="^\+375 \(\d{2}\) [0-9]{3} [0-9]{2} [0-9]{2}$" th:value="${employee.phone}" required>
+            <script src="https://unpkg.com/imask"></script>
+            <script src="../static/js/phone_input.js" th:src="@{/js/phone_input.js}"></script>
+            <br/>
         </div>
         <input class="btn_add_user" type="submit" value="Сохранить"/>
     </form>

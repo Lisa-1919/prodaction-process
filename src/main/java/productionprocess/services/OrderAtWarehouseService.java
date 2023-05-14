@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import productionprocess.data.entities.Material;
 import productionprocess.data.entities.OrderAtWarehouse;
 import productionprocess.data.entities.OrderAtWarehouseDetails;
+import productionprocess.data.entities.OrderOnProduction;
 import productionprocess.data.model.StatusOrderAtWarehouse;
 import productionprocess.data.repo.MaterialRepo;
 import productionprocess.data.repo.OrderAtWarehouseDetailsRepo;
@@ -86,6 +87,16 @@ public class OrderAtWarehouseService {
         List<OrderAtWarehouse> result = new ArrayList<>();
         for (OrderAtWarehouse orderAtWarehouse : orderAtWarehouses) {
             if (orderAtWarehouse.getStatus().toLowerCase().contains(value.toLowerCase())) {
+                result.add(orderAtWarehouse);
+            }
+        }
+        return result;
+    }
+    public List<OrderAtWarehouse> searchOrderAtWarehouseById(int value) {
+        Iterable<OrderAtWarehouse> ordersAtWarehouse = orderAtWarehouseRepo.findAll();
+        List<OrderAtWarehouse> result = new ArrayList<>();
+        for (OrderAtWarehouse orderAtWarehouse : ordersAtWarehouse) {
+            if (orderAtWarehouse.getId() == value) {
                 result.add(orderAtWarehouse);
             }
         }

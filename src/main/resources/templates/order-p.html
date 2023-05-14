@@ -21,9 +21,9 @@
     </div>
     <div class="order_info">
         <h3>Общая информация</h3>
-        <p th:text="'Принят: ' + ${orderOnProduction.orderDate}"></p>
+        <p th:text="'Принят: ' + ${#temporals.format(orderOnProduction.orderDate, 'dd-MM-yyyy HH:mm:ss')}"></p>
         <p th:text="'Крайняя дата: ' + ${orderOnProduction.desiredDate}"></p>
-        <p th:text="'Время выполнения: '"></p>
+        <p th:text="'Время выполнения: ' + ${orderOnProduction.getTotalHours()} + ' ч. ' + ${orderOnProduction.getTotalMinutes()} + ' мин.'"></p>
         <p th:text="'Статус: ' + ${orderOnProduction.status}"></p>
         <p th:text="'Заказчик: ' + ${orderOnProduction.name}"></p>
     </div>
@@ -47,13 +47,13 @@
     <div class="btn_d">
         <form method="get" th:action="'/orders-p/' + ${orderOnProduction.id} + '/components'">
             <button type="submit" class="btn_d_1"
-                    th:disabled="${!orderOnProduction.status.equals('Ожидание выполнения') || !orderOnProduction.status.equals('Ожидание комплектующих')}">
+                    th:disabled="${!(orderOnProduction.status.equals('Ожидание выполнения'))}">
                 Добавить комплектующие
             </button>
         </form>
         <form method="get" th:action="'/orders-p/' + ${orderOnProduction.id} + '/start'">
             <button type="submit" class="btn_d_2"
-                    th:disabled="${!orderOnProduction.status.equals('Ожидание выполнения') || !orderOnProduction.status.equals('Ожидание комплектующих')}">
+                    th:disabled="${!(orderOnProduction.status.equals('Ожидание выполнения') || orderOnProduction.status.equals('Ожидание комплектующих'))}">
                 Начать сборку
             </button>
         </form>

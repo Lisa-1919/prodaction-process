@@ -1,12 +1,17 @@
+table {
+    align-content: center;
+}
+
 .form {
     position: absolute;
     display: flex;
     flex-direction: column;
     left: 122px;
+    top: 120px;
 }
 
 .operations {
-    width: 1161px;
+    width: 1000px;
 }
 
 .materials {
@@ -24,6 +29,18 @@ p {
     background-color: transparent;
 }
 
-select{
+select {
     width: 330px;
+}
+
+.sequence_th {
+    width: 100px;
+}
+
+.sequence {
+    width: 70px;
+}
+
+.quantity {
+    width: 100px;
 }

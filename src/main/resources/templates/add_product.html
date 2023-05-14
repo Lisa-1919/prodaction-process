@@ -28,9 +28,11 @@
                 <option value="">Выберите тип изделия</option>
             </select>
         </p>
+        <p>Свойство:
         <select th:field="*{property}" id="property">
             <option value="">Выберите тип изделия</option>
         </select>
+        </p>
         <p>Введите артикул</p>
         <input th:field="*{article}" type="text" required>
         <p>Маршрут</p>
@@ -39,6 +41,7 @@
                 <th>Цех</th>
                 <th>Операция</th>
                 <th>Время выполнения</th>
+                <th class="sequence_th" >Порядок выполнения</th>
                 <th></th>
             </tr>
             <div th:each="operation : ${operations}">
@@ -46,7 +49,7 @@
                     <td th:text="${operation.workshop}"></td>
                     <td th:text="${operation.name}"></td>
                     <td th:text="${operation.hours} + ':' + ${operation.minutes}"></td>
-                    <td><input type="number" min="1" step="1" name="selectedOperationsSequencing"></td>
+                    <td><input class="sequence" type="number" min="1" step="1" name="selectedOperationsSequencing"></td>
                     <td><input type="checkbox" class="check" name="selectedOperations" th:value="${operation.id}"></td>
                 </tr>
             </div>
@@ -61,7 +64,7 @@
             <div th:each="material : ${materials}">
                 <tr>
                     <td th:text="${material.name}"></td>
-                    <td><input type="number" placeholder="кол-во" name="selectedMaterialsQuantity"></td>
+                    <td><input class="quantity" type="number" placeholder="кол-во" name="selectedMaterialsQuantity"></td>
                     <td><input type="checkbox" class="check" name="selectedMaterials" th:value="${material.id}"></td>
                 </tr>
             </div>

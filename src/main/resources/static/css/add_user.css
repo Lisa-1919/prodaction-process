@@ -19,7 +19,7 @@ h1{
 
 .data{
     width: 397px;
-    height: 291px;
+    height: 350px;
     margin-top: 210px;
     margin-left: 520px;
 }
@@ -30,10 +30,9 @@ h1{
 }
 
 input[type=submit]{
-    width: 259px;
-    height: 76px;
-    margin-left: 591px;
-    margin-top: 45px;
+    width: 150px;
+    height: 56px;
+    margin-left: 641px;
 }
 
 span{

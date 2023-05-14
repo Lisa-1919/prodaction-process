@@ -16,6 +16,7 @@ import productionprocess.services.OrderAtWarehouseService;
 import productionprocess.services.OrderOnProductionService;
 
 import java.time.LocalDateTime;
+import java.util.Formatter;
 import java.util.List;
 
 @Controller
@@ -28,8 +29,14 @@ public class DispatcherController {
     private MaterialService materialService;
 
     @GetMapping("/orders-w")
-    public String OrdersAtWarehouse(Model model){
+    public String ordersAtWarehouse(Model model){
         model.addAttribute("ordersAtWarehouse", orderAtWarehouseService.findAll());
+        return "warehouse_order_history";
+    }
+
+    @GetMapping("/orders-w/search")
+    public String searchOrdersAtWarehouse(@RequestParam("id") Integer id, Model model){
+        model.addAttribute("ordersAtWarehouse", orderAtWarehouseService.searchOrderAtWarehouseById(id));
         return "warehouse_order_history";
     }
 
@@ -47,13 +54,14 @@ public class DispatcherController {
 
     @GetMapping("/orders-p")
     public String ordersOnProduction(Model model){
+        orderOnProductionService.runtime();
         model.addAttribute("ordersOnProduction", orderOnProductionService.findAll());
         return "dispatcher";
     }
 
-    @PostMapping("/orders-p")
+    @GetMapping("/orders-p/search")
     public String search(@RequestParam("id") Integer id, Model model){
-        model.addAttribute("orderOnProduction",orderOnProductionService.searchOrderOnProductionById(id));
+        model.addAttribute("ordersOnProduction",orderOnProductionService.searchOrderOnProductionById(id));
         return "dispatcher";
     }
 
@@ -65,6 +73,7 @@ public class DispatcherController {
 
     @GetMapping("/orders-p/{id}/start")
     public String start(@PathVariable("id") Integer id, Model model){
+        materialService.startProduction(id);
         orderOnProductionService.editStatus(id, StatusOrderOnProduction.STATUS_3);
         return "redirect:/orders-p";
     }

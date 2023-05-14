@@ -46,23 +46,6 @@ public class AdminController {
         }
     }
 
-//    @PostMapping("/employees/add")
-//    public String addManager(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String phoneNumber,
-//                             @RequestParam String email, @RequestParam Integer roleId, Model model) {
-//        String password = employeeService.generatePassword();
-//
-//        Employee employee = new Employee(firstName, lastName, phoneNumber, email, password);
-//        employeeService.saveEmployee(employee, roleId);
-//        try {
-//            Writer writer = new FileWriter("D:\\productionProcess\\src\\main\\resources\\employees.txt", true);
-//            writer.write(email + " " + password + "\n");
-//            writer.flush();
-//            writer.close();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return "redirect:/home";
-//    }
 
     @GetMapping("/employees")
     public String getAllEmployees(Model model){

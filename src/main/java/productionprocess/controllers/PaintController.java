@@ -34,8 +34,7 @@ public class PaintController {
     @GetMapping("/paint/{id}")
     public String order(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("orderOnProduction", orderOnProductionService.findById(id));
-        model.addAttribute("userRole", "PAINT_SHOP_MASTER");
-        //model.addAttribute("userRole", employeeService.getAuthorized().getRoleName());
+        model.addAttribute("userRole", employeeService.getAuthorized().getRoleName());
         return "order_on_production";
     }
 

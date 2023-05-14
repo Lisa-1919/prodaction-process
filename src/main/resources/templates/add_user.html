@@ -22,8 +22,10 @@
             <input th:field="*{firstName}" placeholder="Имя" required><br/>
             <input th:field="*{lastName}" placeholder="Фамилия" required><br/>
             <input th:field="*{email}" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="email" required><br/>
-            <span id="phone" class="input-hint">+375 (xx) xxx xx xx</span>
-            <input th:field="*{phone}" pattern="^\+375 \(\d{2}\) [0-9]{3} [0-9]{2} [0-9]{2}$" placeholder="Номер телефона" required><br/>
+            <input data-mask="phone" th:field="*{phone}" pattern="^\+375 \(\d{2}\) [0-9]{3} [0-9]{2} [0-9]{2}$" placeholder="Номер телефона" required>
+            <script src="https://unpkg.com/imask"></script>
+            <script src="../static/js/phone_input.js" th:src="@{/js/phone_input.js}"></script>
+            <br/>
         </div>
         <input type="submit" value="Сохранить" class="btn_add_user"/>
     </form>

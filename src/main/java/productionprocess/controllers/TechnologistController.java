@@ -141,8 +141,8 @@ public class TechnologistController {
 
     @GetMapping("/materials/search")
     public String materialSearch(@RequestParam("name") String name, Model model){
-        model.addAttribute("materials", materialService.searchMaterialByName("name"));
-        return "technologist";
+        model.addAttribute("materials", materialService.searchMaterialByName(name));
+        return "materials";
     }
 
 
@@ -185,7 +185,7 @@ public class TechnologistController {
     @GetMapping("/operations/search")
     public String operationSearch(@RequestParam("name") String name, Model model){
         model.addAttribute("operations", operationService.searchOperationByName(name));
-        return "technologist";
+        return "operations";
     }
 
     @GetMapping("/operations/add")

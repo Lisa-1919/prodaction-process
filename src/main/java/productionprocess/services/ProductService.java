@@ -38,10 +38,12 @@ public class ProductService {
 
         Route route = product.getRoute();
         Route routeDB = routeRepo.findById(productDB.getRoute().getId()).orElseThrow();
+
         routeDB.setName(route.getName());
         routeDB.setTotalHours(route.getTotalHours());
         routeDB.setTotalMinutes(route.getTotalMinutes());
         routeDB.setOperationInRoutes(route.getOperationInRoutes());
+
         routeRepo.save(routeDB);
 
         List<MaterialsForProduct> materialsForProductList = materialsForProductRepo.findByProduct(productDB);

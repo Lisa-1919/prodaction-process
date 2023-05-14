@@ -17,7 +17,7 @@
 <header th:insert="blocks/header::header"></header>
 <div class="search">
     <form action="/orders-w/search" method="get">
-        <p><input type="search" name="id" placeholder="Что вы ищите?" class="search__form">
+        <p><input type="search" name="id" placeholder="Введите № заказа" class="search__form">
             <input type="submit" value="" class="search_button">
         </p>
     </form>
@@ -41,8 +41,8 @@
             <tr>
                 <td><a name="orderId" th:href="'/orders-w/' + ${order.id}" th:text="${order.id}"></a></td>
                 <td th:text="${order.status}"></td>
-                <td th:text="${order.orderDate}"></td>
-                <td th:text="${order.receiptDate}"></td>
+                <td th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                <td th:text="${#temporals.format(order.receiptDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td>
                     <form method="get" th:action="'/orders-w/' + ${order.id} + '/confirm'">
                         <button type="submit"

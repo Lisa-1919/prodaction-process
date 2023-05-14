@@ -18,19 +18,19 @@ public class OrderOnProductionDetails {
     private Product product;
 
     @Column(name = "amount")
-    private double amount;
+    private int amount;
 
     public OrderOnProductionDetails() {
     }
 
-    public OrderOnProductionDetails(Integer id, OrderOnProduction orderOnProduction, Product product, double amount) {
+    public OrderOnProductionDetails(Integer id, OrderOnProduction orderOnProduction, Product product, int amount) {
         this.id = id;
         this.orderOnProduction = orderOnProduction;
         this.product = product;
         this.amount = amount;
     }
 
-    public OrderOnProductionDetails(OrderOnProduction orderOnProduction, Product product, double amount) {
+    public OrderOnProductionDetails(OrderOnProduction orderOnProduction, Product product, int amount) {
         this.orderOnProduction = orderOnProduction;
         this.product = product;
         this.amount = amount;
@@ -60,11 +60,11 @@ public class OrderOnProductionDetails {
         this.product = product;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 }

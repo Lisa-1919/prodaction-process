@@ -16,7 +16,7 @@
 <header th:insert="blocks/header::header"></header>
 <div class="search">
     <form action="/paint/search" method="get">
-        <p><input type="search" name="id" placeholder="Что вы ищите?" class="search__form">
+        <p><input type="search" name="id" placeholder="Введите № заказа" class="search__form">
             <input type="submit" value="" class="search_button">
         </p>
     </form>
@@ -39,7 +39,7 @@
                 <td><a th:href="'/paint/' + ${order.id}" th:text="${order.id}"></a></td>
                 <td th:text="${order.name}"></td>
                 <td th:text="${order.status}"></td>
-                <td th:text="${order.orderDate}"></td>
+                <td th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
                 <td th:text="${order.desiredDate}"></td>
                 <td th:text="${order.totalHours} + ' ч. ' + ${order.totalMinutes} + ' мин.'"></td>
             </tr>

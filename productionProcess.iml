@@ -139,5 +139,6 @@
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:6.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:6.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.passay:passay:1.6.2" level="project" />
+    <orderEntry type="library" name="imask" level="application" />
   </component>
 </module>
