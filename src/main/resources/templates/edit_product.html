@@ -35,7 +35,7 @@
             <p>Введите артикул</p>
             <input th:field="*{article}" th:value="${product.article}" type="text" required>
             <p>Маршрут</p>
-            <table class="operations" th:object="${operations}">
+            <table class="operations">
                 <tr>
                     <th>Цех</th>
                     <th>Операция</th>
@@ -43,45 +43,37 @@
                     <th>Порядок выполнения</th>
                     <th></th>
                 </tr>
-
-                <div th:each="operation : ${operations}">
-                    <div th:each="op : ${product.getRoute().getOperationInRoutes()}">
-                        <div th:if="${operation.id==op.operation.id}">
-                            <tr>
-                                <td th:text="${operation.workshop}"></td>
-                                <td th:text="${operation.name}"></td>
-                                <td th:text="${operation.hours} + ':' + ${operation.minutes}"></td>
-                                <td>
-                                    <input type="number" min="1" step="1"
-                                           name="selectedOperationsSequencing" th:value="${op.sequencing}">
-                                </td>
-                                <td>
-                                    <input type="checkbox" class="check"
-                                           name="selectedOperations"
-                                           th:value="${operation.id}" checked>
-
-                                </td>
-
-                        </div>
-                        <div th:unless="${operation.id==op.operation.id}">
-
-
-                            <tr>
-                                <td th:text="${operation.workshop}"></td>
-                                <td th:text="${operation.name}"></td>
-                                <td th:text="${operation.hours} + ':' + ${operation.minutes}"></td>
-                                <td>
-                                    <input type="number" min="1" step="1"
-                                           name="selectedOperationsSequencing">
-                                </td>
-                                <td>
-                                    <input type="checkbox" class="check"
-                                           name="selectedOperations"
-                                           th:value="${operation.id}" >
-                                </td>
-                            </tr>
-                        </div>
-                    </div>
+                <div th:each="operation: ${product.getRoute().getOperationInRoutes()}">
+                    <tr>
+                        <td th:text="${operation.operation.workshop}"></td>
+                        <td th:text="${operation.operation.name}"></td>
+                        <td th:text="${operation.operation.hours} + ':' + ${operation.operation.minutes}"></td>
+                        <td>
+                            <input type="number" min="1" step="1"
+                                   name="selectedOperationsSequencing" th:value="${operation.sequencing}">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="check"
+                                   name="selectedOperations"
+                                   th:value="${operation.operation.id}" checked>
+                        </td>
+                    </tr>
+                </div>
+                <div th:each="_operation : ${operations}">
+                    <tr>
+                        <td th:text="${_operation.workshop}"></td>
+                        <td th:text="${_operation.name}"></td>
+                        <td th:text="${_operation.hours} + ':' + ${_operation.minutes}"></td>
+                        <td>
+                            <input type="number" min="1" step="1"
+                                   name="selectedOperationsSequencing">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="check"
+                                   name="selectedOperations"
+                                   th:value="${_operation.id}">
+                        </td>
+                    </tr>
                 </div>
             </table>
         </div>
@@ -92,6 +84,14 @@
                 <th>Кол-во</th>
                 <th></th>
             </tr>
+            <div th:each="material : ${product.getMaterialsForProducts()}">
+                <tr>
+                    <td th:text="${material.material.name}"></td>
+                    <td><input type="number" placeholder="кол-во" name="selectedMaterialsQuantity" th:value="${material.quantity}"></td>
+                    <td><input type="checkbox" class="check" name="selectedMaterials" th:value="${material.material.id}" checked>
+                    </td>
+                </tr>
+            </div>
             <div th:each="material : ${materials}">
                 <tr>
                     <td th:text="${material.name}"></td>
@@ -101,9 +101,8 @@
                 </tr>
             </div>
         </table>
-</div>
-<input class="btn" type="submit" value="Сохранить"/>
-</form>
+        <input class="btn" type="submit" value="Сохранить"/>
+    </form>
 </div>
 </body>
 </html>

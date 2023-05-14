@@ -93,4 +93,16 @@ public class Operation {
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Operation)) {
+            return false;
+        }
+        Operation operation = (Operation) obj;
+        return id.equals(operation.id);
+    }
 }

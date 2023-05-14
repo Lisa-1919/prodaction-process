@@ -1,14 +1,17 @@
 package productionprocess.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.OpPlus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import productionprocess.data.entities.*;
+import productionprocess.data.repo.OperationRepo;
 import productionprocess.services.MaterialService;
 import productionprocess.services.OperationService;
 import productionprocess.services.ProductService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,6 +24,8 @@ public class TechnologistController {
     @Autowired
     private OperationService operationService;
 
+
+
     @GetMapping("/products")
     public String products(Model model) {
         model.addAttribute("products", productService.findAll());
@@ -28,7 +33,7 @@ public class TechnologistController {
     }
 
     @GetMapping("/products/search")
-    public String productSearch(@RequestParam("article") String article, Model model){
+    public String productSearch(@RequestParam("article") String article, Model model) {
         model.addAttribute("products", productService.searchProductByArticle(article));
         return "technologist";
     }
@@ -83,8 +88,28 @@ public class TechnologistController {
     @GetMapping("/products/{id}")
     public String getProduct(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("product", productService.findById(id));
-        model.addAttribute("operations", operationService.findAll());
-        model.addAttribute("materials", materialService.findAll());
+        //model.addAttribute("operations", operationService.findAll());
+        //model.addAttribute("materials", materialService.findAll());
+        List<Operation> operations = operationService.findAll();
+        List<Operation> result = new ArrayList<>();
+        List<Operation> operationsInRoute = new ArrayList<>();
+        productService.findById(id).getRoute().getOperationInRoutes().forEach(operationInRoute -> operationsInRoute.add(operationInRoute.getOperation()));
+        for (Operation operation : operations) {
+            if(!operationsInRoute.contains(operation)){
+                result.add(operation);
+            }
+        }
+        model.addAttribute("operations", result);
+        List<Material> materials = materialService.findAll();
+        List<Material> materialResult = new ArrayList<>();
+        List<Material> materialsInProduct = new ArrayList<>();
+        productService.findById(id).getMaterialsForProducts().forEach(materialForProduct -> materialsInProduct.add(materialForProduct.getMaterial()));
+        for (Material material : materials) {
+            if(!materialsInProduct.contains(material)){
+                materialResult.add(material);
+            }
+        }
+        model.addAttribute("materials", materialResult);
         return "edit_product";
     }
 
@@ -93,7 +118,6 @@ public class TechnologistController {
                               @RequestParam("selectedOperationsSequencing") List<Integer> selectedOperationsSequencing,
                               @RequestParam("selectedMaterials") List<Integer> selectedMaterials,
                               @RequestParam("selectedMaterialsQuantity") List<Double> selectedMaterialsQuantity, Model model) {
-
         Route route = new Route();
         for (int i = 0; i < selectedOperations.size(); i++) {
             OperationInRoute operationInRoute = new OperationInRoute();
@@ -116,14 +140,13 @@ public class TechnologistController {
         route.setTotalMinutes(minutes);
         route.setName(product.getArticle());
         product.setRoute(route);
-
         for (int i = 0; i < selectedMaterials.size(); i++) {
             MaterialsForProduct materialsForProduct = new MaterialsForProduct();
             materialsForProduct.setMaterial(materialService.findById(selectedMaterials.get(i)));
             materialsForProduct.setQuantity(selectedMaterialsQuantity.get(i));
             product.getMaterialsForProducts().add(materialsForProduct);
         }
-        productService.addProduct(product);
+        productService.editProduct(product);
         return "redirect:/products";
     }
 
@@ -140,7 +163,7 @@ public class TechnologistController {
     }
 
     @GetMapping("/materials/search")
-    public String materialSearch(@RequestParam("name") String name, Model model){
+    public String materialSearch(@RequestParam("name") String name, Model model) {
         model.addAttribute("materials", materialService.searchMaterialByName(name));
         return "materials";
     }
@@ -183,7 +206,7 @@ public class TechnologistController {
     }
 
     @GetMapping("/operations/search")
-    public String operationSearch(@RequestParam("name") String name, Model model){
+    public String operationSearch(@RequestParam("name") String name, Model model) {
         model.addAttribute("operations", operationService.searchOperationByName(name));
         return "operations";
     }

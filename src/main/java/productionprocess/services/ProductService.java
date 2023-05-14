@@ -35,29 +35,19 @@ public class ProductService {
 
     public void editProduct(Product product) {
         Product productDB = productRepo.findById(product.getId()).orElseThrow();
-
-        Route route = product.getRoute();
-        Route routeDB = routeRepo.findById(productDB.getRoute().getId()).orElseThrow();
-
-        routeDB.setName(route.getName());
-        routeDB.setTotalHours(route.getTotalHours());
-        routeDB.setTotalMinutes(route.getTotalMinutes());
-        routeDB.setOperationInRoutes(route.getOperationInRoutes());
-
-        routeRepo.save(routeDB);
-
-        List<MaterialsForProduct> materialsForProductList = materialsForProductRepo.findByProduct(productDB);
-        materialsForProductRepo.deleteAll(materialsForProductList);
-        product.getMaterialsForProducts().forEach(materialsForProduct -> materialsForProduct.setProduct(product));
-        materialsForProductRepo.saveAll(product.getMaterialsForProducts());
-
+        int routeToDelete = productDB.getRoute().getId();
         productDB.setType(product.getType());
         productDB.setModel(product.getModel());
         productDB.setProperty(product.getProperty());
         productDB.setCostPrice(product.getCostPrice());
         productDB.setRoute(product.getRoute());
-        productDB.setMaterialsForProducts(product.getMaterialsForProducts());
+        routeRepo.save(product.getRoute());
+        operationInRouteRepo.saveAll(product.getRoute().getOperationInRoutes());
         productRepo.save(productDB);
+        materialsForProductRepo.deleteAll(productDB.getMaterialsForProducts());
+        product.getMaterialsForProducts().forEach(material -> material.setProduct(productDB));
+        materialsForProductRepo.saveAll(product.getMaterialsForProducts());
+        routeRepo.delete(routeRepo.findById(routeToDelete).get());
     }
 
     public boolean deleteProduct(int id) {
@@ -99,4 +89,13 @@ public class ProductService {
         return result;
     }
 
+    public Route getRoute(Product product){
+        Route route = new Route();
+        for(Route route1: routeRepo.findAll()){
+            if(productRepo.findById(product.getId()).get().getRoute().getId() == route1.getId()){
+                route = route1;
+            }
+        }
+        return route;
+    }
 }

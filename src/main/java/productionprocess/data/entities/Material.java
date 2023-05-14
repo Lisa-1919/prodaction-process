@@ -59,4 +59,16 @@ public class Material {
     public void setUnit(String unit) {
         this.unit = unit;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Material)) {
+            return false;
+        }
+        Material material = (Material) obj;
+        return id.equals(material.id);
+    }
 }

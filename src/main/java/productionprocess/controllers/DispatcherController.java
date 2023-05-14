@@ -5,17 +5,17 @@ import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import productionprocess.data.entities.OrderAtWarehouse;
-import productionprocess.data.entities.OrderAtWarehouseDetails;
-import productionprocess.data.entities.OrderOnProduction;
+import productionprocess.data.entities.*;
 import productionprocess.data.model.MaterialToOrder;
 import productionprocess.data.model.StatusOrderAtWarehouse;
 import productionprocess.data.model.StatusOrderOnProduction;
+import productionprocess.data.repo.OperationRepo;
 import productionprocess.services.MaterialService;
 import productionprocess.services.OrderAtWarehouseService;
 import productionprocess.services.OrderOnProductionService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 
@@ -27,6 +27,9 @@ public class DispatcherController {
     private OrderAtWarehouseService orderAtWarehouseService;
     @Autowired
     private MaterialService materialService;
+
+    @Autowired
+    private OperationRepo operationRepo;
 
     @GetMapping("/orders-w")
     public String ordersAtWarehouse(Model model){
@@ -67,7 +70,9 @@ public class DispatcherController {
 
     @GetMapping("/orders-p/{id}")
     public String order(@PathVariable("id") Integer id, Model model){
+
         model.addAttribute("orderOnProduction", orderOnProductionService.findById(id));
+
         return "order-p";
     }
 
