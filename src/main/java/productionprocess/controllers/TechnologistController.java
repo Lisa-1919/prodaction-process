@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import productionprocess.data.entities.*;
+import productionprocess.data.model.OperationComparator;
 import productionprocess.data.repo.OperationRepo;
 import productionprocess.services.MaterialService;
 import productionprocess.services.OperationService;
@@ -41,7 +42,7 @@ public class TechnologistController {
     @GetMapping("/products/add")
     public String addProductPage(Model model) {
         model.addAttribute("product", new Product());
-        model.addAttribute("operations", operationService.findAll());
+        model.addAttribute("operations", operationService.findAll().stream().sorted(new OperationComparator()));
         model.addAttribute("materials", materialService.findAll());
         return "add_product";
     }
@@ -99,7 +100,7 @@ public class TechnologistController {
                 result.add(operation);
             }
         }
-        model.addAttribute("operations", result);
+        model.addAttribute("operations", result.stream().sorted(new OperationComparator()));
         List<Material> materials = materialService.findAll();
         List<Material> materialResult = new ArrayList<>();
         List<Material> materialsInProduct = new ArrayList<>();

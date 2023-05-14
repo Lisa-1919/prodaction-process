@@ -36,14 +36,12 @@
             <th>№</th>
             <th>Изделие</th>
             <th>Артикул</th>
-            <th>Себестоимость</th>
         </tr>
         <div th:each="product : ${products}">
             <tr>
                 <td th:text="${product.id}"></td>
                 <td th:text="${product.type} +' ' + ${product.model} + ' (' + ${product.property} + ')'"></td>
                 <td th:text="${product.article}"></td>
-                <td th:text="${product.costPrice}"></td>
                 <td class="more">
                     <a th:href="'/products/' + ${product.id}">
                         <img src="/img/edit.svg" alt="Редактировать"/>

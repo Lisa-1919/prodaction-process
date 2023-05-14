@@ -3,10 +3,11 @@ package productionprocess.data.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
+import java.util.Comparator;
 
 @Entity
 @Table(name = "operations")
-public class Operation {
+public class Operation{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -93,6 +94,8 @@ public class Operation {
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {

@@ -43,6 +43,7 @@ public class OperationService {
             operationInRouteRepo.save(operationInRoute);
         }
         operationDB.setName(operation.getName());
+        operationDB.setWorkshop(operation.getWorkshop());
         operationDB.setDescription(operation.getDescription());
         operationDB.setHours(operation.getHours());
         operationDB.setMinutes(operation.getMinutes());

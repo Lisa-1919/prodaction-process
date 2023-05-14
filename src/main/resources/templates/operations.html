@@ -35,7 +35,6 @@
             <th>№</th>
             <th>Цех</th>
             <th>Название</th>
-            <th>Описание</th>
             <th>Время выполнения</th>
             <th></th>
             <th></th>
@@ -45,7 +44,6 @@
                 <td th:text="${operation.id}"></td>
                 <td th:text="${operation.workshop}"></td>
                 <td th:text="${operation.name}"></td>
-                <td th:text="${operation.description}"></td>
                 <td th:text="${operation.hours} + ':' + ${operation.minutes}"></td>
                 <td class="more">
                     <a th:href="'/operations/' + ${operation.id}">
