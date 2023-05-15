@@ -53,8 +53,10 @@ public class ProductService {
     public boolean deleteProduct(int id) {
         try {
             Product product = productRepo.findById(id).orElseThrow();
-            routeRepo.delete(product.getRoute());
+            Route route = product.getRoute();
             productRepo.delete(product);
+            routeRepo.delete(route);
+
             return true;
         } catch (NoSuchElementException e) {
             return false;
